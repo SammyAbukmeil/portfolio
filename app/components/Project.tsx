@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function Project({ children, title, isLive, img }: Props) {
-  const pillClasses = "p-1.5 rounded-2xl text-xs";
+  const pillClasses = "p-1.5 rounded-2xl text-xs text-white";
 
   return (
     <article className="my-10 max-w-[750px]">
@@ -22,9 +22,9 @@ export default function Project({ children, title, isLive, img }: Props) {
       />
       <div className="mt-4">
         {isLive ? (
-          <span className={`bg-green-400 ${pillClasses}`}>Live</span>
+          <span className={`bg-primary ${pillClasses}`}>Live</span>
         ) : (
-          <span className={`bg-red-400 text-white ${pillClasses}`}>Not Live</span>
+          <span className={`bg-red-400  ${pillClasses}`}>Not Live</span>
         )}
         {children}
       </div>
