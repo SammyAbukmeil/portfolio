@@ -25,7 +25,7 @@ export default function Home() {
             </p>
             <p className="mt-4">
               I built this app for my nephew who uses it daily! I have some
-              other users who found the app organicially.
+              other users who found the app organically.
             </p>
             <TechStack>
               <ul className="pl-4">
@@ -64,8 +64,9 @@ export default function Home() {
           </Project>
           <Project title="Holmes" isLive={true} img={holmesImg}>
             <p className="mt-2">
-              I built the web interface for Holmes with a friend as a freelance
-              contract. The app helps users find reviews on rental properties.
+              I built the web interface for Holmes with a colleague as a
+              freelance contract. The app helps users find reviews on rental
+              properties.
             </p>
             <p className="mt-4">
               The client already had a React Native app hooked up to a Firebase
@@ -104,9 +105,9 @@ export default function Home() {
           </Project>
           <Project title="Bia Bakes" isLive={false} img={biaBakesImg}>
             <p className="mt-2">
-              I built a website for a friend who runs a bakery in Jordan to help
-              advertise her goods. The website has a CMS integrated which
-              allowed her to change the menu whenever she wanted.
+              I built a website for a bakery in Jordan to help advertise their
+              products. The website has a CMS integrated which allowed her to
+              change the menu whenever she wanted.
             </p>
             <p className="mt-4">
               The client decided to take the website down to cut costs.
