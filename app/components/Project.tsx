@@ -20,7 +20,7 @@ export default function Project({ children, title, isLive, img }: Props) {
         src={img}
         alt="A screenshot of a project"
       />
-      <div className="mt-4 pl-4">
+      <div className="mt-4">
         {isLive ? (
           <span className={`bg-green-400 ${pillClasses}`}>Live</span>
         ) : (
