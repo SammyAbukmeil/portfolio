@@ -1,42 +1,38 @@
-import Image from "next/image";
-import headshot from "@/app/images/headshot.jpg";
 import Project from "./components/Project";
-import minoImg from "@/app/images/mino.webp";
+import Header from "@/app/components/Header";
+import Hero from "./components/Hero";
+import TechStack from "@/app/components/TechStack";
+import Links from "@/app/components/Links";
+import Footer from "@/app/components/Footer";
+
+import minoImg from "@/app/images/mino.png";
+import holmesImg from "@/app/images/holmes.png";
+import biaBakesImg from "@/app/images/bia-bakes.png";
 
 export default function Home() {
   return (
     <>
-      <header className="text-center py-12">
-        <h1 className="font-bold text-2xl">Sammy Abukmeil</h1>
-        <h2 className="pt-2">Fullstack Software Engineer</h2>
-      </header>
+      <Header />
       <main>
-        <section className="m-auto max-w-3xs md:max-w-md">
-          <Image
-            className="m-auto mb-6"
-            src={headshot}
-            width={200}
-            height={200}
-            alt="A photo of Sammy"
-          />
-          <p>
-            I'm passionate about learning and currently diving into the world of{" "}
-            <span className="underline decoration-wavy">algorithms</span>,{" "}
-            <span className="underline decoration-wavy">data structures</span>{" "}
-            and{" "}
-            <span className="underline decoration-wavy">design patterns</span>
-          </p>
-        </section>
-        <section className="mt-12 m-auto max-w-3xs md:max-w-2xl">
+        <Hero />
+        <section className="mt-12 px-4 md:px-0 m-auto container">
           <h3 className="font-bold text-2xl">Projects</h3>
           <Project title="Mino" isLive={true} img={minoImg}>
-            <section className="tech-stack my-4">
-              <h4 className="font-bold mb-2">Tech Stack</h4>
-              <ul className="list-disc pl-4">
+            <p className="mt-2">
+              A native app to help non-verbal people communicate via
+              text-to-speech. Users can create blocks with images and text, and
+              when clicked, the app speaks the text.
+            </p>
+            <p className="mt-4">
+              I built this app for my nephew who uses it daily! I have some
+              other users who found the app organicially.
+            </p>
+            <TechStack>
+              <ul className="pl-4">
                 <li>React Native</li>
                 <li>
                   Firebase
-                  <ul className="list-disc pl-6">
+                  <ul className="pl-6">
                     <li>Auth</li>
                     <li>Storage</li>
                     <li>Firestore</li>
@@ -44,19 +40,9 @@ export default function Home() {
                 </li>
                 <li>Expo Speech</li>
               </ul>
-            </section>
-            <p>
-              Mino is a native app to help non-verbal people to communicate via
-              text-to-speech. Users can create blocks with images and text, and
-              when clicked, the app speaks it out.
-            </p>
-            <p className="mt-4">
-              I built this app for my nephew who uses it daily! I have some
-              other users who found the app organicially.
-            </p>
-            <section className="links mt-4">
-              <h4 className="font-bold">Links</h4>
-              <ul className="list-disc pl-4">
+            </TechStack>
+            <Links>
+              <ul className="pl-4">
                 <li>
                   <a
                     className="underline text-blue-700"
@@ -74,20 +60,79 @@ export default function Home() {
                   </a>
                 </li>
               </ul>
-            </section>
+            </Links>
           </Project>
-          {/* <Project title="Holmes" isLive={true}>
-            Holmes is a...
+          <Project title="Holmes" isLive={true} img={holmesImg}>
+            <p className="mt-2">
+              I built the web interface for Holmes with a friend as a freelance
+              contract. The app helps users find reviews on rental properties.
+            </p>
+            <p className="mt-4">
+              The client already had a React Native app hooked up to a Firebase
+              backend, our job was to build a web interface which was designed
+              by{" "}
+              <a target="_blank" href="https://www.premonday.com">
+                Premonday
+              </a>
+            </p>
+            <TechStack>
+              <ul className="pl-4">
+                <li>React</li>
+                <li>
+                  Firebase
+                  <ul className="pl-6">
+                    <li>Auth</li>
+                    <li>Storage</li>
+                    <li>Realtime Database</li>
+                  </ul>
+                </li>
+                <li>Tailwind</li>
+              </ul>
+            </TechStack>
+            <Links>
+              <ul className="pl-4">
+                <li>
+                  <a
+                    className="underline text-blue-700"
+                    href="https://holmes-app.com"
+                  >
+                    Website
+                  </a>
+                </li>
+              </ul>
+            </Links>
           </Project>
-          <Project title="Bia Bakes" isLive={false}>
-            Bia Bakes was a...
-          </Project> */}
+          <Project title="Bia Bakes" isLive={false} img={biaBakesImg}>
+            <p className="mt-2">
+              I built a website for a friend who runs a bakery in Jordan to help
+              advertise her goods. The website has a CMS integrated which
+              allowed her to change the menu whenever she wanted.
+            </p>
+            <p className="mt-4">
+              The client decided to take the website down to cut costs.
+            </p>
+            <p className="mt-4">
+              The designs were created by{" "}
+              <a target="_blank" href="https://www.premonday.com">
+                Premonday
+              </a>
+            </p>
+            <TechStack>
+              <ul className="pl-4">
+                <li>WordPress</li>
+                <li>
+                  AWS
+                  <ul className="pl-6">
+                    <li>EC2</li>
+                    <li>RDS</li>
+                  </ul>
+                </li>
+              </ul>
+            </TechStack>
+          </Project>
         </section>
       </main>
-      <footer className="flex justify-center gap-4 my-10">
-        <a href="https://github.com/SammyAbukmeil" target="_blank" className="underline text-blue-700">GitHub</a>
-        <a href="https://www.linkedin.com/in/sammyabukmeil/" target="_blank" className="underline text-blue-700">LinkedIn</a>
-      </footer>
+      <Footer />
     </>
   );
 }

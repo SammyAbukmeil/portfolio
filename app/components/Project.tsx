@@ -12,20 +12,21 @@ export default function Project({ children, title, isLive, img }: Props) {
   const pillClasses = "p-1 rounded-2xl text-xs";
 
   return (
-    <article className="project mt-6">
+    <article className="my-10">
       <h4 className="font-bold text-xl mb-4">{title}</h4>
-      <div className="md:flex gap-1">
-        <div className="relative w-full h-[500px]">
-          <Image src={img} fill alt="A screenshot of a project" />
-        </div>
-        <div className="mt-4 pl-4">
-          {isLive ? (
-            <span className={`bg-green-400 ${pillClasses}`}>Live</span>
-          ) : (
-            <span className={`bg-red-400 ${pillClasses}`}>Not Live</span>
-          )}
-          {children}
-        </div>
+      <Image
+        width={750}
+        height={500}
+        src={img}
+        alt="A screenshot of a project"
+      />
+      <div className="mt-4 pl-4">
+        {isLive ? (
+          <span className={`bg-green-400 ${pillClasses}`}>Live</span>
+        ) : (
+          <span className={`bg-red-400 text-white ${pillClasses}`}>Not Live</span>
+        )}
+        {children}
       </div>
     </article>
   );
