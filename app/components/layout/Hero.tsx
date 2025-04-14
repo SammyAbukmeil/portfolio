@@ -5,13 +5,13 @@ export default function Hero() {
   return (
     <section className="m-auto max-w-3xs md:max-w-md">
       <Image
-        className="m-auto mb-6"
+        className="m-auto mb-6 rounded-lg"
         src={headshot}
         width={200}
         height={200}
         alt="A photo of Sammy"
       />
-      <p>
+      <p className="text-center">
         I'm passionate about learning and currently diving into the world of{" "}
         <span className="underline decoration-wavy underline-offset-4 decoration-primary">
           algorithms

@@ -37,7 +37,7 @@ export default function SideProjectSection() {
           <ul className="pl-4">
             <li>
               <a
-                className="underline text-primary"
+                className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
                 href="https://play.google.com/store/apps/details?id=com.minoSpeak&pli=1"
               >
                 Google Play Store
@@ -45,7 +45,7 @@ export default function SideProjectSection() {
             </li>
             <li>
               <a
-                className="underline text-primary"
+                className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
                 href="https://apps.apple.com/gb/app/mino-speak/id6449201524"
               >
                 Apple App Store
@@ -63,7 +63,7 @@ export default function SideProjectSection() {
           The client already had a React Native app hooked up to a Firebase
           backend, our job was to build a web interface which was designed by{" "}
           <a
-            className="underline underline-offset-4 decoration-primary"
+            className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
             target="_blank"
             href="https://www.premonday.com"
           >
@@ -88,7 +88,7 @@ export default function SideProjectSection() {
           <ul className="pl-4">
             <li>
               <a
-                className="underline text-primary"
+                className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
                 href="https://holmes-app.com"
               >
                 Website
@@ -109,7 +109,7 @@ export default function SideProjectSection() {
         <p className="mt-4">
           The designs were created by{" "}
           <a
-            className="underline underline-offset-4 decoration-primary"
+            className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
             target="_blank"
             href="https://www.premonday.com"
           >
