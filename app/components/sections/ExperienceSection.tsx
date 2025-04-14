@@ -10,6 +10,7 @@ export default function ExperienceSection() {
         role="Senior Educator"
         time="3 years"
         link="https://brainstation.io"
+        date="Mar '22 - Present"
       >
         <p>
           Teaching groups of students on a 3 month software engineering bootcamp
@@ -31,6 +32,7 @@ export default function ExperienceSection() {
         role="Senior Backend Developer"
         time="1 year"
         link="https://www.promoveritas.com"
+        date="Feb '21 - Mar '22"
       >
         <p>Worked on a rebuild of a prize draw competition API</p>
         <TechStack>
@@ -46,6 +48,7 @@ export default function ExperienceSection() {
         role="Backend Engineer"
         time="1 year"
         link="https://www.graze.com"
+        date="Mar '20 - Dec '20"
       >
         <p>Worked on an internal monolithic PHP application</p>
         <TechStack>
@@ -61,6 +64,7 @@ export default function ExperienceSection() {
         role="Full Stack Developer"
         time="2.5 years"
         link="https://www.akauk.com"
+        date="Feb '17 - Mar '20"
       >
         <p>Worked on various WordPress websites for theatre shows</p>
         <TechStack>
@@ -76,6 +80,7 @@ export default function ExperienceSection() {
         role="Full Stack Developer"
         time="6 months"
         link="https://passion.digital"
+        date="May '17 - Sept '17"
       >
         <p>Worked on various WordPress websites</p>
         <TechStack>
@@ -91,6 +96,7 @@ export default function ExperienceSection() {
         role="Full Stack Developer"
         time="2 years"
         link="https://totally.tech"
+        date="Jun '15 - May '17"
       >
         <p>Worked on various PHP applications</p>
         <TechStack>

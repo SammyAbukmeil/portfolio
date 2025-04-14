@@ -6,6 +6,7 @@ interface Props {
   role: string;
   time: string;
   link: string;
+  date: string;
 }
 
 export default function Experience({
@@ -14,6 +15,7 @@ export default function Experience({
   role,
   time,
   link,
+  date,
 }: Props) {
   return (
     <article className="my-15 max-w-[750px]">
@@ -24,9 +26,10 @@ export default function Experience({
       >
         <h4 className="font-bold text-xl mb-1">{title}</h4>
       </a>
-      <h4 className="font-bold text-l mb-1">
+      <h4 className="font-bold text-l">
         {role} - {time}
       </h4>
+      <p className="italic">{date}</p>
       <div className="mt-4">{children}</div>
     </article>
   );
