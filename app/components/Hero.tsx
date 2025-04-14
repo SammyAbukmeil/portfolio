@@ -13,9 +13,17 @@ export default function Hero() {
       />
       <p>
         I'm passionate about learning and currently diving into the world of{" "}
-        <span className="underline decoration-wavy">algorithms</span>,{" "}
-        <span className="underline decoration-wavy">data structures</span> and{" "}
-        <span className="underline decoration-wavy">design patterns</span>
+        <span className="underline decoration-wavy underline-offset-4 decoration-primary">
+          algorithms
+        </span>
+        ,{" "}
+        <span className="underline decoration-wavy underline-offset-4 decoration-primary">
+          data structures
+        </span>{" "}
+        and{" "}
+        <span className="underline decoration-wavy underline-offset-4 decoration-primary">
+          design patterns
+        </span>
       </p>
     </section>
   );

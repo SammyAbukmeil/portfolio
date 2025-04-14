@@ -45,7 +45,7 @@ export default function Home() {
               <ul className="pl-4">
                 <li>
                   <a
-                    className="underline text-blue-700"
+                    className="underline text-primary"
                     href="https://play.google.com/store/apps/details?id=com.minoSpeak&pli=1"
                   >
                     Google Play Store
@@ -53,7 +53,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a
-                    className="underline text-blue-700"
+                    className="underline text-primary"
                     href="https://apps.apple.com/gb/app/mino-speak/id6449201524"
                   >
                     Apple App Store
@@ -93,7 +93,7 @@ export default function Home() {
               <ul className="pl-4">
                 <li>
                   <a
-                    className="underline text-blue-700"
+                    className="underline text-primary"
                     href="https://holmes-app.com"
                   >
                     Website

@@ -9,10 +9,10 @@ interface Props {
 }
 
 export default function Project({ children, title, isLive, img }: Props) {
-  const pillClasses = "p-1 rounded-2xl text-xs";
+  const pillClasses = "p-1.5 rounded-2xl text-xs";
 
   return (
-    <article className="my-10">
+    <article className="my-10 max-w-[750px]">
       <h4 className="font-bold text-xl mb-4">{title}</h4>
       <Image
         width={750}
