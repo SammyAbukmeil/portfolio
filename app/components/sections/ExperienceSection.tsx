@@ -4,7 +4,7 @@ import TechStack from "@/app/components/TechStack";
 export default function ExperienceSection() {
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
-      <h3 className="font-bold text-2xl">Profressional Experience</h3>
+      <h3 className="font-bold text-2xl">Professional Experience</h3>
       <Experience
         title="BrainStation"
         role="Senior Educator"
