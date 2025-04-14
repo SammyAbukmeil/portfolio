@@ -62,7 +62,11 @@ export default function SideProjectSection() {
         <p className="mt-4">
           The client already had a React Native app hooked up to a Firebase
           backend, our job was to build a web interface which was designed by{" "}
-          <a target="_blank" href="https://www.premonday.com">
+          <a
+            className="underline underline-offset-4 decoration-primary"
+            target="_blank"
+            href="https://www.premonday.com"
+          >
             Premonday
           </a>
         </p>
@@ -104,7 +108,11 @@ export default function SideProjectSection() {
         </p>
         <p className="mt-4">
           The designs were created by{" "}
-          <a target="_blank" href="https://www.premonday.com">
+          <a
+            className="underline underline-offset-4 decoration-primary"
+            target="_blank"
+            href="https://www.premonday.com"
+          >
             Premonday
           </a>
         </p>

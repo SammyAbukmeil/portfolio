@@ -7,8 +7,7 @@ export default function ExperienceSection() {
       <h3 className="font-bold text-2xl">Profressional Experience</h3>
       <Experience title="BrainStation" role="Senior Educator" time="3 years">
         <p>
-          Teaching groups of students on a 3 month software engineering
-          bootcamp.
+          Teaching groups of students on a 3 month software engineering bootcamp
         </p>
         <TechStack>
           <ul className="pl-4">
