@@ -65,7 +65,7 @@ export default function ExperienceSection() {
       <Experience
         title="Graze"
         role="Backend Engineer"
-        time="1 year"
+        time="9 months"
         link="https://www.graze.com"
         date="Mar '20 - Dec '20"
       >
