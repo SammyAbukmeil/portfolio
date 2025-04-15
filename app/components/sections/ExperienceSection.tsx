@@ -6,11 +6,30 @@ export default function ExperienceSection() {
     <section className="mt-12 px-4 md:px-0 m-auto container">
       <h3 className="font-bold text-2xl">Professional Experience</h3>
       <Experience
+        title="Konrad Group"
+        role="Senior Software Developer"
+        time="1 month"
+        link="https://www.konrad.com"
+        date="Apr '25 - Present"
+      >
+        <p>
+          Fullstack development for a digital consultancy firm
+        </p>
+        <TechStack>
+          <ul className="pl-4">
+            <li>TypeScript</li>
+            <li>React</li>
+            <li>Express</li>
+            <li>PostgreSQL</li>
+          </ul>
+        </TechStack>
+      </Experience>
+      <Experience
         title="BrainStation"
         role="Senior Educator"
         time="3 years"
         link="https://brainstation.io"
-        date="Mar '22 - Present"
+        date="Mar '22 - Apr '25"
       >
         <p>
           Teaching groups of students on a 3 month software engineering bootcamp
