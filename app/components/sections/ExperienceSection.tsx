@@ -68,7 +68,7 @@ export default function ExperienceSection() {
         link="https://www.graze.com"
         date="Mar '20 - Dec '20"
       >
-        <p>Worked on an internal monolithic PHP application</p>
+        <p>Worked on an internal PHP application to manage stock and orders</p>
         <TechStack>
           <ul className="pl-4">
             <li>PHP</li>
@@ -100,7 +100,7 @@ export default function ExperienceSection() {
         link="https://passion.digital"
         date="May '17 - Sept '17"
       >
-        <p>Worked on various WordPress websites</p>
+        <p>Worked on various WordPress websites for clients</p>
         <TechStack>
           <ul className="pl-4">
             <li>PHP</li>
@@ -116,7 +116,7 @@ export default function ExperienceSection() {
         link="https://totally.tech"
         date="Jun '15 - May '17"
       >
-        <p>Worked on various PHP applications</p>
+        <p>Worked on various PHP applications for clients</p>
         <TechStack>
           <ul className="pl-4">
             <li>PHP</li>
