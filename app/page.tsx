@@ -11,7 +11,7 @@ export default function Home() {
       <main>
         <Hero />
         <SideProjectSection />
-        <hr />
+        <div className="border-1 border-primary m-8"></div>
         <ExperienceSection />
       </main>
       <Footer />

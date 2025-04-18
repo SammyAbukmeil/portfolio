@@ -1,5 +1,6 @@
 import Image from "next/image";
 import headshot from "@/app/images/headshot.jpg";
+import { Github, Linkedin } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -25,6 +26,14 @@ export default function Hero() {
           design patterns
         </span>
       </p>
+      <div className="flex justify-center mt-6 gap-3">
+        <a href="https://github.com/SammyAbukmeil" target="_blank">
+          <Github />
+        </a>
+        <a href="https://www.linkedin.com/in/sammyabukmeil/" target="_blank">
+          <Linkedin />
+        </a>
+      </div>
     </section>
   );
 }
