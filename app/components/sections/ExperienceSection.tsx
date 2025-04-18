@@ -13,14 +13,13 @@ export default function ExperienceSection() {
         date="Apr '25 - Present"
       >
         <p>
-          Fullstack development for a digital consultancy firm
+          Fullstack development for a digital agency
         </p>
         <TechStack>
           <ul className="pl-4">
             <li>TypeScript</li>
             <li>React</li>
             <li>Express</li>
-            <li>PostgreSQL</li>
           </ul>
         </TechStack>
       </Experience>
