@@ -4,7 +4,7 @@ import { Github, Linkedin } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="m-auto max-w-3xs md:max-w-md py-4">
+    <section className="m-auto max-w-3xs md:max-w-md">
       <Image
         className="m-auto mb-6 rounded-4xl"
         src={headshot}

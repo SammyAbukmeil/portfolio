@@ -7,7 +7,7 @@ export default function Header() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <header className="text-center py-6 md:py-12">
+    <header className="text-center py-6">
       <nav>
         <ul className="flex justify-end gap-4 mx-6 mb-4 md:mx-20 list-none">
           {/* <li>
