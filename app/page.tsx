@@ -4,11 +4,11 @@ import Hero from "./components/layout/Hero";
 import Footer from "@/app/components/layout/Footer";
 import SideProjectSection from "@/app/components/sections/SideProjectSection";
 import ExperienceSection from "@/app/components/sections/ExperienceSection";
-import { onLoad, scroll } from "@/app/animation/variants";
+import { scroll } from "@/app/animation/variants";
 
 export default function Home() {
   return (
-    <motion.div variants={onLoad} initial="hidden" whileInView="visible">
+    <>
       <Header />
       <main>
         <Hero />
@@ -24,6 +24,6 @@ export default function Home() {
         </motion.div>
       </main>
       <Footer />
-    </motion.div>
+    </>
   );
 }
