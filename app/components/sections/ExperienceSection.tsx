@@ -1,5 +1,12 @@
 import Experience from "@/app/components/Experience";
 import TechStack from "@/app/components/TechStack";
+import totallyLogo from "@/app/images/totally-tech.jpeg";
+import passionDigitalLogo from "@/app/images/passion-digital.jpeg";
+import akaLogo from "@/app/images/aka-logo.jpeg";
+import grazeLogo from "@/app/images/graze-logo.jpeg";
+import promoveritasLogo from "@/app/images/promoveritas-logo.jpeg";
+import brainstationLogo from "@/app/images/brainstation-logo.jpeg";
+import konradLogo from "@/app/images/konrad-logo.jpeg";
 
 export default function ExperienceSection() {
   return (
@@ -11,10 +18,9 @@ export default function ExperienceSection() {
         time="1 month"
         link="https://www.konrad.com"
         date="Apr '25 - Present"
+        logo={konradLogo}
       >
-        <p>
-          Fullstack development for a digital agency
-        </p>
+        <p>Fullstack development for a digital agency</p>
         <TechStack>
           <ul className="pl-4">
             <li>TypeScript</li>
@@ -29,6 +35,7 @@ export default function ExperienceSection() {
         time="3 years"
         link="https://brainstation.io"
         date="Mar '22 - Apr '25"
+        logo={brainstationLogo}
       >
         <p>
           Teaching groups of students on a 3 month software engineering bootcamp
@@ -51,6 +58,7 @@ export default function ExperienceSection() {
         time="1 year"
         link="https://www.promoveritas.com"
         date="Feb '21 - Mar '22"
+        logo={promoveritasLogo}
       >
         <p>Worked on a rebuild of a prize draw competition API</p>
         <TechStack>
@@ -67,6 +75,7 @@ export default function ExperienceSection() {
         time="9 months"
         link="https://www.graze.com"
         date="Mar '20 - Dec '20"
+        logo={grazeLogo}
       >
         <p>Worked on an internal PHP application to manage stock and orders</p>
         <TechStack>
@@ -83,6 +92,7 @@ export default function ExperienceSection() {
         time="2.5 years"
         link="https://www.akauk.com"
         date="Feb '17 - Mar '20"
+        logo={akaLogo}
       >
         <p>Worked on various WordPress websites for theatre shows</p>
         <TechStack>
@@ -99,6 +109,7 @@ export default function ExperienceSection() {
         time="6 months"
         link="https://passion.digital"
         date="May '17 - Sept '17"
+        logo={passionDigitalLogo}
       >
         <p>Worked on various WordPress websites for clients</p>
         <TechStack>
@@ -115,6 +126,7 @@ export default function ExperienceSection() {
         time="2 years"
         link="https://totally.tech"
         date="Jun '15 - May '17"
+        logo={totallyLogo}
       >
         <p>Worked on various PHP applications for clients</p>
         <TechStack>

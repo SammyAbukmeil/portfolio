@@ -10,52 +10,74 @@ import { scroll } from "@/app/animation/variants";
 export default function SideProjectSection() {
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
-      <h3 className="font-bold text-2xl">Side Projects</h3>
-      <Project title="Mino" isLive={true} img={minoImg}>
-        <p className="mt-2">
-          A native app to help non-verbal people communicate via text-to-speech.
-          Users can create blocks with images and text, and when clicked, the
-          app speaks the text.
-        </p>
-        <p className="mt-4">
-          I built this app for my nephew who uses it daily! I have some other
-          users who found the app organically.
-        </p>
-        <TechStack>
-          <ul className="pl-4">
-            <li>React Native</li>
-            <li>
-              Firebase
-              <ul className="pl-6">
-                <li>Auth</li>
-                <li>Storage</li>
-                <li>Firestore</li>
-              </ul>
-            </li>
-            <li>Expo Speech</li>
-          </ul>
-        </TechStack>
-        <Links>
-          <ul className="pl-4">
-            <li>
-              <a
-                className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
-                href="https://play.google.com/store/apps/details?id=com.minoSpeak&pli=1"
-              >
-                Google Play Store
-              </a>
-            </li>
-            <li>
-              <a
-                className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
-                href="https://apps.apple.com/gb/app/mino-speak/id6449201524"
-              >
-                Apple App Store
-              </a>
-            </li>
-          </ul>
-        </Links>
-      </Project>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: {
+            delay: 0.5,
+            duration: 2,
+          },
+        }}
+      >
+        <h3 className="font-bold text-2xl">Side Projects</h3>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: {
+            delay: 0.6,
+            duration: 2,
+          },
+        }}
+      >
+        <Project title="Mino" isLive={true} img={minoImg}>
+          <p className="mt-2">
+            A native app to help non-verbal people communicate via
+            text-to-speech. Users can create blocks with images and text, and
+            when clicked, the app speaks the text.
+          </p>
+          <p className="mt-4">
+            I built this app for my nephew who uses it daily! I have some other
+            users who found the app organically.
+          </p>
+          <TechStack>
+            <ul className="pl-4">
+              <li>React Native</li>
+              <li>
+                Firebase
+                <ul className="pl-6">
+                  <li>Auth</li>
+                  <li>Storage</li>
+                  <li>Firestore</li>
+                </ul>
+              </li>
+              <li>Expo Speech</li>
+            </ul>
+          </TechStack>
+          <Links>
+            <ul className="pl-4">
+              <li>
+                <a
+                  className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
+                  href="https://play.google.com/store/apps/details?id=com.minoSpeak&pli=1"
+                >
+                  Google Play Store
+                </a>
+              </li>
+              <li>
+                <a
+                  className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
+                  href="https://apps.apple.com/gb/app/mino-speak/id6449201524"
+                >
+                  Apple App Store
+                </a>
+              </li>
+            </ul>
+          </Links>
+        </Project>
+      </motion.div>
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
@@ -119,7 +141,8 @@ export default function SideProjectSection() {
             change the menu whenever she wanted.
           </p>
           <p className="mt-4">
-            The client decided to take the website down to cut costs.
+            The website was running for 3 years before the client decided to
+            take the website down to cut costs.
           </p>
           <p className="mt-4">
             The designs were created by{" "}
