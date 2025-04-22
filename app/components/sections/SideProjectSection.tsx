@@ -86,8 +86,9 @@ export default function SideProjectSection() {
       >
         <Project title="Holmes" isLive={true} img={holmesImg}>
           <p className="mt-2">
-            I built the web interface for Holmes with a colleague as a freelance
-            contract. The app helps users find reviews on rental properties.
+            Collaborated with a colleague to create the web interface for Holmes
+            as a freelance project. The app helps users find reviews on rental
+            properties.
           </p>
           <p className="mt-4">
             The client already had a React Native app hooked up to a Firebase
@@ -136,7 +137,7 @@ export default function SideProjectSection() {
       >
         <Project title="Bia Bakes" isLive={false} img={biaBakesImg}>
           <p className="mt-2">
-            I built a website for a bakery in Jordan to help advertise their
+            Developed a website for a bakery in Jordan to help advertise their
             products. The website has a CMS integrated which allowed her to
             change the menu whenever she wanted.
           </p>
