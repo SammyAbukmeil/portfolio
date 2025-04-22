@@ -36,10 +36,9 @@ export default function Experience({
           <h4 className="font-bold text-xl mb-1">{title}</h4>
         </a>
       </div>
-      <h4 className="font-bold text-l">
-        {role} - {time}
-      </h4>
+      <h4 className="font-bold text-l">{role}</h4>
       <p className="italic">{date}</p>
+      <p><small>{time}</small></p>
       <div className="mt-4">{children}</div>
     </article>
   );

@@ -7,6 +7,7 @@ import grazeLogo from "@/app/images/graze-logo.jpeg";
 import promoveritasLogo from "@/app/images/promoveritas-logo.jpeg";
 import brainstationLogo from "@/app/images/brainstation-logo.jpeg";
 import konradLogo from "@/app/images/konrad-logo.jpeg";
+import { formatDistance, formatDistanceStrict } from "date-fns";
 
 export default function ExperienceSection() {
   return (
@@ -15,7 +16,10 @@ export default function ExperienceSection() {
       <Experience
         title="Konrad Group"
         role="Senior Software Developer"
-        time="1 month"
+        time={`${formatDistanceStrict(new Date(), new Date(2025, 4, 14), {
+          unit: "month",
+          roundingMethod: "ceil",
+        })} and counting...`}
         link="https://www.konrad.com"
         date="Apr '25 - Present"
         logo={konradLogo}
