@@ -61,6 +61,7 @@ export default function SideProjectSection() {
               <li>
                 <a
                   className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
+                  target="_blank"
                   href="https://play.google.com/store/apps/details?id=com.minoSpeak&pli=1"
                 >
                   Google Play Store
@@ -69,6 +70,7 @@ export default function SideProjectSection() {
               <li>
                 <a
                   className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
+                  target="_blank"
                   href="https://apps.apple.com/gb/app/mino-speak/id6449201524"
                 >
                   Apple App Store
@@ -120,6 +122,7 @@ export default function SideProjectSection() {
               <li>
                 <a
                   className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
+                  target="_blank"
                   href="https://holmes-app.com"
                 >
                   Website
