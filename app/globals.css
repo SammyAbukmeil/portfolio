@@ -5,6 +5,7 @@
 @theme {
   --color-primary: #6EAA8B;
   --color-secondary: #AACCCD;
+  --color-accent: #ecc24b;
   --color-dark: #1E1E1E;
 }
 
@@ -27,6 +28,10 @@
   ul ul {
     list-style-type: circle;
   }
+}
+
+html {
+  overflow-y: scroll;
 }
 
 pre {
@@ -194,4 +199,8 @@ table {
     animation: fade-in 0.8s ease-in-out forwards;
     opacity: 0;
   }
+}
+
+iframe {
+  width: 100%;
 }

@@ -1,29 +1,61 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+
 export const metadata = {
-  title: 'Algorithms in TypeScript',
+  title: "Algorithms in TypeScript",
   alternates: {
-    canonical: '/blog/algorithms-typescript',
+    canonical: "/blog/algorithms-typescript",
   },
 };
 
+<Link href="/blog" className="flex">
+  <ArrowLeft className="mr-2" /> Back
+</Link>
+
 # Algorithms in TypeScript
 
-Algorithms are...
+Algorithms are a <span className="dark:text-accent">sequence of steps to solve a problem</span>.
 
-```python
-weights, biases = init_random_parameters()
+Given the same steps + inputs, an algorithm should always lead to the same solution.
 
-epochs = 10
-learning_rate = 0.01 # See ⁴
+## Measuring Performance - (Time Complexity - Big O)
 
-for epoch in range(epochs):
-  for input_data, target in training_dataset:
-    predictions = forward_pass(input_data, weights, biases)
-    loss = loss_function(predictions, target)
-    gradients = backpropagation(loss, weights, biases)
+Since a problem may have multiple solutions, we often measure the performance of an algorithm.
 
-    # Step 4: Gradient Descent (Parameter Update)
-    weights -= learning_rate * gradients["weights"]
-    biases -= learning_rate * gradients["biases"]
+Consider the following problem
 
-  print(f"Epoch {epoch + 1}/{epochs}, Loss: {loss}")
-```
+> Build a function which:
+>
+> 1. Takes a number as an input
+> 2. Calculates the sum of all numbers leading up to that number
+
+A solution might look like the following:
+
+<iframe
+  style={{ height: "17rem" }}
+  src="https://codesandbox.io/embed/r4mzpz?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+You might be tempted to measure the performance via the [Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
+
+> **Note**: You can change the number in the example below (e.g. `30`), however, 
+> <span className="dark:text-accent">be careful not to go too large</span> otherwise your browser will crash. Don't go above 300m (i.e. `300000000`)
+
+> Small numbers show `0` since it runs too fast and finishes in less than a millisecond.
+
+<iframe
+  style={{ height: "22rem" }}
+  src="https://codesandbox.io/embed/h5zl76?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+As you make the number bigger, you'll notice that the time it takes increases. However, try the same number twice, it's always slightly different.
+
+This is due to various factors:
+- The speed of the computer
+- The amount of processes running in the background of your computer
+- The ram your browse has availble
+- etc
+
+So this isn't the best way to measure the performance of an algorithm.
+
+However, as you add `0`'s to the example above, we do see a trend.
