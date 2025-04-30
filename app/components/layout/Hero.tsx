@@ -6,7 +6,7 @@ import * as motion from "motion/react-client";
 export default function Hero() {
   return (
     <section className="m-auto max-w-3xs md:max-w-md">
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
@@ -15,7 +15,7 @@ export default function Hero() {
             duration: 2,
           },
         }}
-      >
+      > */}
         <Image
           className="m-auto mb-6 rounded-4xl"
           src={headshot}
@@ -23,8 +23,8 @@ export default function Hero() {
           height={200}
           alt="A photo of Sammy"
         />
-      </motion.div>
-      <motion.div
+      {/* </motion.div> */}
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
@@ -33,7 +33,7 @@ export default function Hero() {
             duration: 2,
           },
         }}
-      >
+      > */}
         <p className="text-center">
           I'm passionate about learning and am currently diving into the world
           of{" "}
@@ -49,8 +49,8 @@ export default function Hero() {
             design patterns
           </span>
         </p>
-      </motion.div>
-      <motion.div
+      {/* </motion.div> */}
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
@@ -59,7 +59,7 @@ export default function Hero() {
             duration: 2,
           },
         }}
-      >
+      > */}
         <div className="flex justify-center mt-6 gap-3">
           <a href="https://github.com/SammyAbukmeil" target="_blank">
             <Github />
@@ -68,7 +68,7 @@ export default function Hero() {
             <Linkedin />
           </a>
         </div>
-      </motion.div>
+      {/* </motion.div> */}
     </section>
   );
 }

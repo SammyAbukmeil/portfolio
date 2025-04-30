@@ -10,7 +10,7 @@ import { scroll } from "@/app/animation/variants";
 export default function SideProjectSection() {
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
@@ -19,10 +19,10 @@ export default function SideProjectSection() {
             duration: 2,
           },
         }}
-      >
+      > */}
         <h3 className="font-bold text-2xl">Side Projects</h3>
-      </motion.div>
-      <motion.div
+      {/* </motion.div> */}
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
@@ -31,7 +31,7 @@ export default function SideProjectSection() {
             duration: 2,
           },
         }}
-      >
+      > */}
         <Project title="Mino" isLive={true} img={minoImg}>
           <p className="mt-2">
             A native app to help non-verbal people communicate via
@@ -79,13 +79,13 @@ export default function SideProjectSection() {
             </ul>
           </Links>
         </Project>
-      </motion.div>
-      <motion.div
+      {/* </motion.div> */}
+      {/* <motion.div
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true }}
         variants={scroll}
-      >
+      > */}
         <Project title="Holmes" isLive={true} img={holmesImg}>
           <p className="mt-2">
             Collaborated with a colleague to create the web interface for Holmes
@@ -131,13 +131,13 @@ export default function SideProjectSection() {
             </ul>
           </Links>
         </Project>
-      </motion.div>
-      <motion.div
+      {/* </motion.div> */}
+      {/* <motion.div
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true }}
         variants={scroll}
-      >
+      > */}
         <Project title="Bia Bakes" isLive={false} img={biaBakesImg}>
           <p className="mt-2">
             Developed a website for a bakery in Jordan to help advertise their
@@ -171,7 +171,7 @@ export default function SideProjectSection() {
             </ul>
           </TechStack>
         </Project>
-      </motion.div>
+      {/* </motion.div> */}
     </section>
   );
 }

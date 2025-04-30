@@ -1,0 +1,29 @@
+export const metadata = {
+  title: 'Algorithms in TypeScript',
+  alternates: {
+    canonical: '/blog/algorithms-typescript',
+  },
+};
+
+# Algorithms in TypeScript
+
+Algorithms are...
+
+```python
+weights, biases = init_random_parameters()
+
+epochs = 10
+learning_rate = 0.01 # See ⁴
+
+for epoch in range(epochs):
+  for input_data, target in training_dataset:
+    predictions = forward_pass(input_data, weights, biases)
+    loss = loss_function(predictions, target)
+    gradients = backpropagation(loss, weights, biases)
+
+    # Step 4: Gradient Descent (Parameter Update)
+    weights -= learning_rate * gradients["weights"]
+    biases -= learning_rate * gradients["biases"]
+
+  print(f"Epoch {epoch + 1}/{epochs}, Loss: {loss}")
+```
