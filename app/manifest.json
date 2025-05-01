@@ -1,6 +1,6 @@
 {
-  "name": "Sammy Abukmeil - Software Engineer",
-  "short_name": "SA Portfolio",
+  "name": "Sammy Abukmeil - Software Developer",
+  "short_name": "Sammy's Portfolio",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -17,5 +17,5 @@
   ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "minimal-ui"
 }

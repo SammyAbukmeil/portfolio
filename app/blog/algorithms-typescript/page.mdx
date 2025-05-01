@@ -8,24 +8,22 @@ export const metadata = {
   },
 };
 
-<Link href="/blog" className="flex">
-  <ArrowLeft className="mr-2" /> Back
+<Link href="/blog" className="flex justify-end">
+  <ArrowLeft className="mr-2" /> <span>Back</span>
 </Link>
 
 # Algorithms in TypeScript
 
-Algorithms are a <span className="dark:text-accent">sequence of steps to solve a problem</span>.
+Algorithms are a **sequence of steps to solve a problem**. Given the same steps + inputs, an algorithm should always lead to the same solution.
 
-Given the same steps + inputs, an algorithm should always lead to the same solution.
+## Measuring Performance
 
-## Measuring Performance - (Time Complexity - Big O)
+Since a problem may have multiple solutions, we often measure the performance of an algorithm to compare.
 
-Since a problem may have multiple solutions, we often measure the performance of an algorithm.
 
-Consider the following problem
+Consider the following problem:
 
 > Build a function which:
->
 > 1. Takes a number as an input
 > 2. Calculates the sum of all numbers leading up to that number
 
@@ -38,12 +36,12 @@ A solution might look like the following:
 
 You might be tempted to measure the performance via the [Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
 
-> **Note**: You can change the number in the example below (e.g. `30`), however,
+> **Notes**:
+> - You can change the number in the example below (e.g. `30`), however, **be careful not to go too large** otherwise your browser will crash.
 >
-> <span className="dark:text-accent">be careful not to go too large</span> otherwise
-> your browser will crash. Don't go above 300m (i.e. `300000000`)
-
-> Small numbers show `0` since it runs too fast and finishes in less than a millisecond.
+> - Don't go above 300m (i.e. `300000000`).
+>
+> - Small numbers show `0` since it runs too fast and finishes in less than a millisecond.
 
 <iframe
   style={{ height: "22rem" }}
@@ -59,22 +57,16 @@ This is due to various factors:
 - The ram your browse has availble
 - etc
 
-So this isn't the best way to measure the performance of an algorithm.
-
-However, as you add `0`'s to the example above, we do see a trend, roughly:
+So this isn't the best way to measure the performance of an algorithm. However, as you add `0`'s to the example above, we do see a trend, roughly:
 
 - 1
 - 10
 - 100
 - 1000
 
-It's a factor of 10 (if we x10 the input, the time it takes to finish is x10 longer).
+It's a factor of 10 (if we x10 the input, the time it takes to finish is x10 longer). Similarly, if we x2 the input, the time is x2.
 
-Similarly, if we x2 the input, the time is x2.
-
-This is called <span className="dark:text-accent">linear time complexity</span>.
-
-This is how it would look on a graph:
+This is called <span className="dark:text-accent">linear time complexity</span>. This is how it would look on a graph:
 
 ![Linear Time Complexity](/algorithms/linear-time-complexity.png)
 

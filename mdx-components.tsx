@@ -11,33 +11,33 @@ type BlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
 
 const components = {
   h1: (props: HeadingProps) => (
-    <h1 className="text-xl font-medium py-6" {...props} />
+    <h1 className="text-xl underline underline-offset-4 font-medium py-6" {...props} />
   ),
   h2: (props: HeadingProps) => (
     <h2
-      className="font-medium mt-12 mb-3"
+      className="font-medium underline underline-offset-4 text-lg mt-12 mb-3"
       {...props}
     />
   ),
   h3: (props: HeadingProps) => (
     <h3
-      className="text-gray-800 dark:text-zinc-200 font-medium mt-8 mb-3"
+      className="dark:text-zinc-200 font-medium mt-8 mb-3"
       {...props}
     />
   ),
   h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
   p: (props: ParagraphProps) => (
-    <p className="text-gray-800 dark:text-zinc-300 leading-snug my-4" {...props} />
+    <p className="dark:text-white leading-6 mb-4" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol
-      className="text-gray-800 dark:text-zinc-300 list-decimal pl-5 space-y-2"
+      className="dark:text-white list-decimal pl-5 space-y-2"
       {...props}
     />
   ),
   ul: (props: ListProps) => (
     <ul
-      className="text-gray-800 dark:text-zinc-300 list-disc pl-5 space-y-1"
+      className="dark:text-white list-disc pl-5 space-y-1 my-4"
       {...props}
     />
   ),
@@ -46,11 +46,11 @@ const components = {
     <em className="font-medium" {...props} />
   ),
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
-    <strong className="font-medium" {...props} />
+    <strong className="font-medium text-accent" {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className =
-      "dark:text-primary font-medium hover:dark:text-white underline underline-offset-4 hover:underline-offset-6 transition-all";
+      "dark:text-primary font-medium underline underline-offset-4 hover:underline-offset-6 transition-all";
     if (href?.startsWith("/")) {
       return (
         <Link href={href} className={className} {...props}>
@@ -83,7 +83,7 @@ const components = {
   },
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="ml-4 border-l-3 border-gray-300 pl-4 text-gray-700 dark:border-zinc-600 dark:text-zinc-300 mb-4"
+      className="ml-4 border-l-3 border-gray-300 pl-4 text-gray-700 dark:border-zinc-600 dark:text-white my-8"
       {...props}
     />
   ),

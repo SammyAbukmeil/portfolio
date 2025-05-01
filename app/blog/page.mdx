@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+
 export const metadata = {
   title: "Blog",
   alternates: {
@@ -5,6 +8,11 @@ export const metadata = {
   },
 };
 
+<Link href="/" className="flex justify-end">
+  <ArrowLeft className="mr-2" /> <span>Back</span>
+</Link>
+
 # Blog
 
-- [Algorithms in TypeScript](/blog/algorithms-typescript) - <small className="text-2xs">30/04/25</small>
+- [Algorithms in TypeScript](/blog/algorithms-typescript)
+<small className="text-2xs">01/05/25</small>
