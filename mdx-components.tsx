@@ -11,7 +11,10 @@ type BlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
 
 const components = {
   h1: (props: HeadingProps) => (
-    <h1 className="text-xl underline underline-offset-4 font-medium py-6" {...props} />
+    <h1
+      className="text-xl underline underline-offset-4 font-medium py-6"
+      {...props}
+    />
   ),
   h2: (props: HeadingProps) => (
     <h2
@@ -21,25 +24,24 @@ const components = {
   ),
   h3: (props: HeadingProps) => (
     <h3
-      className="dark:text-zinc-200 font-medium mt-8 mb-3"
+      className="underline underline-offset-4 font-medium mt-10 mb-3"
       {...props}
     />
   ),
-  h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
+  h4: (props: HeadingProps) => (
+    <h4
+      className="underline underline-offset-4 mt-10 mb-3"
+      {...props}
+    />
+  ),
   p: (props: ParagraphProps) => (
     <p className="dark:text-white leading-6 mb-4" {...props} />
   ),
   ol: (props: ListProps) => (
-    <ol
-      className="dark:text-white list-decimal pl-5 space-y-2"
-      {...props}
-    />
+    <ol className="dark:text-white list-decimal pl-5 space-y-2" {...props} />
   ),
   ul: (props: ListProps) => (
-    <ul
-      className="dark:text-white list-disc pl-5 space-y-1 my-4"
-      {...props}
-    />
+    <ul className="dark:text-white list-disc pl-5 space-y-1 my-4" {...props} />
   ),
   li: (props: ListItemProps) => <li className="pl-1" {...props} />,
   em: (props: ComponentPropsWithoutRef<"em">) => (

@@ -1,0 +1,769 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+
+export const metadata = {
+  title: "TypeScript Basics",
+  alternates: {
+    canonical: "/blog/typescript-basics",
+  },
+};
+
+<Link href="/blog" className="flex justify-end">
+  <ArrowLeft className="mr-2" /> <span>Back</span>
+</Link>
+
+# TypeScript Basics
+
+## What is TypeScript
+
+- TypeScript extends JavaScript by adding "types" to the language
+- It provides a command line interface (cli) which we can run to compile our TypeScript to JavaScript via the cli command `tsc`
+- This helps spot bugs during development (i.e. when we're building our apps) and therefore prevent bugs from happening during "runtime" (when a user is using our apps) 
+
+For example, here's some TypeScript:
+
+```ts
+let firstName: string = "Sammy";
+```
+
+The `: string` is TypeScript syntax which ensures that this variable will only ever contain a value of type `string`
+
+If another developer attempts to assign a value to this variable of type `number`, TypeScript will throw an error in VS Code and won't compile via the `tsc` CLI
+
+## Setup a Local Environment
+
+This section guides you through how to install and compile TypeScript code.
+
+### Create a folder to practice TypeScript
+
+On your desktop create a `typescript` directory:
+- Open it in VS Code
+- Open a terminal
+
+### Setup a `package.json` file
+
+```shell
+npm init -y
+```
+
+### Install TypeScript as a dev dependency
+
+We use TypeScript during development (not to actually run the app), so we'll add the `--save-dev` flag to indicate that it's a dependency for development
+
+```shell
+npm install typescript --save-dev
+``` 
+
+We should now be able to run the cli
+
+```shell
+npx tsc
+```
+
+Which should output something like `Version 5.3.3`
+
+### Create a `tsconfig.json` file
+
+We can control how the TypeScript compiler behaves via a JSON file, let's create it
+
+```shell
+npx tsc --init
+```
+
+This will generate a `tsconfig.json` file with some default settings
+
+Let's add a setting to tell the TypeScript compiler where to find our TypeScript files and where to send our compiled JavaScript files
+
+```json
+{
+  "include": ["src"],
+  "compilerOptions": {
+    "outDir": "./build",
+    ...
+  }
+}
+```
+
+Now create an `src/` directory and inside of it create a `index.ts`
+
+Add 
+
+```ts
+let firstName: string = "Sammy";
+```
+
+inside the `index.ts` and run
+
+```shell
+npx tsc
+```
+
+You should now see a `build` directory with an `index.js` file inside.
+
+Let's run 
+
+```shell
+npx tsc --watch
+```
+
+Which will watch for changes in the TypesScript file and automatically transpile it to `index.js`
+
+## Vanilla TypeScript
+
+Here are a few of the core features of TypeScript.
+
+_For a more detailed breakdown, take a look at the [TypeScript Documentation](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)._
+
+### Typing Variables
+
+When creating variables, we can either provide an **explicit** type assignment:
+
+```ts
+let firstName: string = "Sammy";
+```
+
+In the code above, we're creating a variable and explicity telling TypeScript (via `: string`) that it must be a string.
+
+[TS Playground - Variables](https://www.typescriptlang.org/play?#code/DYUwLgBAZglgTgZzAOQIYFsQC4JLjAOwHMIBeCAIgGUN0BPCgbgChmBjAewIQ9ADpgHIgApYiFBhABKFkA)
+> - _There will be links to TS Playground for each section in this article going forward_
+> - _It compiles TypeScript to JavaScript and shows the compiled code on the right_
+> - _**Click "Run" to execute the JavaScript and see any console logs**_
+
+This makes your code easier to read/understand, and is more explicit.
+
+You can also create a variable without a type and TypeScript will **infer** (i.e. guess) the type, based on the value:
+
+```ts
+let surname = "Abukmeil";
+```
+
+This is called an **implicit** type assignment.
+
+You can hover over a variable in VS Code to check what type TypeScript inferred:
+
+![VS Code type popup](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ezvg6uf7oen5g000voe4.png)
+
+If you try to assign a value with the wrong type to a typed variable, TypeScript will highlight an error in VS Code (squiggly red line) and the TypeScript compiler will throw an error:
+
+`Type 'number' is not assignable to type 'string'`
+
+[TS Playground - Incorrect Type Error](https://www.typescriptlang.org/play?#code/DYUwLgBAzgrgTgOwIYFsQQLwQEQEEBGMA1mgJbDYDcAUNbIqulgKyVA)
+> In TS Playground, you'll see the errors in two places:
+>  1. In the panel on the left by hovering over the red squiggly line
+>  2. In the panel on the right by switching to the "Errors" tab 
+
+This happens with both explicity typed variables and implicity typed variables.
+
+### Typing Arrays
+
+When creating arrays, we can add a type like so
+
+```ts
+const games: string[] = ["Space Invaders", "Pac Man"];
+```
+
+The `: string[]` above says "this array can only contain strings"
+
+[TS Playground - Arrays](https://www.typescriptlang.org/play?#code/MYewdgzgLgBA5gQwLYFMIC4bQE4EsxwDaAujALwyEBEAygA4LAowCSYAbggCYrYRUAaGFQAKjGAFkEYKsQDcAKAWhIIADYoAdGpBwAFIlQQAlIqA)
+
+If we try to do the following
+
+```ts
+games.push(4);
+```
+
+We get the following error
+
+`Argument of type 'number' is not assignable to parameter of type 'string'`
+
+### Tuples
+
+A tuple is an array with a specific length & specific types for each index
+
+```ts
+let inventoryItem: [number, string, number] = [
+  1, 
+  "Gaming Monitor", 
+  100
+];
+```
+
+The `: [number, string, number]` above says "This array must have 3 items with the following types"
+
+[TS Playground - Tuples](https://www.typescriptlang.org/play?#code/DYUwLgBAlgdgbiGYD2AnAngSTCAtgLggG0YBXXAIxFQBoIBnMVWAczrMuoF0IBeYgIx0ARAHEAhrlYQAsshhQUqYXQEAGNVwDcAKB0BjefWSgAdMGQsAFLARI0WHLgCUWoA)
+
+So if we were to re-assign this variable, this is allowed:
+
+```ts
+inventoryItem = [2, "Microwave", 40];
+```
+
+Whereas this isn't (since the last element in the array should be a number):
+
+```ts
+inventoryItem = [2, "Toaster", "35"];
+```
+
+We get the following error `Type 'string' is not assignable to type 'number'`
+
+When creating tuples, you can also give a name to each array item for clarity
+
+```ts
+let inventoryItem: [id: number, name: string, price: number] = [
+  1,
+  "Gaming Monitor",
+  100,
+];
+```
+
+### Typing Objects
+
+When creating objects, we can add a type like so
+
+```ts
+const game: { name: string; releaseYear: number } = {
+  name: "Resident Evil",
+  releaseYear: 1996,
+};
+```
+
+where `: { name: string; releaseYear: number }` specifies the name and type for each property
+
+[TS Playground Example - Typing an object](https://www.typescriptlang.org/play?#code/MYewdgzgLgBA5gQwLYFMBcMDeMzPTaAJwEsw4BuGQlAGxQQhQE17CMwBXJAIxUJgC+MALxYAUDBx4MAIgBKKCMQAmKMLACiAN2I0ZAGglVa9RiwRsYARgCcNgGyGB5IA)
+
+### Enums
+
+An enum is a group of constants (i.e. variables that should never change).
+
+For example 
+
+```ts
+enum Directions {
+  North,
+  East,
+  South,
+  West
+}
+```
+
+In the code above, we've defined some directions that we'll use in our app.
+
+```ts
+let currentDirection = Directions.North;
+```
+
+[TS Playground Example - Enum](https://www.typescriptlang.org/play?#code/KYOwrgtgBAIglgJ2AYwC5wPYgM5QN4BQUUAchgqgBYA0RUAogIbaq3EDKGYVbUA6sBYEAvgQIAbYKijIwCJCFTwkaTCCgBeWIhTos2AHRkKlANxA)
+
+In the code above, we're creating a variable and setting it equal to one of our enum values.
+
+If we `console.log()` this variable, we'll get `0`
+
+```ts
+console.log(currentDirection); // 0
+```
+
+So each value in our enum is given a number starting from `0`.
+
+Now that variable can only ever be assigned a value from this enum.
+
+If we try to set the variable to some other value
+
+```ts
+currentDirection = "Something Incorrect";
+```
+
+We'll get the following error `Type '"Something Incorrect"' is not assignable to type 'Directions'`
+
+We can also change the numbers that the enum values are linked to 
+
+```ts
+enum StatusCodes {
+  Success = 200,
+  NotFound = 404,
+  ServerError = 500,
+}
+
+const currentStatus = StatusCodes.NotFound;
+
+console.log(currentStatus); // 404
+```
+
+Or change the numbers that the enum values are linked to to be strings instead
+
+```ts
+enum Direction {
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT",
+}
+
+const currentDirection = Direction.Up;
+
+console.log(currentDirection); // UP
+```
+
+### Type Aliases
+
+We can define a Type Alias which makes types reusable and gives them a name.
+
+```ts
+type GameReleaseYear = number;
+
+const pacmanYear: GameReleaseYear = 1980;
+const spaceInvadersYear: GameReleaseYear = 1978;
+```
+
+[TS Playground Example - Type Alias](https://www.typescriptlang.org/play/?#code/C4TwDgpgBA4ghgWwgJQgGwnAzhAmpgJygF4oA7AVwQCMICBuAKEYGMB7MrYKMOFhOGXxwCALliIU6TDmFFSARgCcADgAMTdp25ZeLCAEkyANzgATOljnj4SVBmx5CJKMoDsK+kA)
+
+In the code above, we created a Type Alias called `GameReleaseYear` which is a number.
+
+This Type Alias is used for multiple variables.
+
+We can define a Type Alias for any type, including objects:
+
+```ts
+type Game = {
+  title: string;
+  year: number;
+};
+
+const game: Game = {
+  title: "Pac Man",
+  year: 1980
+}
+```
+
+[TS Playground Example - Type Alias for an object](https://www.typescriptlang.org/play/?#code/C4TwDgpgBA4ghgW2gXigbwFBSsAlsAGwgC4oBnYAJ1wDsBzAbiyhAjktJoFcEAjCSkwC+TDAGMA9jQpQ6iErHlRUmbHkIKARAAU4YqAFk4NTQBpmrdqQCMATgAcABgxCgA)
+
+### Interfaces
+
+An interface is similar to a type alias, however, you can only use them for objects
+
+```ts
+interface Game {
+  title: string;
+  year: number;
+}
+
+const game: Game = {
+  title: "Pac Man",
+  year: 1980,
+};
+```
+
+[TS Playground Example - Interface](https://www.typescriptlang.org/play/?#code/JYOwLgpgTgZghgYwgAgOJwLYoN4ChnJjBgA2EAXMgM5hSgDmA3PsgJ4RxSUgCuGARtGYBfXLgQB7EDWT1MFNPOQBeZHgJFSCgEQAFRMgCycENoA0Ldp0oBGAJwAOAAwXhjIA)
+
+Interfaces have an additional feature compared to Type Aliases, that they can extend other interfaces:
+
+```ts
+interface Game {
+  title: string;
+  year: number;
+}
+
+interface IndieGame extends Game {
+  developer: string
+}
+
+const indieGame: IndieGame = {
+  title: "Stardew Valley",
+  year: 2016,
+  developer: "ConcernedApe"
+};
+```
+
+### Union Types
+
+A union type allows a value to be more than one type
+
+```ts
+function displayId(id: number | string) {
+  console.log(`ID is: ${id}`);
+}
+
+displayId(5);
+displayId("ff72ce73-322d-4eb2-8029-c739d30c3ef5");
+```
+
+[TS Playground Example - Union Type](https://www.typescriptlang.org/play/?#code/GYVwdgxgLglg9mABAExgZwA4BsCGBPASWQAoZkAuRMEAWwCMBTAJ0QB9E0omYwBzASkQBvAFCJEEBGjhYGAOixxexAAYEAIonSUAJELIBfFfwDcIgyJGpMuQiQCspq+mz4ixAETBgAdgBMEAw+AMwAtMF+fsihACwMdH6hABwADH4AnKEQIenIwSkQwQzA9h6mQA)
+
+In the code above, the `id` property could either be a `string` or a `number`
+
+### Typing Functions
+
+We can specify what the return value type will be:
+
+```ts
+function getUserId(): number {
+  return 5;
+}
+```
+
+The `: number` above says "this function will return a value of type number"
+
+We can add types for each of the parameters:
+
+```ts
+function sum(x: number, y: number): number {
+  return x + y;
+}
+```
+
+[TS Playground Example - Typing Functions](https://www.typescriptlang.org/play/?#code/GYVwdgxgLglg9mABAZxAWwBQA8BcizoBGApgE4A0iAnngWiaQJS1FmIDeAUIoqcVCFJIsiANTUA3JwC+nThATIovYqgA2ygLwp0GAEyUAzIynzFcNcQB0auAHMMfdVBNA)
+
+In the code above, we've added types for the parameters and the return type via `: number`
+
+We can use a type alias to define the function types separately:
+
+```ts
+type Multiply = (x: number, y: number) => number; 
+
+const multiply: Multiply = (x, y) => {
+  return x * y;
+}
+```
+
+### Typing Classes
+
+When creating classes, we can add types for the properties and the methods
+
+```ts
+class Car {
+  engineType: string;
+
+  constructor(engineType: string) {
+    this.engineType = engineType;
+  }
+
+  getEngineType(): string {
+    return this.engineType;
+  }
+} 
+
+const car = new Car("Six cylinders");
+```
+
+In the code above, we specify that the class has a property called `engineType` which is a string, and that the `getEngineType()` method returns a string
+
+We can also use `private` and `public` keywords to specify if certain properties / methods are accessible outside of the class
+
+```ts
+class Car {
+  private engineType: string;
+
+  constructor(engineType: string) {
+    this.engineType = engineType;
+  }
+
+  public getEngineType(): string {
+    return this.engineType;
+  }
+}
+
+const car = new Car("Six cylinders");
+console.log(car.getEngineType());
+console.log(car.engineType); // Error
+```
+
+In the code above, the `engineType` property is set `private` and therefore only accessible within the class, whereas the `getEngineType()` method is `public` and can be accessed outside of the class.
+
+Instead of typing `private engineType: string;` outside of the constructor and `engineType: string` which is repetitive, we can combine both into the constructor:
+
+```ts
+class Car {
+  public constructor(private engineType: string) {
+    this.engineType = engineType;
+  }
+
+  public getEngineType(): string {
+    return this.engineType;
+  }
+}
+
+const car = new Car("Six cylinders");
+```
+
+[TS Playground Example - Typing Classes](https://www.typescriptlang.org/play/?#code/MYGwhgzhAEDCYCdoG8BQ1oAcCuAjEAlsNMAPYB2EALgtsFaQgBSYIEBuYVAptN+QHMC5bgBUAnpm4AuaNTaCAlCnQZoVABYEIAOn5CREqdAC8fQcLGTuAblUBfVKpz4i0AdyoBRC4etNFWXlhARU1aARPbARydS1dfUsjWwdUR1QySioSRFNoEQB3OEQmACIAZQIADxJxQnIAE24ECFLFOwyKCFIQbh0QUgEmYER2oA)
+
+In the above code `private engineType: string` defines a property and constructs it.
+
+### Generics
+
+#### Generic Functions
+
+Generics allow your typed functions to accept any type
+
+```ts
+function getValue<Type>(value: Type): Type {
+  return value;
+}
+```
+
+In the code above, we define a generic function which can receive a parameter of any type, and return a value of any type.
+
+```ts
+const num = getValue<number>(10);
+```
+
+In the code above, we're using the generic function, giving a type of `number`
+
+```ts
+const str = getValue<string>("Hello");
+```
+
+[TS Playground Example - Generic Function](https://www.typescriptlang.org/play/?#code/GYVwdgxgLglg9mABAcwKZQGoEMA2JUA8AKgJ4AOqAfABQBuu+AXIqRQJTOuqIDeAUIkQAndCCFJ6eVAG4+AXz58ICAM5REYEAFtEAXhTpsUgpq0AjVEJoBGAAxtZysGsRqheg5gaE3MMMhoAIgAJVBwcOECHRScVOBxUADoI5GpTABpXKCEHIA)
+
+In the code above, we're using the same generic function, giving a type of `string`
+
+Here's another example
+
+```ts
+function reverse<Type>(array: Type[]): Type[] {
+  return array.reverse();
+}
+
+const reversedNumbers = reverse<number>([1, 2, 3]);
+const reversedStrings = reverse<string>(["Hello", "Bye"]);
+```
+
+[TS Playground Example - Generic Function Example 2](https://www.typescriptlang.org/play/?#code/GYVwdgxgLglg9mABAJwKYDdXIM6oDwAqAngA6oB8AFAIbLLVEBcixZA2gLoCUzrqniAN4AoRClRQQyJLXpEAdGkw5UlLgG5hAX2HCICbFHHLcAEwByIALYAjLNkQBeY-fxhrd5FTYBGADSIAEwBAMzcmvpghi4qpgDKUMgwYADmDs5KrniGSaneAEQAEqgANiVw+QH5AEJEqPnhupHYcCWo8uUplJmxlrb2AT1mCblpGkA)
+
+In the code above, the parameter `array` is typed as `Type[]` i.e. an array of whichever type was declared. The return value is also typed as `Type[]` i.e. it will return an array of the declared type
+
+#### Generic Type Aliases
+
+When creating a type alias _(See section "Type Aliases" above for a refresher)_, we can make it generic
+
+```ts
+type Person<Type> = {
+  name: string;
+  age: number;
+  job: Type;
+};
+```
+
+In the code above, we've defined a generic type, where the `job` property could be any type
+
+```ts
+const personOne: Person<boolean> = {
+  name: "Jane",
+  age: 21,
+  job: false,
+};
+```
+
+In the code above, we're using our generic type alias and specifying that the job property will be a `boolean`
+
+```ts
+const personTwo: Person<string> = {
+  name: "John",
+  age: 35,
+  job: "Doctor",
+};
+```
+
+[TS Playground Example - Generic Type Alias](https://www.typescriptlang.org/play/?#code/C4TwDgpgBAChBOBnA9gOwDwBVwQHxQF4oBvAKCilQEMBbCALikWHgEtUBzAbnKio4aUArjQBGCHhQBWyUY2yQeAXx6kAxmmZRISNAHlUguLoyjkyADYQqqfETIVqdRgCIAUjYguANL36CAJgBGX2lZRgAzKgtECF8VUnVNYG0EFFRMAHdkRmN09GY2TjsSXidBd2QAC1QfPwFGAGYAVlCoGTkoFwARZDVgZHg6hKTUFCsAOgtkDgAKHXSDONSTLOQASi4gA)
+
+In the code above, we've used the same generic type alias, this time job will be a `string`
+
+## TypeScript With React
+
+Here are a few way of using TypeScript in React
+
+_For a more detailed breakdown, take a look at the [React Documentation](https://react.dev/learn/typescript)._
+
+### Creating a Vite app
+
+From this tutorial, we'll use [Vite](https://vitejs.dev).
+
+We can create a new Vite app with TypeScript by running the following command
+
+```shell
+npm create vite@latest
+```
+
+Choose the following options:
+- Select a framework -> React
+- Select a variant -> TypeScript
+
+_Note: Another common approach is to use [Next JS](https://nextjs.org/docs/getting-started/installation)_
+
+### File Extension
+
+Ensure your file extensions are `.tsx` (it wont work with `.js` or `.jsx`)
+
+### Typing Props
+
+Let's start with an example:
+
+```tsx
+// App.tsx
+function App() {
+  const handleTodo = (text: string) => {
+    console.log(text);
+  }
+
+  return (
+    <>
+      <NewTodo handleTodo={handleTodo} />
+    </>
+  );
+}
+```
+
+```tsx
+// NewTodo.tsx
+interface Props {
+  handleTodo: (text: string) => void;
+}
+
+function NewTodo({ handleTodo }: Props) {
+  return (
+    <>
+      <button onClick={() => handleTodo("Hello")}>Click</button>
+    </>
+  );
+}
+```
+
+Here we've used an interface to define a type for the props object.
+
+In this case, there's only one key value pair:
+- Key: `handleTodo` - the name of the prop
+- Value: `(text: string) => void` - This prop is a function, so this type describes the function parameters and return type (`void` means the function doesn't return anything)
+
+### Typing State
+
+Let's start with an example:
+
+```tsx
+interface Todo {
+  id: string;
+  text: string;
+}
+
+function App() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  return (
+    <>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>{todo.text}</li>
+        ))}
+      </ul>
+      <button
+        onClick={() => setTodos([...todos, { id: uuid(), text: "Hello" }])}
+      >
+        Add todo
+      </button>
+    </>
+  );
+}
+```
+
+Here we've used an interface to define a type for the state variable.
+
+`Todo[]` means this state variable will contain an array of `Todo` type objects
+
+`useState()` can be used as a Generic Function ([as explained here](#generic-functions)) hence the following syntax `useState<Todo[]>([])`
+
+## TypeScript With Express
+
+Here are a few way of using TypeScript in Express
+
+### Setting up an Express TypeScript app
+
+Create an express app as usual:
+
+```shell
+npm init -y
+```
+
+```shell
+npm i express
+```
+
+Install TypeScript as a dev dependancy, as well as some **declaration packages** for node and express
+
+```shell
+npm i -D typescript @types/express @types/node
+```
+
+> These declaration packages (e.g. `@types/express`) can be found in the [DefinitelyTyped GitHub Repo](https://github.com/DefinitelyTyped/DefinitelyTyped), which is a large collection of TypeScript type definitions.
+
+> For example, here are the type definitions for Express JS: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/express
+
+> Running `npm i -D @types/express` brings these into your `node_modules/` directory and makes them usable in your application.
+
+Create a `tsconfig.json` file
+
+```shell
+npx tsc --init
+```
+
+and ensure you set a directory for your compiled JS files to be sent to 
+
+```json
+{
+  "compilerOptions": {
+    ...
+    "outDir": "./dist"
+    ...
+  }
+}
+```
+
+This is how we'll run our app:
+- In development -> we want node to run our `.ts` files
+- In production -> we want node to run our comipled `.js`
+
+Since node can't run `.ts` files natively, we need to install a library for executing TypeScript via node called [ts-node](https://typestrong.org/ts-node/)
+
+```shell
+npm i -D ts-node
+```
+
+And to watch for file changes in development, we'll use [nodemon](https://nodemon.io)
+
+```shell
+npm i -D nodemon
+```
+
+And setup some scripts to run our app
+
+```json
+{
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts"
+  }
+}
+```
+
+### Using Types in Express
+
+Create a `src` directory and a `index.ts` file inside it with the following:
+
+```ts
+import express, { Express, Request, Response } from "express";
+
+const app: Express = express();
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("Express + TypeScript Server");
+});
+
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
+```
+
+Here we're importing types for:
+- `Express` -> Type for the return value from `express()`
+- `Request` -> Type for the `req` parameter
+- `Response` -> Type for the `res` parameter
+
+These are imported from the `express` package, which will search from them in `@types/express`

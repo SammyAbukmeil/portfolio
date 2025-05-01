@@ -20,7 +20,7 @@ export default function Header({ isBlog }: Props) {
     <header className="text-center py-6">
       <nav>
         <ul className="flex justify-end gap-4 mx-6 mb-4 md:mx-20 list-none">
-          {/* <li>
+          <li>
             <Link href="/" className={isBlog ? hoverClasses : activeClasses}>
               Home
             </Link>
@@ -32,7 +32,7 @@ export default function Header({ isBlog }: Props) {
             >
               Blog
             </Link>
-          </li> */}
+          </li>
           <li
             className="hover:cursor-pointer"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
