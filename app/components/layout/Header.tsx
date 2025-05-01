@@ -12,7 +12,7 @@ export default function Header({ isBlog }: Props) {
   const { theme, setTheme } = useTheme();
 
   const activeClasses =
-    "decoration-solid underline decoration-primary underline-offset-4 hover:underline-offset-6 transition-all decoration-2";
+    "decoration-solid underline decoration-primary underline-offset-6 hover:underline-offset-6 transition-all decoration-2";
   const hoverClasses =
     "hover:decoration-solid hover:underline hover:t decoration-primary underline-offset-4 transition-all decoration-2";
 
