@@ -18,7 +18,7 @@ export default function Header({ isBlog }: Props) {
 
   return (
     <header className="text-center py-6">
-      <nav className="mb-10">
+      <nav className={`${!isBlog? "mb-10" : ""}`}>
         <ul className="flex justify-end gap-4 mx-6 mb-4 md:mx-20 list-none">
           <li>
             <Link href="/" className={isBlog ? hoverClasses : activeClasses}>
