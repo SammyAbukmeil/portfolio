@@ -45,14 +45,14 @@ const components = {
   ),
   li: (props: ListItemProps) => <li className="pl-1" {...props} />,
   em: (props: ComponentPropsWithoutRef<"em">) => (
-    <em className="font-medium" {...props} />
+    <em {...props} />
   ),
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
-    <strong className="font-medium text-accent" {...props} />
+    <strong className="font-medium dark:text-accent" {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className =
-      "dark:text-primary font-medium underline underline-offset-4 hover:underline-offset-6 transition-all";
+      "underline decoration-primary underline-offset-4 hover:underline-offset-6 transition-all";
     if (href?.startsWith("/")) {
       return (
         <Link href={href} className={className} {...props}>
