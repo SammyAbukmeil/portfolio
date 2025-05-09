@@ -16,7 +16,7 @@ export const metadata = {
 
 Algorithms are a **sequence of steps to solve a problem**. Given the same steps + inputs, an algorithm should always lead to the same solution.
 
-## Measuring Performance
+## Measuring Performance (bad approach: manually timing it)
 
 Since a problem may have multiple solutions, we often measure the performance of an algorithm to compare. Consider the following problem:
 
@@ -34,43 +34,113 @@ A solution might look like the following:
 You might be tempted to measure the performance via the [Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
 
 > Note:
-> - You can change the number in the example below (e.g. `30`), however, **be careful not to input large values** otherwise your browser will crash (don't go above 300m `300000000`)
+> - You can change the number in the example below (e.g. to `30`), however, **don't input large values** otherwise your browser 
+will crash (don't go above 300m `300000000`)
 >
-> - Small numbers show `0` since it runs too fast and finishes in less than a millisecond.
+> - Small numbers show `0` since the function call finishes in less than a millisecond.
 
 <iframe
   style={{ height: "22rem" }}
   src="https://codesandbox.io/embed/h5zl76?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
 ></iframe>
 
-As you make the number bigger, you'll notice that the time it takes increases. However, try the same number twice, it's always slightly different. This is due to various factors:
+As you make the number bigger, you'll notice that the time it takes increases. However, try the same number twice, it's 
+always slightly different. This is due to various factors:
 
-- The speed of the computer
+- The speed of your computer
 - The amount of processes running on your computer
-- The ram your browser has availble
+- The ram your browser has available
 
-So this isn't the best way to measure the performance of an algorithm. However, as you add `0`'s to the example above, we do see a trend, roughly:
+So this isn't the best way to measure the performance of an algorithm.
+
+## Measuring Performance (better approach: spot a trend)
+
+In the example above, as you add `0`'s, we see a trend which is roughly:
 
 - 1
 - 10
 - 100
 - 1000
 
-It's a factor of 10 (if we x10 the input, the time it takes to finish is x10 longer). Similarly, if we x2 the input, the time is x2.
+It's a factor of 10 (if we x10 the input, the time it takes is x10 longer). Similarly, if we x2 the input, the time it takes is x2. 
 
-This is called **linear time complexity**. This is how it would look on a graph:
+In other words, as the input increases, so does the time in a linear fashion. This trend is called **linear time complexity**. This is how it would look on a graph:
 
 ![Linear Time Complexity](/algorithms/linear-time-complexity.png)
 
-As `n` grows -> more loop iterations -> more time (in a linear way)
-
-We could also solve the same problem like so:
+We could also solve the same problem with a fancy maths formula like so:
 
 <iframe
   style={{ height: "22rem" }}
   src="https://codesandbox.io/embed/5625sr?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
 ></iframe>
 
-As you add `0`'s to the example above, you'll notice that the time it takes don't increase, this trend is called **constant time complexity**
+As you add `0`'s to the example above, you'll notice that the time it takes (looking for a trend, not the exact numbers) 
+doesn't increase. This trend is called **constant time complexity**:
 
 ![Constant Time Complexity](/algorithms/constant-time-complexity.png)
+
+There are common names for these trends:
+- Linear = `O(n)`
+- Constant = `O(1)`
+
+We'll see more as we progress.
+
+## Measuring Performance (best approach: Asymptotic Analysis)
+
+Asymptotic Analysis is a technique to figure out if an algortim is Linear (`O(n)`), Constant (`O(1)`) etc.
+
+It involes 3 steps:
+1. Figure out the mathematical "function", which allows us plot the trend on a graph
+2. ...
+3. ...
+
+Let's use Asymptotic Analysis for this function:
+
+```ts
+function sum(n: number) {
+  let result = 0;
+
+  for (let i = 0; i <= n; i++) {
+    result += i;
+  }
+
+  return result;
+}
+```
+
+To figure out the mathematical function, we need to **count the number of expression executions**.
+
+Let's start off by checking how many times each expression executes when `n` is `1`:
+
+```ts
+function sum(n: number) {
+  let result = 0; // 1
+
+  for (let i = 0; i <= n; i++) { // 1
+    result += i; // 1
+  }
+
+  return result; // 1
+}
+```
+
+The mathematical "function" is written like so:
+
+`T = 1 + 1 + 1 + 1`
+
+```ts
+function sum(n: number) {
+  let result = 0; // 1
+
+  for (let i = 0; i <= n; i++) { // 1
+    result += i; // 3
+  }
+
+  return result; // 1
+}
+```
+
+So the only thing that changes when `n` increases is the amount of times the expression in the body of the loop.
+
+The mathematical "function" is written like so:
