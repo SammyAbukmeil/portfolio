@@ -205,3 +205,27 @@ iframe {
   width: 100%;
   margin: 3rem 0;
 }
+
+.blog h1::before {
+  content: "# ";
+}
+
+.blog h2::before {
+  content: "## ";
+}
+
+.blog h3::before {
+  content: "### ";
+}
+
+.blog h4::before {
+  content: "#### ";
+}
+
+.blog h5::before {
+  content: "##### ";
+}
+
+.blog h6::before {
+  content: "###### ";
+}

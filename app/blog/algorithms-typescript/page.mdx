@@ -18,9 +18,13 @@ Algorithms are a **sequence of steps to solve a problem**. Given the same steps 
 
 ## Measuring Performance
 
-### Manually timing it (bad)
+Since a problem may have multiple solutions, we often measure the performance of an algorithm to compare.
 
-Since a problem may have multiple solutions, we often measure the performance of an algorithm to compare. Consider the following problem:
+### Option 1: Manually timing it
+
+> Note: This approach to measuring algorithm performance is unreliable, more on this below.
+
+Consider the following problem:
 
 > Build a function which:
 > 1. Takes a number as an input
@@ -55,7 +59,9 @@ always slightly different. This is due to various factors:
 
 So this isn't the best way to measure the performance of an algorithm.
 
-### Spot a trend (better)
+### Option 2: Spot a trend 
+
+> Note: This approach better than manually timing, however, there's a smarter approach. More on this below.
 
 In the example above, as you add `0`'s, we see a trend which is roughly:
 
@@ -83,21 +89,19 @@ doesn't increase. This trend is called **constant time complexity**:
 ![Constant Time Complexity](/algorithms/constant-time-complexity.png)
 
 These trends are often described using Big O notation (a category for the growth rate of algorithms):
-- Linear = `O(n)` "big O of n"
-- Constant = `O(1)` "big O of 1"
+- Linear = `O(n)` _(pronounced "O of n")_
+- Constant = `O(1)` _(pronounced "O of 1")_
 
 We'll see more later.
 
-### Derive Big O via Asymptotic Analysis (best)
+### Option 3: Derive Big O via Asymptotic Analysis
 
-Asymptotic Analysis is a technique to figure out if an algortim is Linear (`O(n)`), Constant (`O(1)`) etc.
+Asymptotic Analysis is a technique to figure out if an algorithm is Linear `O(n)`, Constant `O(1)`, etc...
 
 It involes 3 steps:
-1. Define the mathematical "function"
-2. Find the "fastest growing term" in the mathematical function
-3. Remove the "coefficient" from the fastest growing term
-
-All of these terms will be explained and examples given.
+> 1. Define the mathematical "function"
+> 2. Find the "fastest growing term" in the mathematical function
+> 3. Remove the "coefficient" from the fastest growing term
 
 Let's use Asymptotic Analysis for this function:
 
@@ -113,17 +117,17 @@ function sum(n: number) {
 }
 ```
 
-#### Define the mathematical function
+#### Step 1: Define the mathematical function
 
 To figure out the mathematical function, we need to **count the number of expression executions**.
 
 Let's start off by checking how many times each expression executes when `n` is `1`:
 
 ```ts
-function sum(n: number) {
+function sum(1: number) {
   let result = 0; // 1 expression execution
 
-  for (let i = 0; i <= n; i++) { // 1 expression execution
+  for (let i = 0; i <= 1; i++) { // 1 expression execution
     result += i; // 1 expression execution
   }
 
@@ -140,17 +144,16 @@ Where `T` stands for "Time Complexity".
 Now let's check how many times each expression executes when `n` is `3`:
 
 ```ts
-function sum(n: number) {
+function sum(3: number) {
   let result = 0; // 1
 
-  for (let i = 0; i <= n; i++) { // 1
+  for (let i = 0; i <= 3; i++) { // 1
     result += i; // 3
   }
 
   return result; // 1
 }
 ```
-
 
 The mathematical "function" is written like so:
 
@@ -177,7 +180,7 @@ function sum(n: number) {
   let result = 0;
 
   for (let i = 0; i <= n; i++) {
-    console.log(i);
+    console.log("...");
     result += i;
   }
 
@@ -204,18 +207,17 @@ Which is more generalised. We've replaced the concrete numbers with coefficients
 - `a` is the coefficient of the variable `n`
 - `b` is a constant term (not a coefficient of a variable)
 
-#### Find the fastest growing term
+#### Step 2: Find the fastest growing term
 
 For this function:
 
 `T = a*n + b` 
 
 the fastest growing term is `a*n`, since `b` is a constant term which doesn't grow 
-at all, it's always exactly the same number.
+at all, it's always exactly the same number. `a*n` on the other hand depends 
+on `n`, and for a bigger `n`, this term is bigger.
 
-`a*n` on the other hand depends on `n`, and for a bigger `n`, this term is bigger.
-
-#### Remove the coefficient from the fastest growing term
+#### Step 3: Remove the coefficient from the fastest growing term
 
 For the fastest growing term:
 
@@ -225,6 +227,155 @@ The coefficient is `a` in this case, so the mathematical function becomes:
 
 `T = n`
 
-This tells us that the time complexity for this algorithm depends on `n`.
+This tells us that the time complexity for this algorithm depends on `n`. This is where the `n` in the
+ Big O notation for linear time complexity `O(n)` comes from.
 
-This is where the `n` in the Big O notation for linear time complexity `O(n)` comes from.
+---
+
+Let's use Asymptotic Analysis to the constant time function discussed earlier:
+
+```ts
+function sum(n: number) {
+  return (n / 2) * (n + 1);
+}
+```
+
+**Step 1**: define the mathematical function
+
+Starting with `n` equal to `1`:
+
+```ts
+function sum(1: number) {
+  return (1 / 2) * (1 + 1); // 1
+}
+```
+
+So the mathematical function is:
+
+`T = 1`
+
+And if we try with `n` equal to `3`:
+
+```ts
+function sum(3: number) {
+  return (3 / 2) * (3 + 1); // 1
+}
+```
+
+Which also has a mathematical function of:
+
+`T = 1`
+
+So regardless of the value of `n`, we always get `T = 1`. 
+
+We can't make this mathematical function any more general, since 
+there is no `n` in this mathematical function. 
+
+**Step 2**: find the fastest growing term
+
+For this mathematical function:
+
+`T = 1`
+
+There is no fastest growing term since we only have `1` on the right hand side.
+
+**Step 3**: remove the coefficient from the fastest growing term
+
+And there is no coefficient to remove since there is no `n` variable, we only have a constant term `1`. 
+
+so `T = 1` is our final mathematical function for this algorithm.
+
+We take the value on the right-hand side of the equals sign and put in in Big O 
+notation, `O(1)`, which is an example of a constant time algorithm.
+
+Again, if we were to add an extra line of code:
+
+```ts
+function sum(n: number) {
+  console.log(...);
+  return (n / 2) * (n + 1); // 1
+}
+```
+
+This doesn't result in:
+
+`T = 1 + 1` -> `T = 2` -> `O(2)`
+
+It's still `O(1)`, because we're concerned about the "trend" rather than concrete numbers. In this
+case, the time the function takes to execute doesn't depend on `n`.
+
+Constant time is the best possible outcome for an algorithm in terms of performance, although it
+isn't always possible.
+
+## Other common algorithms
+
+Here's a list of the most common algorithms, ordered from **fastest to slowest**:
+
+1. `O(1)` - Constant Time Complexity (**fast**)
+
+![Constant Time Complexity](/algorithms/constant-time-complexity.png)
+
+> `n` has no effect on time
+
+2. `O(log n)` - Logarithmic Time Complexity
+
+![Logarithmic Time Complexity](/algorithms/logarithmic-time-complexity.png)
+
+> Initially a slow algorithm, but is faster when `n` is large because it grows at a 
+> slower pace (logarithmically) with `n`
+
+3. `O(1)` - Linear Time Complexity
+
+![Linear Time Complexity](/algorithms/linear-time-complexity.png)
+
+> Execution times grows linearly with `n`
+
+4. `O(n²)` - Quadratic Time Complexity
+
+![Quadratic Time Complexity](/algorithms/quadratic-time-complexity.png)
+
+> Initially a fast algorithm, but is slower when `n` is large because it grows at a 
+faster pace (quadratically) with `n`
+
+5. `O(2ⁿ)` - Exponential Time Complexity (**slow**)
+
+![Exponential Time Complexity](/algorithms/exponential-time-complexity.png)
+
+> Execution times grows exponentially with `n`
+
+There are even more algorithms (technically any mathematical function is possible), but
+these are the most common.
+
+## Calling functions with loops within them
+
+Consider this algorithm:
+
+```ts
+const sumNumbers = (numbers: number[]) => {
+  let result = 0; // 1
+
+  for (const number of numbers) { // 1
+    result += number; // n
+  }
+
+  return result; // 1
+}
+```
+
+`T = 1 + 1 + n + 1`
+`T = 3 + 1*n`
+`T = 1*n`
+`T = n`
+
+This algorithm has linear time complexity `O(n)` due to the loop.
+
+We could also impliment this algorithm with a `.reduce()` like so:
+
+```ts
+const sumNumbers = (numbers: number[]) => {
+  return numbers.reduce((sum, currNum) => sum + currNum, 0); // under the hood => n
+}
+```
+
+But this still has a time complexity of `O(n)` since `.reduce()` executes a loop 
+behind the scenes.
