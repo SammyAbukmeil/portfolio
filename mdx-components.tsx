@@ -38,7 +38,7 @@ const components = {
     <p className="dark:text-white leading-6 mb-4" {...props} />
   ),
   ol: (props: ListProps) => (
-    <ol className="dark:text-white list-decimal pl-5 space-y-2" {...props} />
+    <ol className="dark:text-white list-decimal pl-5 space-y-2 mb-4" {...props} />
   ),
   ul: (props: ListProps) => (
     <ul className="dark:text-white list-disc pl-5 space-y-1 my-4" {...props} />

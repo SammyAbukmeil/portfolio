@@ -16,7 +16,9 @@ export const metadata = {
 
 Algorithms are a **sequence of steps to solve a problem**. Given the same steps + inputs, an algorithm should always lead to the same solution.
 
-## Measuring Performance (bad approach: manually timing it)
+## Measuring Performance
+
+### Manually timing it (bad)
 
 Since a problem may have multiple solutions, we often measure the performance of an algorithm to compare. Consider the following problem:
 
@@ -53,7 +55,7 @@ always slightly different. This is due to various factors:
 
 So this isn't the best way to measure the performance of an algorithm.
 
-## Measuring Performance (better approach: spot a trend)
+### Spot a trend (better)
 
 In the example above, as you add `0`'s, we see a trend which is roughly:
 
@@ -80,20 +82,22 @@ doesn't increase. This trend is called **constant time complexity**:
 
 ![Constant Time Complexity](/algorithms/constant-time-complexity.png)
 
-There are common names for these trends:
-- Linear = `O(n)`
-- Constant = `O(1)`
+These trends are often described using Big O notation (a category for the growth rate of algorithms):
+- Linear = `O(n)` "big O of n"
+- Constant = `O(1)` "big O of 1"
 
-We'll see more as we progress.
+We'll see more later.
 
-## Measuring Performance (best approach: Asymptotic Analysis)
+### Derive Big O via Asymptotic Analysis (best)
 
 Asymptotic Analysis is a technique to figure out if an algortim is Linear (`O(n)`), Constant (`O(1)`) etc.
 
 It involes 3 steps:
-1. Figure out the mathematical "function", which allows us plot the trend on a graph
-2. ...
-3. ...
+1. Define the mathematical "function"
+2. Find the "fastest growing term" in the mathematical function
+3. Remove the "coefficient" from the fastest growing term
+
+All of these terms will be explained and examples given.
 
 Let's use Asymptotic Analysis for this function:
 
@@ -109,25 +113,31 @@ function sum(n: number) {
 }
 ```
 
+#### Define the mathematical function
+
 To figure out the mathematical function, we need to **count the number of expression executions**.
 
 Let's start off by checking how many times each expression executes when `n` is `1`:
 
 ```ts
 function sum(n: number) {
-  let result = 0; // 1
+  let result = 0; // 1 expression execution
 
-  for (let i = 0; i <= n; i++) { // 1
-    result += i; // 1
+  for (let i = 0; i <= n; i++) { // 1 expression execution
+    result += i; // 1 expression execution
   }
 
-  return result; // 1
+  return result; // 1 expression execution
 }
 ```
 
 The mathematical "function" is written like so:
 
 `T = 1 + 1 + 1 + 1`
+
+Where `T` stands for "Time Complexity".
+
+Now let's check how many times each expression executes when `n` is `3`:
 
 ```ts
 function sum(n: number) {
@@ -141,6 +151,80 @@ function sum(n: number) {
 }
 ```
 
-So the only thing that changes when `n` increases is the amount of times the expression in the body of the loop.
 
 The mathematical "function" is written like so:
+
+`T = 1 + 1 + 3 + 1`
+
+So the only thing that changes when `n` increases is the amount of times the expression in the body of the loop. 
+Therefore, we can write a generic mathematical function like so:
+
+`T = 1 + 1 + n + 1`
+
+Which can be shortend to:
+
+`T = 3 + n`
+
+Or 
+
+`T = 3 + 1 * n` (why we're writing it like this will become clear soon)
+
+However, we don't need to be this percise. For example, if we always count 
+all expression executions, we would consider a algorithm slower just by adding a line of code e.g:
+
+```ts
+function sum(n: number) {
+  let result = 0;
+
+  for (let i = 0; i <= n; i++) {
+    console.log(i);
+    result += i;
+  }
+
+  return result;
+}
+```
+
+But even with the new line added in the example above, the "big picture" /
+"trend" / "growth rate" of this algorithm hasn't changed. 
+
+We're less concerned about exact number of code exections, and more so about the
+type of mathematical function.
+
+So we can rewrite our mathematical function from:
+
+`T = 3 + 1 * n` 
+
+to:
+
+`T = a*n + b` 
+
+Which is more generalised. We've replaced the concrete numbers with coefficients 
+(a coefficient is numerical or constant multiplier in an algebraic term):
+- `a` is the coefficient of the variable `n`
+- `b` is a constant term (not a coefficient of a variable)
+
+#### Find the fastest growing term
+
+For this function:
+
+`T = a*n + b` 
+
+the fastest growing term is `a*n`, since `b` is a constant term which doesn't grow 
+at all, it's always exactly the same number.
+
+`a*n` on the other hand depends on `n`, and for a bigger `n`, this term is bigger.
+
+#### Remove the coefficient from the fastest growing term
+
+For the fastest growing term:
+
+`a*n`
+
+The coefficient is `a` in this case, so the mathematical function becomes:
+
+`T = n`
+
+This tells us that the time complexity for this algorithm depends on `n`.
+
+This is where the `n` in the Big O notation for linear time complexity `O(n)` comes from.
