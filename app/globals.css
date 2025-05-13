@@ -7,6 +7,8 @@
   --color-secondary: #AACCCD;
   --color-accent: #ecc24b;
   --color-dark: #1E1E1E;
+  --color-blue: #6e84d9;
+  --color-code-block: #464646;
 }
 
 :root {
@@ -32,10 +34,11 @@
 
 html {
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 pre {
-  background-color: #16161e;
+  background-color: #2a2a31;
   border-radius: 0.5rem;
   overflow-x: auto;
   padding: 1rem;
@@ -57,7 +60,7 @@ code {
   font-size: 14px;
   padding: 0.2em 0.4em;
   border-radius: 0.3em;
-  background-color: var(--color-gray-100);
+  background-color: #2a2a31;
 }
 
 pre code {
@@ -83,7 +86,7 @@ code:not(pre code) span {
     font-size: 14px;
     padding: 0.2em 0.4em;
     border-radius: 0.3em;
-    background-color: var(--color-zinc-800);
+    background-color: #464646;
   }
 
   code:not(pre code) span {

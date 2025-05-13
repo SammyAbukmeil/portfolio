@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import Fab from "../../components/blog/Fab.tsx";
+import Navbar from "../../components/blog/Navbar.tsx";
 
 export const metadata = {
   title: "TypeScript Basics",
@@ -8,18 +10,49 @@ export const metadata = {
   },
 };
 
-<Link href="/blog" className="flex justify-end">
+<Link href="/blog" className="flex">
   <ArrowLeft className="mr-2" /> <span>Back</span>
 </Link>
 
+<Navbar
+  items={[
+    { text: "What is TypeScript", link: "#what-is-typescript", nested: false },
+    {
+      text: "Setup a Local Environment",
+      link: "#setup-a-local-environment",
+      nested: false,
+    },
+    { text: "Vanilla TypeScript", link: "#vanilla-typescript", nested: false },
+    { text: "Typing Arrays", link: "#typing-arrays", nested: true },
+    { text: "Tuples", link: "#tuples", nested: true },
+    { text: "Typing Objects", link: "#typing-objects", nested: true },
+    { text: "Enums", link: "#enums", nested: true },
+    { text: "Type Aliases", link: "#type-aliases", nested: true },
+    { text: "Interfaces", link: "#interfaces", nested: true },
+    { text: "Union Types", link: "#union-types", nested: true },
+    { text: "Typing Functions", link: "#typing-functions", nested: true },
+    { text: "Typing Classes", link: "#typing-classes", nested: true },
+    { text: "Generic Functions", link: "#generic-functions", nested: true },
+    { text: "Generic Type Aliases", link: "#generic-type-aliases", nested: true },
+    { text: "TypeScript With React", link: "#typescript-with-react", nested: false },
+    { text: "Typing Props", link: "#typing-props", nested: true },
+    { text: "Typing State", link: "#typing-state", nested: true },
+    { text: "TypeScript With Express", link: "#typescript-with-express", nested: false },
+    { text: "Typing Core Express Objects", link: "#typing-core-express-objects", nested: true },
+  ]}
+/>
+
+<Fab />
+
 # TypeScript Basics
-###### _Published: 11/01/24_
+
+_Published: 11/01/24_
 
 ## What is TypeScript
 
 - TypeScript extends JavaScript by adding "types" to the language
 - It provides a command line interface (cli) which we can run to compile our TypeScript to JavaScript via the cli command `tsc`
-- This helps spot bugs during development (i.e. when we're building our apps) and therefore prevent bugs from happening during "runtime" (when a user is using our apps) 
+- This helps spot bugs during development (i.e. when we're building our apps) and therefore prevent bugs from happening during "runtime" (when a user is using our apps)
 
 For example, here's some TypeScript:
 
@@ -38,6 +71,7 @@ This section guides you through how to install and compile TypeScript code.
 ### Create a folder to practice TypeScript
 
 On your desktop create a `typescript` directory:
+
 - Open it in VS Code
 - Open a terminal
 
@@ -53,7 +87,7 @@ We use TypeScript during development (not to actually run the app), so we'll add
 
 ```shell
 npm install typescript --save-dev
-``` 
+```
 
 We should now be able to run the cli
 
@@ -87,7 +121,7 @@ Let's add a setting to tell the TypeScript compiler where to find our TypeScript
 
 Now create an `src/` directory and inside of it create a `index.ts`
 
-Add 
+Add
 
 ```ts
 let firstName: string = "Sammy";
@@ -101,7 +135,7 @@ npx tsc
 
 You should now see a `build` directory with an `index.js` file inside.
 
-Let's run 
+Let's run
 
 ```shell
 npx tsc --watch
@@ -126,6 +160,7 @@ let firstName: string = "Sammy";
 In the code above, we're creating a variable and explicity telling TypeScript (via `: string`) that it must be a string.
 
 [TS Playground - Variables](https://www.typescriptlang.org/play?#code/DYUwLgBAZglgTgZzAOQIYFsQC4JLjAOwHMIBeCAIgGUN0BPCgbgChmBjAewIQ9ADpgHIgApYiFBhABKFkA)
+
 > - _There will be links to TS Playground for each section in this article going forward_
 > - _It compiles TypeScript to JavaScript and shows the compiled code on the right_
 > - _**Click "Run" to execute the JavaScript and see any console logs**_
@@ -149,9 +184,11 @@ If you try to assign a value with the wrong type to a typed variable, TypeScript
 `Type 'number' is not assignable to type 'string'`
 
 [TS Playground - Incorrect Type Error](https://www.typescriptlang.org/play?#code/DYUwLgBAzgrgTgOwIYFsQQLwQEQEEBGMA1mgJbDYDcAUNbIqulgKyVA)
+
 > In TS Playground, you'll see the errors in two places:
->  1. In the panel on the left by hovering over the red squiggly line
->  2. In the panel on the right by switching to the "Errors" tab 
+>
+> 1.  In the panel on the left by hovering over the red squiggly line
+> 2.  In the panel on the right by switching to the "Errors" tab
 
 This happens with both explicity typed variables and implicity typed variables.
 
@@ -182,11 +219,7 @@ We get the following error
 A tuple is an array with a specific length & specific types for each index
 
 ```ts
-let inventoryItem: [number, string, number] = [
-  1, 
-  "Gaming Monitor", 
-  100
-];
+let inventoryItem: [number, string, number] = [1, "Gaming Monitor", 100];
 ```
 
 The `: [number, string, number]` above says "This array must have 3 items with the following types"
@@ -236,14 +269,14 @@ where `: { name: string; releaseYear: number }` specifies the name and type for 
 
 An enum is a group of constants (i.e. variables that should never change).
 
-For example 
+For example
 
 ```ts
 enum Directions {
   North,
   East,
   South,
-  West
+  West,
 }
 ```
 
@@ -275,7 +308,7 @@ currentDirection = "Something Incorrect";
 
 We'll get the following error `Type '"Something Incorrect"' is not assignable to type 'Directions'`
 
-We can also change the numbers that the enum values are linked to 
+We can also change the numbers that the enum values are linked to
 
 ```ts
 enum StatusCodes {
@@ -331,8 +364,8 @@ type Game = {
 
 const game: Game = {
   title: "Pac Man",
-  year: 1980
-}
+  year: 1980,
+};
 ```
 
 [TS Playground Example - Type Alias for an object](https://www.typescriptlang.org/play/?#code/C4TwDgpgBA4ghgW2gXigbwFBSsAlsAGwgC4oBnYAJ1wDsBzAbiyhAjktJoFcEAjCSkwC+TDAGMA9jQpQ6iErHlRUmbHkIKARAAU4YqAFk4NTQBpmrdqQCMATgAcABgxCgA)
@@ -364,13 +397,13 @@ interface Game {
 }
 
 interface IndieGame extends Game {
-  developer: string
+  developer: string;
 }
 
 const indieGame: IndieGame = {
   title: "Stardew Valley",
   year: 2016,
-  developer: "ConcernedApe"
+  developer: "ConcernedApe",
 };
 ```
 
@@ -418,11 +451,11 @@ In the code above, we've added types for the parameters and the return type via 
 We can use a type alias to define the function types separately:
 
 ```ts
-type Multiply = (x: number, y: number) => number; 
+type Multiply = (x: number, y: number) => number;
 
 const multiply: Multiply = (x, y) => {
   return x * y;
-}
+};
 ```
 
 ### Typing Classes
@@ -440,7 +473,7 @@ class Car {
   getEngineType(): string {
     return this.engineType;
   }
-} 
+}
 
 const car = new Car("Six cylinders");
 ```
@@ -585,6 +618,7 @@ npm create vite@latest
 ```
 
 Choose the following options:
+
 - Select a framework -> React
 - Select a variant -> TypeScript
 
@@ -603,7 +637,7 @@ Let's start with an example:
 function App() {
   const handleTodo = (text: string) => {
     console.log(text);
-  }
+  };
 
   return (
     <>
@@ -631,6 +665,7 @@ function NewTodo({ handleTodo }: Props) {
 Here we've used an interface to define a type for the props object.
 
 In this case, there's only one key value pair:
+
 - Key: `handleTodo` - the name of the prop
 - Value: `(text: string) => void` - This prop is a function, so this type describes the function parameters and return type (`void` means the function doesn't return anything)
 
@@ -704,7 +739,7 @@ Create a `tsconfig.json` file
 npx tsc --init
 ```
 
-and ensure you set a directory for your compiled JS files to be sent to 
+and ensure you set a directory for your compiled JS files to be sent to
 
 ```json
 {
@@ -717,6 +752,7 @@ and ensure you set a directory for your compiled JS files to be sent to
 ```
 
 This is how we'll run our app:
+
 - In development -> we want node to run our `.ts` files
 - In production -> we want node to run our comipled `.js`
 
@@ -744,7 +780,7 @@ And setup some scripts to run our app
 }
 ```
 
-### Using Types in Express
+### Typing Core Express Objects
 
 Create a `src` directory and a `index.ts` file inside it with the following:
 
@@ -763,6 +799,7 @@ app.listen(3000, () => {
 ```
 
 Here we're importing types for:
+
 - `Express` -> Type for the return value from `express()`
 - `Request` -> Type for the `req` parameter
 - `Response` -> Type for the `res` parameter

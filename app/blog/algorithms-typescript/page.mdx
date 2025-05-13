@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import Navbar from "../../components/blog/Navbar.tsx";
+import Fab from "../../components/blog/Fab.tsx";
 
 export const metadata = {
   title: "Algorithms in TypeScript",
@@ -12,7 +14,23 @@ export const metadata = {
   <ArrowLeft className="mr-2" /> <span>Back</span>
 </Link>
 
+<Navbar
+  items={[
+    { text: "Algorithms in TypeScript", link: "#algorithms-in-typescript", nested: false },
+    { text: "Measuring Performance", link: "#measuring-performance", nested: false },
+    { text: "Other common algorithms", link: "#other-common-algorithms", nested: false },
+    { text: "Constant Time Complexity", link: "#constant-time-complexity", nested: true },
+    { text: "Logarithmic Time Complexity", link: "#logarithmic-time-complexity", nested: true },
+    { text: "Linear Time Complexity", link: "#linear-time-complexity", nested: true },
+    { text: "Quadratic Time Complexity", link: "#quadratic-time-complexity", nested: true },
+    { text: "Exponential Time Complexity", link: "#exponential-time-complexity", nested: true },
+  ]}
+/>
+
+<Fab />
+
 # Algorithms in TypeScript
+_Published: 13/05/25_
 
 Algorithms are a **sequence of steps to solve a problem**. Given the same steps + inputs, an algorithm should always lead to the same solution.
 
@@ -22,11 +40,12 @@ Since a problem may have multiple solutions, we often measure the performance of
 
 ### Option 1: Manually timing it
 
-> Note: This approach to measuring algorithm performance is unreliable, more on this below.
+> Note: This approach to measuring algorithm performance is **unreliable**, more on this below.
 
 Consider the following problem:
 
 > Build a function which:
+>
 > 1. Takes a number as an input
 > 2. Calculates the sum of all numbers leading up to that number
 
@@ -40,8 +59,9 @@ A solution might look like the following:
 You might be tempted to measure the performance via the [Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
 
 > Note:
-> - You can change the number in the example below (e.g. to `30`), however, **don't input large values** otherwise your browser 
-will crash (don't go above 300m `300000000`)
+>
+> - You can change the number in the example below (e.g. to `30`), however, **don't input large values** otherwise your browser
+>   will crash (don't go above 300m `300000000`)
 >
 > - Small numbers show `0` since the function call finishes in less than a millisecond.
 
@@ -50,7 +70,7 @@ will crash (don't go above 300m `300000000`)
   src="https://codesandbox.io/embed/h5zl76?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
 ></iframe>
 
-As you make the number bigger, you'll notice that the time it takes increases. However, try the same number twice, it's 
+As you make the number bigger, you'll notice that the time it takes increases. However, try the same number twice, it's
 always slightly different. This is due to various factors:
 
 - The speed of your computer
@@ -59,9 +79,9 @@ always slightly different. This is due to various factors:
 
 So this isn't the best way to measure the performance of an algorithm.
 
-### Option 2: Spot a trend 
+### Option 2: Spot a trend
 
-> Note: This approach better than manually timing, however, there's a smarter approach. More on this below.
+> Note: This approach **better than manually timing**, however, *there's a smarter approach*. More on this below.
 
 In the example above, as you add `0`'s, we see a trend which is roughly:
 
@@ -70,7 +90,7 @@ In the example above, as you add `0`'s, we see a trend which is roughly:
 - 100
 - 1000
 
-It's a factor of 10 (if we x10 the input, the time it takes is x10 longer). Similarly, if we x2 the input, the time it takes is x2. 
+It's a factor of 10 (if we x10 the input, the time it takes is x10 longer). Similarly, if we x2 the input, the time it takes is x2.
 
 In other words, as the input increases, so does the time in a linear fashion. This trend is called **linear time complexity**. This is how it would look on a graph:
 
@@ -83,12 +103,13 @@ We could also solve the same problem with a fancy maths formula like so:
   src="https://codesandbox.io/embed/5625sr?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
 ></iframe>
 
-As you add `0`'s to the example above, you'll notice that the time it takes (looking for a trend, not the exact numbers) 
+As you add `0`'s to the example above, you'll notice that the time it takes (looking for a trend, not the exact numbers)
 doesn't increase. This trend is called **constant time complexity**:
 
 ![Constant Time Complexity](/algorithms/constant-time-complexity.png)
 
 These trends are often described using Big O notation (a category for the growth rate of algorithms):
+
 - Linear = `O(n)` _(pronounced "O of n")_
 - Constant = `O(1)` _(pronounced "O of 1")_
 
@@ -96,9 +117,12 @@ We'll see more later.
 
 ### Option 3: Derive Big O via Asymptotic Analysis
 
+> Note: This approach is the **most reliable** and **wildely used** approach to measure an algorithms performance
+
 Asymptotic Analysis is a technique to figure out if an algorithm is Linear `O(n)`, Constant `O(1)`, etc...
 
 It involes 3 steps:
+
 > 1. Define the mathematical "function"
 > 2. Find the "fastest growing term" in the mathematical function
 > 3. Remove the "coefficient" from the fastest growing term
@@ -159,7 +183,7 @@ The mathematical "function" is written like so:
 
 `T = 1 + 1 + 3 + 1`
 
-So the only thing that changes when `n` increases is the amount of times the expression in the body of the loop. 
+So the only thing that changes when `n` increases is the amount of times the expression in the body of the loop.
 Therefore, we can write a generic mathematical function like so:
 
 `T = 1 + 1 + n + 1`
@@ -168,11 +192,11 @@ Which can be shortend to:
 
 `T = 3 + n`
 
-Or 
+Or
 
 `T = 3 + 1 * n` (why we're writing it like this will become clear soon)
 
-However, we don't need to be this percise. For example, if we always count 
+However, we don't need to be this percise. For example, if we always count
 all expression executions, we would consider a algorithm slower just by adding a line of code e.g:
 
 ```ts
@@ -189,21 +213,22 @@ function sum(n: number) {
 ```
 
 But even with the new line added in the example above, the "big picture" /
-"trend" / "growth rate" of this algorithm hasn't changed. 
+"trend" / "growth rate" of this algorithm hasn't changed.
 
 We're less concerned about exact number of code exections, and more so about the
 type of mathematical function.
 
 So we can rewrite our mathematical function from:
 
-`T = 3 + 1 * n` 
+`T = 3 + 1 * n`
 
 to:
 
-`T = a*n + b` 
+`T = a*n + b`
 
-Which is more generalised. We've replaced the concrete numbers with coefficients 
+Which is more generalised. We've replaced the concrete numbers with coefficients
 (a coefficient is numerical or constant multiplier in an algebraic term):
+
 - `a` is the coefficient of the variable `n`
 - `b` is a constant term (not a coefficient of a variable)
 
@@ -211,10 +236,10 @@ Which is more generalised. We've replaced the concrete numbers with coefficients
 
 For this function:
 
-`T = a*n + b` 
+`T = a*n + b`
 
-the fastest growing term is `a*n`, since `b` is a constant term which doesn't grow 
-at all, it's always exactly the same number. `a*n` on the other hand depends 
+the fastest growing term is `a*n`, since `b` is a constant term which doesn't grow
+at all, it's always exactly the same number. `a*n` on the other hand depends
 on `n`, and for a bigger `n`, this term is bigger.
 
 #### Step 3: Remove the coefficient from the fastest growing term
@@ -228,7 +253,7 @@ The coefficient is `a` in this case, so the mathematical function becomes:
 `T = n`
 
 This tells us that the time complexity for this algorithm depends on `n`. This is where the `n` in the
- Big O notation for linear time complexity `O(n)` comes from.
+Big O notation for linear time complexity `O(n)` comes from.
 
 ---
 
@@ -266,10 +291,10 @@ Which also has a mathematical function of:
 
 `T = 1`
 
-So regardless of the value of `n`, we always get `T = 1`. 
+So regardless of the value of `n`, we always get `T = 1`.
 
-We can't make this mathematical function any more general, since 
-there is no `n` in this mathematical function. 
+We can't make this mathematical function any more general, since
+there is no `n` in this mathematical function.
 
 **Step 2**: find the fastest growing term
 
@@ -281,11 +306,11 @@ There is no fastest growing term since we only have `1` on the right hand side.
 
 **Step 3**: remove the coefficient from the fastest growing term
 
-And there is no coefficient to remove since there is no `n` variable, we only have a constant term `1`. 
+And there is no coefficient to remove since there is no `n` variable, we only have a constant term `1`.
 
 so `T = 1` is our final mathematical function for this algorithm.
 
-We take the value on the right-hand side of the equals sign and put in in Big O 
+We take the value on the right-hand side of the equals sign and put in in Big O
 notation, `O(1)`, which is an example of a constant time algorithm.
 
 Again, if we were to add an extra line of code:
@@ -311,33 +336,43 @@ isn't always possible.
 
 Here's a list of the most common algorithms, ordered from **fastest to slowest**:
 
-1. `O(1)` - Constant Time Complexity (**fast**)
+### Constant Time Complexity
+- Big O Notation: `O(1)`
+- Speed: **Extremely Fast**
 
 ![Constant Time Complexity](/algorithms/constant-time-complexity.png)
 
 > `n` has no effect on time
 
-2. `O(log n)` - Logarithmic Time Complexity
+### Logarithmic Time Complexity
+- Big O Notation: `O(log n)`
+- Speed: **Very Fast**
 
 ![Logarithmic Time Complexity](/algorithms/logarithmic-time-complexity.png)
 
-> Initially a slow algorithm, but is faster when `n` is large because it grows at a 
+> Initially a slow algorithm, but is faster when `n` is large because it grows at a
 > slower pace (logarithmically) with `n`
 
-3. `O(1)` - Linear Time Complexity
+### Linear Time Complexity
+- Big O Notation: `O(n)`
+- Speed: **Fast**
 
 ![Linear Time Complexity](/algorithms/linear-time-complexity.png)
 
 > Execution times grows linearly with `n`
 
-4. `O(n²)` - Quadratic Time Complexity
+### Quadratic Time Complexity
+- Big O Notation: `O(n²)`
+- Speed: **Moderate**
 
 ![Quadratic Time Complexity](/algorithms/quadratic-time-complexity.png)
 
-> Initially a fast algorithm, but is slower when `n` is large because it grows at a 
-faster pace (quadratically) with `n`
+> Initially a fast algorithm, but is slower when `n` is large because it grows at a
+> faster pace (quadratically) with `n`
 
-5. `O(2ⁿ)` - Exponential Time Complexity (**slow**)
+### Exponential Time Complexity
+- Big O Notation: `O(2ⁿ)`
+- Speed: **Extremely Slow**.
 
 ![Exponential Time Complexity](/algorithms/exponential-time-complexity.png)
 
@@ -354,18 +389,19 @@ Consider this algorithm:
 const sumNumbers = (numbers: number[]) => {
   let result = 0; // 1
 
-  for (const number of numbers) { // 1
+  for (const number of numbers) {
+    // 1
     result += number; // n
   }
 
   return result; // 1
-}
+};
 ```
 
-`T = 1 + 1 + n + 1`
-`T = 3 + 1*n`
-`T = 1*n`
-`T = n`
+- `T = 1 + 1 + n + 1`
+- `T = 3 + 1*n`
+- `T = 1*n`
+- `T = n`
 
 This algorithm has linear time complexity `O(n)` due to the loop.
 
@@ -374,8 +410,10 @@ We could also impliment this algorithm with a `.reduce()` like so:
 ```ts
 const sumNumbers = (numbers: number[]) => {
   return numbers.reduce((sum, currNum) => sum + currNum, 0); // under the hood => n
-}
+};
 ```
 
-But this still has a time complexity of `O(n)` since `.reduce()` executes a loop 
+But this still has a time complexity of `O(n)` since `.reduce()` executes a loop
 behind the scenes.
+
+_More coming soon..._

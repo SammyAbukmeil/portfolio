@@ -1,6 +1,4 @@
-import Link from "next/link";
 import Header from "../components/layout/Header";
-import { ArrowLeft } from "lucide-react";
 
 export default function MdxLayout({ children }: { children: React.ReactNode }) {
   return (
