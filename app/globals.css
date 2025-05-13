@@ -95,6 +95,10 @@ code:not(pre code) span {
   }
 }
 
+html.dark code:not(pre code) span {
+  color: var(--color-zinc-100) !important;
+}
+
 pre code span {
   font-weight: 500;
 }
