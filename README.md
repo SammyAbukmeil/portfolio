@@ -19,3 +19,4 @@ Tech Stack:
   - More advanced TS features
   - Common errors
   - Pretty errors extension
+- Leetcode problems

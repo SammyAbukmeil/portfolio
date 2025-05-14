@@ -118,7 +118,7 @@ const components = {
       {...props}
     />
   ),
-  hr: () => <hr className="mb-4 mx-8 dark:border-zinc-600" />,
+  hr: () => <hr className="my-16 mx-8 dark:border-zinc-600" />,
 };
 
 declare global {

@@ -16,20 +16,68 @@ export const metadata = {
 
 <Navbar
   items={[
-    { text: "Algorithms in TypeScript", link: "#algorithms-in-typescript", nested: false },
-    { text: "Measuring Performance", link: "#measuring-performance", nested: false },
-    { text: "Other common algorithms", link: "#other-common-algorithms", nested: false },
-    { text: "Constant Time Complexity", link: "#constant-time-complexity", nested: true },
-    { text: "Logarithmic Time Complexity", link: "#logarithmic-time-complexity", nested: true },
-    { text: "Linear Time Complexity", link: "#linear-time-complexity", nested: true },
-    { text: "Quadratic Time Complexity", link: "#quadratic-time-complexity", nested: true },
-    { text: "Exponential Time Complexity", link: "#exponential-time-complexity", nested: true },
+    {
+      text: "Algorithms in TypeScript",
+      link: "#algorithms-in-typescript",
+      nested: false,
+    },
+    {
+      text: "Measuring Performance",
+      link: "#measuring-performance",
+      nested: false,
+    },
+    {
+      text: "Other common algorithms",
+      link: "#other-common-algorithms",
+      nested: false,
+    },
+    {
+      text: "Constant Time Complexity",
+      link: "#constant-time-complexity",
+      nested: true,
+    },
+    {
+      text: "Logarithmic Time Complexity",
+      link: "#logarithmic-time-complexity",
+      nested: true,
+    },
+    {
+      text: "Linear Time Complexity",
+      link: "#linear-time-complexity",
+      nested: true,
+    },
+    {
+      text: "Quadratic Time Complexity",
+      link: "#quadratic-time-complexity",
+      nested: true,
+    },
+    {
+      text: "Exponential Time Complexity",
+      link: "#exponential-time-complexity",
+      nested: true,
+    },
+    {
+      text: "Common Misconception: Calling functions their own time complexity",
+      link: "#common-misconception:-calling-functions-their-own-time-complexity",
+      nested: false,
+    },
+    {
+      text: "Fibonacci Sequence",
+      link: "#fibonacci-sequence",
+      nested: true,
+    },
+    {
+      text: "Primality Test",
+      link: "#primality-test",
+      nested: true,
+    },
   ]}
 />
 
 <Fab />
 
 # Algorithms in TypeScript
+
 _Published: 13/05/25_
 
 Algorithms are a **sequence of steps to solve a problem**. Given the same steps + inputs, an algorithm should always lead to the same solution.
@@ -81,7 +129,7 @@ So this isn't the best way to measure the performance of an algorithm.
 
 ### Option 2: Spot a trend
 
-> Note: This approach **better than manually timing**, however, *there's a smarter approach*. More on this below.
+> Note: This approach **better than manually timing**, however, _there's a smarter approach_. More on this below.
 
 In the example above, as you add `0`'s, we see a trend which is roughly:
 
@@ -115,9 +163,13 @@ These trends are often described using Big O notation (a category for the growth
 
 We'll see more later.
 
+<div className='border-2 border-dotted px-2 dark:border-primary rounded-md'>
+<small className='dark:text-primary'>important</small>
+
 ### Option 3: Derive Big O via Asymptotic Analysis
 
-> Note: This approach is the **most reliable** and **wildely used** approach to measure an algorithms performance
+> Note: This approach is the **most reliable** and **wildely used** approach to measure
+> an algorithms performance, and we'll be refering to it often in this article.
 
 Asymptotic Analysis is a technique to figure out if an algorithm is Linear `O(n)`, Constant `O(1)`, etc...
 
@@ -190,13 +242,17 @@ Therefore, we can write a generic mathematical function like so:
 
 Which can be shortend to:
 
-`T = 3 + n`
+`T = n + 3`
 
 Or
 
-`T = 3 + 1 * n` (why we're writing it like this will become clear soon)
+`T = 1*n + 3`
 
-However, we don't need to be this percise. For example, if we always count
+> Note: In the above mathematical function, we've added `1 *` before `n` which may seem redundant in this example, however,
+> explicitly adding `1 *` will help when dealing with more complex expressions where the values related to `n` need to be
+> clearly separated from other constant values
+
+However, we don't need to be this precise. For example, if we always count
 all expression executions, we would consider a algorithm slower just by adding a line of code e.g:
 
 ```ts
@@ -213,14 +269,12 @@ function sum(n: number) {
 ```
 
 But even with the new line added in the example above, the "big picture" /
-"trend" / "growth rate" of this algorithm hasn't changed.
-
-We're less concerned about exact number of code exections, and more so about the
-type of mathematical function.
+"trend" / "growth rate" of this algorithm hasn't changed. We're less concerned about
+exact number of code exections, and more so about the type of mathematical function.
 
 So we can rewrite our mathematical function from:
 
-`T = 3 + 1 * n`
+`T = 1*n + 3`
 
 to:
 
@@ -255,9 +309,14 @@ The coefficient is `a` in this case, so the mathematical function becomes:
 This tells us that the time complexity for this algorithm depends on `n`. This is where the `n` in the
 Big O notation for linear time complexity `O(n)` comes from.
 
+</div>
+
 ---
 
-Let's use Asymptotic Analysis to the constant time function discussed earlier:
+Let's do another example.
+
+Let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis)
+for the constant time function discussed earlier:
 
 ```ts
 function sum(n: number) {
@@ -337,6 +396,7 @@ isn't always possible.
 Here's a list of the most common algorithms, ordered from **fastest to slowest**:
 
 ### Constant Time Complexity
+
 - Big O Notation: `O(1)`
 - Speed: **Extremely Fast**
 
@@ -345,6 +405,7 @@ Here's a list of the most common algorithms, ordered from **fastest to slowest**
 > `n` has no effect on time
 
 ### Logarithmic Time Complexity
+
 - Big O Notation: `O(log n)`
 - Speed: **Very Fast**
 
@@ -354,6 +415,7 @@ Here's a list of the most common algorithms, ordered from **fastest to slowest**
 > slower pace (logarithmically) with `n`
 
 ### Linear Time Complexity
+
 - Big O Notation: `O(n)`
 - Speed: **Fast**
 
@@ -362,6 +424,7 @@ Here's a list of the most common algorithms, ordered from **fastest to slowest**
 > Execution times grows linearly with `n`
 
 ### Quadratic Time Complexity
+
 - Big O Notation: `O(n²)`
 - Speed: **Moderate**
 
@@ -371,6 +434,7 @@ Here's a list of the most common algorithms, ordered from **fastest to slowest**
 > faster pace (quadratically) with `n`
 
 ### Exponential Time Complexity
+
 - Big O Notation: `O(2ⁿ)`
 - Speed: **Extremely Slow**.
 
@@ -378,10 +442,9 @@ Here's a list of the most common algorithms, ordered from **fastest to slowest**
 
 > Execution times grows exponentially with `n`
 
-There are even more algorithms (technically any mathematical function is possible), but
-these are the most common.
+There are even more algorithms (technically any mathematical function is possible), butthese are the most common.
 
-## Calling functions with loops within them
+## Common Misconception: Calling functions their own time complexity
 
 Consider this algorithm:
 
@@ -390,7 +453,6 @@ const sumNumbers = (numbers: number[]) => {
   let result = 0; // 1
 
   for (const number of numbers) {
-    // 1
     result += number; // n
   }
 
@@ -398,8 +460,12 @@ const sumNumbers = (numbers: number[]) => {
 };
 ```
 
+Let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis)
+for this function:
+
 - `T = 1 + 1 + n + 1`
-- `T = 3 + 1*n`
+- `T = n + 3`
+- `T = 1*n + 3`
 - `T = 1*n`
 - `T = n`
 
@@ -413,7 +479,185 @@ const sumNumbers = (numbers: number[]) => {
 };
 ```
 
-But this still has a time complexity of `O(n)` since `.reduce()` executes a loop
-behind the scenes.
+But this still has a time complexity of `O(n)` since `.reduce()` executes a loop behind the scenes.
 
-_More coming soon..._
+## Math Problems
+
+## Fibonacci Sequence
+
+The fibonacci sequence is a series of numbers where each number is the sum of the two preceding numbers:
+
+> `1, 1, 2, 3, 5, 8, 13, 21, ...`
+
+**Note**: The sequence continues infinitely.
+
+Our task here is:
+
+> Write a function that receives an integer and returns the number at that index from the Fibonacci Sequence.
+>
+> e.g. `fib(4)` should return `5`
+
+Here's the solution:
+
+<iframe
+  style={{ height: "17rem" }}
+  src="https://codesandbox.io/embed/q9phzx?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+function fib(n: number) {
+  // Create an array to store the fibonacci sequence up to n, starting with the first two numbers
+  const numbers = [1, 1];
+
+  // Loop starting at index 2 since we already have those in our array above, and stop when we get
+  // to the n + 1 since we want to push the number at index n
+  for (let i = 2; i < n + 1; i++) {
+    // Sum of the last two numbers in the array above
+    numbers.push(numbers[i - 2] + numbers[i - 1]);
+  }
+
+  // return the number at index n, which is in the array now
+  return numbers[n];
+}
+```
+
+Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis) for this function:
+
+```ts
+function fib(n: number) {
+  const numbers = [1, 1]; // 1
+
+  for (let i = 2; i < n + 1; i++) {
+    // 1
+    numbers.push(numbers[i - 2] + numbers[i - 1]); // not n, since the loop doesn't start at 0
+  }
+
+  return numbers[n]; // 1
+}
+```
+
+To see how many times the loop runs, let's add a console log and let dev tools output the count:
+
+<iframe
+  style={{ height: "17rem" }}
+  src="https://codesandbox.io/embed/p7cjqg?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+When `n` is `4`, the loop runs three times i.e. `n - 1` times.
+
+- `T = 1 + 1 + 1 + n - 1`
+- `T = n + 2`
+- `T = 1*n + 2`
+- `T = 1*n`
+- `T = n`
+
+Therefore this is linear time complexity `O(n)`
+
+For arguments sake, let's see how the mathematical function would look with an extra expression in the loop
+
+```ts
+function fib(n: number) {
+  const numbers = [1, 1]; // 1
+
+  for (let i = 2; i < n + 1; i++) {
+    // 1
+    console.log("..."); // n - 1
+    numbers.push(numbers[i - 2] + numbers[i - 1]); // n - 1
+  }
+
+  return numbers[n]; // 1
+}
+```
+
+Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis)
+for this function:
+
+- `T = 1 + 1 + 1 + 2 * (n - 1)`
+- `T = 3 + 2n - 2`
+- `T = 2n + 1`
+- `T = 2n`
+- `T = n`
+
+As you can see, adding another expression execution in the loop still results in `T = n`, since
+the "trend" of this function doesn't change by simply adding an expression in a loop.
+
+## Primality Test
+
+The primality test determines whether a number is prime (the number can only be divided by itself and 1):
+
+> `isPrime(9)` -> false (divisible by 3)
+>
+> `isPrime(5)` -> true 
+
+The approach to this problem is to try dividing the input number by all smaller numbers, and return true
+if it's only divisible by itself and 1.
+
+Here's the solution:
+
+<iframe
+  style={{ height: "17rem" }}
+  src="https://codesandbox.io/embed/dzvq7r?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+function isPrime(num: number) {
+  // Loop starting at index 2 since we don't to try dividing by 1, and stop at i < num since
+  // we don't want to divide by the number itself
+  for (let i = 2; i < num; i++) {
+    // If any number divides with no remainder, it's not prime
+    if (num % i === 0) {
+      return false;
+    }
+  }
+
+  // Otherwise it is prime
+  return true;
+}
+```
+
+Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis) for this function.
+
+Since we have an `if` statement, we have different **cases** with different time complexities, depending on the input number:
+- Best case = `O(1)`
+  - If `num` is `1` or `2`, the loop never runs.
+- Average case = `O(n)`
+  - We don't know the input number; it could be anything between `3` and `1000003`, so a loop is likely to execute.
+- Worst case = `O(n)`
+  - If `num` is very large and not a prime number (e.g. `1000003`), the loop finishes without an early return
+
+If an algorithm has different cases, we might have a look at the best and worst cases, but we care most about the average case since
+we can't predict which case is most likely.
+
+Often the average case has the same time complexity as the worst case scenario due to not knowing which inputs the function will recieve. 
+Usually we calculate the worst case and derive the average case based on that.
+
+However, there's a more efficient solution to this problem due to this mathematical fact:
+
+> Every non-prime number (e.g. `9`) is produced by two factors (e.g. `3` and `3`). At least one of those factors
+> will be smaller or equal to the square root of the number we're analysing.
+
+The square root of a number is a number that when multiplied by itself equals the original number. For `9`, the square root is `3`.
+
+With this, we can modify our `for` loop to only loop as many times as `Math.sqrt(num)` to reduce the amount of loops, and 
+use `<=` to check the square root itself:
+
+<iframe
+  style={{ height: "17rem" }}
+  src="https://codesandbox.io/embed/qmzfwr?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+This changes the Big O of our cases:
+
+- Best case = `O(1)`
+- Average case = `O(sqrt(n))`
+- Worst case = `O(sqrt(n))`
+
+Square root time complexity looks like so on a graph:
+
+![Square Root Time Complexity](/algorithms/square-root-time-complexity.png)
+
+_**More coming soon...**_
