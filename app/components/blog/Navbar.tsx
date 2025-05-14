@@ -6,7 +6,7 @@ interface Props {
 
 export default function Navbar({ items }: Props) {
   return (
-    <section className="mt-8 bg-zinc-200 dark:bg-primary p-4">
+    <section className="mt-8 bg-zinc-100 dark:bg-primary-dark p-4">
       <p>Contents</p>
       <ul className="list-none">
         {items.map((item, i) => (
