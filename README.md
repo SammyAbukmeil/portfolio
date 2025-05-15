@@ -20,3 +20,7 @@ Tech Stack:
   - Common errors
   - Pretty errors extension
 - Leetcode problems
+- Queues
+- Redis
+- Docker
+- AWS
