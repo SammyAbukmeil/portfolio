@@ -504,7 +504,7 @@ Consider this algorithm:
 const sumNumbers = (numbers: number[]): number => {
   let result = 0; // 1
 
-  for (const number of numbers) {
+  for (const number of numbers) { // 1
     result += number; // n
   }
 
@@ -581,8 +581,7 @@ Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-
 function fib(n: number): number {
   const numbers = [1, 1]; // 1
 
-  for (let i = 2; i < n + 1; i++) {
-    // 1
+  for (let i = 2; i < n + 1; i++) { // 1
     numbers.push(numbers[i - 2] + numbers[i - 1]); // not n, since the loop doesn't start at 0
   }
 
@@ -613,8 +612,7 @@ For arguments sake, let's see how the mathematical function would look with an e
 function fib(n: number): number {
   const numbers = [1, 1]; // 1
 
-  for (let i = 2; i < n + 1; i++) {
-    // 1
+  for (let i = 2; i < n + 1; i++) { // 1
     console.log("..."); // n - 1
     numbers.push(numbers[i - 2] + numbers[i - 1]); // n - 1
   }
@@ -742,10 +740,8 @@ Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-
 function getMin(numbers: number[]): number {
   let currentMin = numbers[0]; // 1
 
-  for (const num of numbers) {
-    // 1
-    if (num < currentMin) {
-      // n
+  for (const num of numbers) { // 1
+    if (num < currentMin) { // n
       currentMin = num; // (best) 0; (avg) 1; (worst) 2
     }
   }
@@ -798,4 +794,53 @@ Here's the solution:
 <iframe
   style={{ height: "28rem" }}
   src="https://codesandbox.io/embed/knzvn3?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+function isPowerOfTwo(number: number): boolean {
+  // Eliminate 0 and negative numbers
+  if (number < 1) {
+    return false;
+  }
+
+  // A variable to keep track of the current division, started with the input
+  let dividedNumber = number;
+
+  // Keep looping until we get to 1
+  while (dividedNumber !== 1) {
+    // If any division is not divisble by 2, it's not a power of two
+    if (dividedNumber % 2 !== 0) {
+      return false;
+    }
+
+    // Reassign the tracker variable with the next division
+    dividedNumber = dividedNumber / 2;
+  }
+
+  return true;
+}
+```
+
+Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis) for this function.
+
+- Best case: `O(1)`
+  - With an input of `13`, since it's not divisible by 2, the if check in the loop catches it straight away
+- Avg case: `O(log n)`
+  - Same as below
+- Worst case: `O(log n)` 
+  - With an input of `1,125,899,906,842,624`, a very large number which is a power of two (made via `Math.pow(2, 50)`)
+  - Large numbers which are a power of two shrink quickly (e.g. `1,000,000` is solved in `8` loops) due to the `/ 2`
+  - We don't have `O(n)` here since the amount of loops is much smaller than `n`, we have `O(log n)`
+
+A reminder of how `O(log n)` looks on a graph:
+
+![Logarithmic Time Complexity](/algorithms/logarithmic-time-complexity.png)
+
+i.e. It doesn't take a large amount of time for big numbers. To prove this, we can count the number of loops via a counter variable:
+
+<iframe
+  style={{ height: "33rem" }}
+  src="https://codesandbox.io/embed/4w4crf?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
 ></iframe>
