@@ -101,6 +101,11 @@ export const metadata = {
       link: "#is-even",
       nested: true,
     },
+    {
+      text: "Is Power of Two",
+      link: "#is-power-of-two",
+      nested: true,
+    },
   ]}
 />
 
@@ -632,7 +637,7 @@ the "trend" of this function doesn't change by simply adding an expression in a 
 
 ## Is Prime
 
-The primality test determines whether a number is prime (the number can only be divided by itself and 1):
+The "primality test" determines whether a number is prime (the number can only be divided by itself and 1):
 
 > `isPrime(9)` -> false (divisible by 3)
 >
@@ -775,3 +780,22 @@ Here's the solution:
 
 Rather than using Asymptotic Analysis, we can clearly see that there is no loop and there's only one expression execution.
 Therefore, this algorithm has a Big O of `O(1)` i.e. constant time
+
+## Is Power of Two
+
+A "power of two" - represented mathematically as `2ⁿ` - means the number is produced when you multiply
+ 2 by itself repeatedly (2 x 2 x 2 x ...). The first few powers of 2 are `1, 2, 4, 8, 16, ...`.
+
+> `isPowerOfTwo(8)` -> `true` via `2³` (2 to the power of 3)
+>
+> `isPowerOfTwo(5)` -> `false`
+
+The approach to this problem is to continually divide the input number by `2` until we get `1`, and as
+long as there is no remainder for any division, the number is a power of two.
+
+Here's the solution:
+
+<iframe
+  style={{ height: "28rem" }}
+  src="https://codesandbox.io/embed/knzvn3?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
