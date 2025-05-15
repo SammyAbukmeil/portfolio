@@ -27,6 +27,26 @@ export const metadata = {
       nested: false,
     },
     {
+      text: "Option 1: Manually timing it",
+      link: "#option-1:-manually-timing-it",
+      nested: true,
+    },
+    {
+      text: "Option 2: Spot a trend",
+      link: "#option-2:-spot-a-trend",
+      nested: true,
+    },
+    {
+      text: "Option 3: Derive Big O via Asymptotic Analysis",
+      link: "#option-3:-derive-big-o-via-asymptotic-analysis",
+      nested: true,
+    },
+    {
+      text: "Option 4: Quickly Estimating Time Complexity",
+      link: "#option-4:-quickly-estimating-time-complexity",
+      nested: true,
+    },
+    {
       text: "Other common algorithms",
       link: "#other-common-algorithms",
       nested: false,
@@ -67,8 +87,18 @@ export const metadata = {
       nested: true,
     },
     {
-      text: "Primality Test",
-      link: "#primality-test",
+      text: "Is Prime",
+      link: "#is-prime",
+      nested: true,
+    },
+    {
+      text: "Min Value in array",
+      link: "#min-value-in-array",
+      nested: true,
+    },
+    {
+      text: "Is Even",
+      link: "#is-even",
       nested: true,
     },
   ]}
@@ -164,9 +194,9 @@ These trends are often described using Big O notation (a category for the growth
 We'll see more later.
 
 <div className='border-2 border-dotted px-2 dark:border-primary rounded-md'>
-<small className='dark:text-primary'>important</small>
+<small className='dark:text-primary font-medium'>important</small>
 
-### Option 3: Derive Big O via Asymptotic Analysis
+<h3 className="font-medium underline underline-offset-4 mt-2 mb-4">Option 3: Derive Big O via Asymptotic Analysis</h3>
 
 > Note: This approach is the **most reliable** and **wildely used** approach to measure
 > an algorithms performance, and we'll be refering to it often in this article.
@@ -182,7 +212,7 @@ It involes 3 steps:
 Let's use Asymptotic Analysis for this function:
 
 ```ts
-function sum(n: number) {
+function sum(n: number): number {
   let result = 0;
 
   for (let i = 0; i <= n; i++) {
@@ -200,7 +230,7 @@ To figure out the mathematical function, we need to **count the number of expres
 Let's start off by checking how many times each expression executes when `n` is `1`:
 
 ```ts
-function sum(1: number) {
+function sum(1: number): number {
   let result = 0; // 1 expression execution
 
   for (let i = 0; i <= 1; i++) { // 1 expression execution
@@ -220,7 +250,7 @@ Where `T` stands for "Time Complexity".
 Now let's check how many times each expression executes when `n` is `3`:
 
 ```ts
-function sum(3: number) {
+function sum(3: number): number {
   let result = 0; // 1
 
   for (let i = 0; i <= 3; i++) { // 1
@@ -256,7 +286,7 @@ However, we don't need to be this precise. For example, if we always count
 all expression executions, we would consider a algorithm slower just by adding a line of code e.g:
 
 ```ts
-function sum(n: number) {
+function sum(n: number): number {
   let result = 0;
 
   for (let i = 0; i <= n; i++) {
@@ -311,6 +341,23 @@ Big O notation for linear time complexity `O(n)` comes from.
 
 </div>
 
+<div className='border-2 border-dotted px-2 mt-4 dark:border-primary rounded-md'>
+<small className='dark:text-primary font-medium'>important</small>
+
+<h3 className="font-medium underline underline-offset-4 mt-2 mb-4">Option 4: Quickly Estimating Time Complexity</h3>
+
+As you become comfortable calculating with deriving Big O via Asymptotic Analysis, there are a few ways
+to quickly spot the time complexity of an algorithm:
+
+- No loop?
+  - Likely constant `O(1)`
+- Single loop?
+  - Likely linear `O(n)`
+- Nested loop?
+  - Likely quadratic `O(n²)`
+
+</div>
+
 ---
 
 Let's do another example.
@@ -319,7 +366,7 @@ Let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-d
 for the constant time function discussed earlier:
 
 ```ts
-function sum(n: number) {
+function sum(n: number): number {
   return (n / 2) * (n + 1);
 }
 ```
@@ -329,7 +376,7 @@ function sum(n: number) {
 Starting with `n` equal to `1`:
 
 ```ts
-function sum(1: number) {
+function sum(1: number): number {
   return (1 / 2) * (1 + 1); // 1
 }
 ```
@@ -341,7 +388,7 @@ So the mathematical function is:
 And if we try with `n` equal to `3`:
 
 ```ts
-function sum(3: number) {
+function sum(3: number): number {
   return (3 / 2) * (3 + 1); // 1
 }
 ```
@@ -375,7 +422,7 @@ notation, `O(1)`, which is an example of a constant time algorithm.
 Again, if we were to add an extra line of code:
 
 ```ts
-function sum(n: number) {
+function sum(n: number): number {
   console.log(...);
   return (n / 2) * (n + 1); // 1
 }
@@ -449,7 +496,7 @@ There are even more algorithms (technically any mathematical function is possibl
 Consider this algorithm:
 
 ```ts
-const sumNumbers = (numbers: number[]) => {
+const sumNumbers = (numbers: number[]): number => {
   let result = 0; // 1
 
   for (const number of numbers) {
@@ -474,7 +521,7 @@ This algorithm has linear time complexity `O(n)` due to the loop.
 We could also impliment this algorithm with a `.reduce()` like so:
 
 ```ts
-const sumNumbers = (numbers: number[]) => {
+const sumNumbers = (numbers: number[]): number => {
   return numbers.reduce((sum, currNum) => sum + currNum, 0); // under the hood => n
 };
 ```
@@ -507,7 +554,7 @@ Here's the solution:
 Let's break it down:
 
 ```ts
-function fib(n: number) {
+function fib(n: number): number {
   // Create an array to store the fibonacci sequence up to n, starting with the first two numbers
   const numbers = [1, 1];
 
@@ -526,7 +573,7 @@ function fib(n: number) {
 Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis) for this function:
 
 ```ts
-function fib(n: number) {
+function fib(n: number): number {
   const numbers = [1, 1]; // 1
 
   for (let i = 2; i < n + 1; i++) {
@@ -558,7 +605,7 @@ Therefore this is linear time complexity `O(n)`
 For arguments sake, let's see how the mathematical function would look with an extra expression in the loop
 
 ```ts
-function fib(n: number) {
+function fib(n: number): number {
   const numbers = [1, 1]; // 1
 
   for (let i = 2; i < n + 1; i++) {
@@ -583,13 +630,13 @@ for this function:
 As you can see, adding another expression execution in the loop still results in `T = n`, since
 the "trend" of this function doesn't change by simply adding an expression in a loop.
 
-## Primality Test
+## Is Prime
 
 The primality test determines whether a number is prime (the number can only be divided by itself and 1):
 
 > `isPrime(9)` -> false (divisible by 3)
 >
-> `isPrime(5)` -> true 
+> `isPrime(5)` -> true
 
 The approach to this problem is to try dividing the input number by all smaller numbers, and return true
 if it's only divisible by itself and 1.
@@ -604,7 +651,7 @@ Here's the solution:
 Let's break it down:
 
 ```ts
-function isPrime(num: number) {
+function isPrime(num: number): boolean {
   // Loop starting at index 2 since we don't to try dividing by 1, and stop at i < num since
   // we don't want to divide by the number itself
   for (let i = 2; i < num; i++) {
@@ -622,6 +669,7 @@ function isPrime(num: number) {
 Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis) for this function.
 
 Since we have an `if` statement, we have different **cases** with different time complexities, depending on the input number:
+
 - Best case = `O(1)`
   - If `num` is `1` or `2`, the loop never runs.
 - Average case = `O(n)`
@@ -632,7 +680,7 @@ Since we have an `if` statement, we have different **cases** with different time
 If an algorithm has different cases, we might have a look at the best and worst cases, but we care most about the average case since
 we can't predict which case is most likely.
 
-Often the average case has the same time complexity as the worst case scenario due to not knowing which inputs the function will recieve. 
+Often the average case has the same time complexity as the worst case scenario due to not knowing which inputs the function will recieve.
 Usually we calculate the worst case and derive the average case based on that.
 
 However, there's a more efficient solution to this problem due to this mathematical fact:
@@ -642,7 +690,7 @@ However, there's a more efficient solution to this problem due to this mathemati
 
 The square root of a number is a number that when multiplied by itself equals the original number. For `9`, the square root is `3`.
 
-With this, we can modify our `for` loop to only loop as many times as `Math.sqrt(num)` to reduce the amount of loops, and 
+With this, we can modify our `for` loop to only loop as many times as `Math.sqrt(num)` to reduce the amount of loops, and
 use `<=` to check the square root itself:
 
 <iframe
@@ -661,3 +709,69 @@ Square root time complexity looks like so on a graph:
 ![Square Root Time Complexity](/algorithms/square-root-time-complexity.png)
 
 _**More coming soon...**_
+
+## Min Value in Array
+
+Our task here is:
+
+> Write a function that receives an array of numbers and returns the minimum value in the array.
+>
+> e.g. `getMin([1, 2, 3])` should return `1`
+
+Here's the solution:
+
+<iframe
+  style={{ height: "20rem" }}
+  src="https://codesandbox.io/embed/5983rd?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Pretty self-explanatory.
+
+Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis) for this function.
+
+- Best case input: `[1, 2, 3]`
+- Avg case input: `[2, 1, 3]`
+- Worst case input: `[3, 2, 1]`
+
+```ts
+function getMin(numbers: number[]): number {
+  let currentMin = numbers[0]; // 1
+
+  for (const num of numbers) {
+    // 1
+    if (num < currentMin) {
+      // n
+      currentMin = num; // (best) 0; (avg) 1; (worst) 2
+    }
+  }
+
+  return currentMin; // 1
+}
+```
+
+For the worse case:
+
+- `T = 1 + 1 + n + 2 + 1`
+- `T = 1*n + 5`
+- `T = 1*n`
+- `T = n`
+
+All three cases are `O(n)` since the loop runs in all cases.
+
+## Is Even
+
+This one is super simple:
+
+> Write a function that receives a number and returns a boolean to determine if the number is even or not.
+>
+> `isEven(1)` -> `false` > `isEven(2)` -> `true`
+
+Here's the solution:
+
+<iframe
+  style={{ height: "11rem" }}
+  src="https://codesandbox.io/embed/c6stlt?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Rather than using Asymptotic Analysis, we can clearly see that there is no loop and there's only one expression execution.
+Therefore, this algorithm has a Big O of `O(1)` i.e. constant time
