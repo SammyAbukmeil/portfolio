@@ -243,3 +243,7 @@ iframe {
 .blog h6::before {
   content: "###### ";
 }
+
+.important-border h3 {
+  margin-top: 0;
+}

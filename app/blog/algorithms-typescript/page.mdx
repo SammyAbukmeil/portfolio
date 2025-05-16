@@ -82,6 +82,11 @@ export const metadata = {
       nested: false,
     },
     {
+      text: "Math Problems",
+      link: "#math-problems",
+      nested: false,
+    },
+    {
       text: "Fibonacci Sequence",
       link: "#fibonacci-sequence",
       nested: true,
@@ -104,6 +109,26 @@ export const metadata = {
     {
       text: "Is Power of Two",
       link: "#is-power-of-two",
+      nested: true,
+    },
+    {
+      text: "Calculate Factorial",
+      link: "#calculate-factorial",
+      nested: true,
+    },
+    {
+      text: "Recursion",
+      link: "#recursion",
+      nested: false,
+    },
+    {
+      text: "Calculate Factorial using Recursion",
+      link: "#calculate-factorial-using-recursion",
+      nested: true,
+    },
+    {
+      text: "Fibonacci Sequence using Recursion",
+      link: "#fibonacci-sequence-using-recursion",
       nested: true,
     },
   ]}
@@ -198,10 +223,10 @@ These trends are often described using Big O notation (a category for the growth
 
 We'll see more later.
 
-<div className='border-2 border-dotted px-2 dark:border-primary rounded-md'>
+<div className='important-border border-2 border-dotted px-2 dark:border-primary rounded-md'>
 <small className='dark:text-primary font-medium'>important</small>
 
-<h3 className="font-medium underline underline-offset-4 mt-2 mb-4">Option 3: Derive Big O via Asymptotic Analysis</h3>
+### Option 3: Derive Big O via Asymptotic Analysis
 
 > Note: This approach is the **most reliable** and **wildely used** approach to measure
 > an algorithms performance, and we'll be refering to it often in this article.
@@ -346,20 +371,24 @@ Big O notation for linear time complexity `O(n)` comes from.
 
 </div>
 
-<div className='border-2 border-dotted px-2 mt-4 dark:border-primary rounded-md'>
+<div className='important-border border-2 border-dotted px-2 mt-4 dark:border-primary rounded-md'>
 <small className='dark:text-primary font-medium'>important</small>
 
-<h3 className="font-medium underline underline-offset-4 mt-2 mb-4">Option 4: Quickly Estimating Time Complexity</h3>
+### Option 4: Quickly Estimating Time Complexity
 
 As you become comfortable calculating with deriving Big O via Asymptotic Analysis, there are a few ways
 to quickly spot the time complexity of an algorithm:
 
 - No loop?
   - Likely constant `O(1)`
+- Loop that repeatedly divides the input number?
+  - Likely logarithmic `O(log n)`
 - Single loop?
   - Likely linear `O(n)`
 - Nested loop?
   - Likely quadratic `O(n²)`
+- Recursive function that calls itself twice?
+  - Likely exponential `O(2ⁿ)`
 
 </div>
 
@@ -844,3 +873,217 @@ i.e. It doesn't take a large amount of time for big numbers. To prove this, we c
   style={{ height: "33rem" }}
   src="https://codesandbox.io/embed/4w4crf?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
 ></iframe>
+
+## Calculate Factorial
+
+The factorial of a number is calculated by repeatedly multiplying it by decreasing integers, starting from the number 
+itself, until you reach one. For example:
+
+> `factorial(3)` -> `3 * 2 * 1` = `6`
+
+The approach to this problem is to iterate through all smaller numbers and multiplying them.
+
+Here's the solution:
+
+<iframe
+  style={{ height: "16rem" }}
+  src="https://codesandbox.io/embed/vqx8d9?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+function factorial(number: number): number {
+  // A counter variable for the result, starting at one since `0` would result in 0 * X
+  let result = 1;
+
+  // The loop from 2 since 1 is accounted for above, and finish at the number
+  for (let i = 2; i <= number; i++) {
+    // Multiply the current result by the current iteration in the loop
+    result *= i;
+  }
+
+  return result;
+}
+```
+
+Now let's follow the [steps to use quickly estimate time complexity](#option-4:-quickly-estimating-time-complexity) for this function.
+
+Since there's only one loop, this is `O(n)`.
+
+## Recursion
+
+Recursion is a technique where a function calls itself to solve a problem.
+
+### Calculate Factorial using Recursion
+
+Let's look at an example, revisiting the [Calculate Factorial](#calculate-factorial) problem we just covered: 
+
+<iframe
+  style={{ height: "16rem" }}
+  src="https://codesandbox.io/embed/dgkj23?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+function factorial(number: number): number {
+  // Our "Base Case" – This stops the recursive calls when reached
+  if (number === 1) {
+    return 1;
+  }
+
+  // Recursive Step: Call the function itself with a smaller input
+  return number * factorial(number - 1);
+}
+```
+
+So when we call `factorial(3)`, the first call looks like this:
+
+```ts
+function factorial(3: number): number {
+  // ...
+
+  return 3 * factorial(2);
+}
+```
+
+This triggers the second call:
+
+```ts
+function factorial(2: number): number {
+  // ...
+
+  return 2 * factorial(1);
+}
+```
+
+And finally, the third call:
+
+```ts
+function factorial(1: number): number {
+  if (number === 1) {
+    return 1;
+  }
+
+  // ...
+}
+```
+
+We made three recursive calls to `factorial()`. The process unfolds like this:
+
+- `factorial(3)` returns `3 * factorial(2)`
+- `factorial(2)` returns `2 * factorial(1)`
+- `factorial(1)` hits the base case and returns `1`
+
+Substituting these values back up the chain, we get: `3 * (2 * 1)` = `6`.
+
+Therefore, `factorial(3)` ultimately returns `6`.
+
+Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis) for this function.
+
+```ts
+function factorial(number: number): number {
+  if (number === 1) { // 1
+    return 1; // 1
+  }
+
+  return number * factorial(number - 1); // 1 (however, this triggers the function again)
+}
+```
+
+Each individual function call has constant time `O(1)` since there's no loop, however, 
+we trigger `n` function calls, therefore our time complexity is:
+
+- `T = n * O(1)`
+- `T = O(n)`
+
+Therefore this isn't faster than the [non-recursive alternate approach](#calculate-factorial), however, 
+less code is needed in this case.
+
+Sometimes recursion can result in a more efficient algorithm.
+
+### Fibonacci Sequence using Recursion
+
+Let's look at an example, revisiting the [Fibonacci Sequence](#fibonacci-sequence) problem we previously covered:
+
+> The fibonacci sequence is a series of numbers where each number is the sum of the two preceding numbers:
+>
+> `1, 1, 2, 3, 5, 8, 13, 21, ...`
+>
+> Write a function that receives an integer and returns the number at that index from the Fibonacci Sequence.
+>
+> e.g. `fib(4)` should return `5`
+
+<iframe
+  style={{ height: "16rem" }}
+  src="https://codesandbox.io/embed/ytlvq4?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+function fib(n: number): number {
+  // Since the fib sequence starts with 1, 1, ... - return 1 in these cases
+  if (n === 0 || n === 1) {
+    return 1;
+  }
+
+  // Recursively call fibonacci function for `n - 1` and `n - 2`
+  return fib(n - 1) + fib(n - 2);
+}
+```
+
+Let's trace what happens when we call `fib(4)`:
+
+- `fib(4)`
+  - `fib(3)`
+    - `fib(2)`
+      - `fib(1)` -> Returns `1`
+      - `fib(0)` -> Returns `1`
+    - `fib(1)` -> Returns `1`
+  - `fib(2)`
+    - `fib(1)` -> Returns `1`
+    - `fib(0)` -> Returns `1`
+  
+As you can see, there are a lot of function calls (9 to be exact) being made as the recursion progresses. Notably, some function calls, like fib(2) 
+and its subsequent calls, are repeated multiple times.
+
+Let's see the trend:
+- `fib(4)` -> `9` function calls
+- `fib(5)` -> `15` function calls (`6` more)
+- `fib(6)` -> `25` function calls (`10` more)
+
+Each time we increase `n`, the function calls increases exponentially and therefore we have exponential time complexity `O(2ⁿ)`.
+
+In summary, this recursive approach to the fibonacci sequence performs worse than the loop approach which has `O(n)`
+
+But how can we distinguish between:
+- Quadratic `O(n²)`
+- Qubic `O(n³)`
+- Exponential `O(2ⁿ)`
+
+Let's add a counter:
+
+<iframe
+  style={{ height: "35rem" }}
+  src="https://codesandbox.io/embed/6gq6y8?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Comparing the same inputs as if we had Quadratic `O(n²)` time complexity:
+- For an input of 5: `5²` = `5 * 5` = `25` function calls
+- For an input of 10: `10²` = `10 * 10` = `100` function calls
+- ...
+
+The increase in the number of function calls is slower than what we observed with our recursive algorithm.
+
+Comparing the same inputs as if we had Qubic `O(n³)` time complexity:
+- For an input of 5: `5³` = `5 * 5 * 5` = `125` function calls
+- For an input of 10: `10³` = `10 * 10 * 10` = `1000` function calls
+- For an input of 20: `20³` = `20 * 20 * 20` = `8000` function calls
+- ...
+
+The increase in loops is also slower then what we observed with our recursive algorithm.
+
+This validates that our recursive algorithm is exponential `O(2ⁿ)`.
+

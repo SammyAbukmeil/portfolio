@@ -10,6 +10,7 @@ Tech Stack:
 
 ## Potential future blog posts
 
+- Spell check
 - Data Structures
 - Design Patterns
 - Architectural patterns
@@ -24,3 +25,9 @@ Tech Stack:
 - Redis
 - Docker
 - AWS
+- Update testing post
+  - Add mocking
+  - Add React testing
+  - Add integration tests
+  - Add E2E testing
+  - Add endpoint testing

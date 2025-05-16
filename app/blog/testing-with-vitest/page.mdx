@@ -1,0 +1,693 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import Navbar from "../../components/blog/Navbar.tsx";
+import Fab from "../../components/blog/Fab.tsx";
+
+export const metadata = {
+  title: "Testing with Vitest",
+  alternates: {
+    canonical: "/blog/testing-with-vitest",
+  },
+};
+
+<Link href="/blog" className="flex">
+  <ArrowLeft className="mr-2" /> <span>Back</span>
+</Link>
+
+<Navbar
+  items={[
+    {
+      text: "What is Testing",
+      link: "#what-is-testing",
+      nested: false,
+    },
+    {
+      text: "Benifits of Testing",
+      link: "#benifits-of-testing",
+      nested: false,
+    },
+    {
+      text: "Types of Tests",
+      link: "#types-of-tests",
+      nested: false,
+    },
+    {
+      text: "Unit Tests",
+      link: "#unit-tests",
+      nested: true,
+    },
+    {
+      text: "Integration Tests",
+      link: "#integration-tests",
+      nested: true,
+    },
+    {
+      text: "End-to-End Tests",
+      link: "#end-to-end-tests",
+      nested: true,
+    },
+    {
+      text: "Getting Started",
+      link: "#getting-started",
+      nested: false,
+    },
+    {
+      text: "Local development setup",
+      link: "#local-development-setup",
+      nested: true,
+    },
+    {
+      text: "Writing our first test",
+      link: "#writing-our-first-test",
+      nested: true,
+    },
+    {
+      text: "Using it() instead of test()",
+      link: "#using-it()-instead-of-test()",
+      nested: true,
+    },
+    {
+      text: "Detecting bugs",
+      link: "#detecting-bugs",
+      nested: true,
+    },
+    {
+      text: "Best Practices",
+      link: "#best-practices",
+      nested: false,
+    },
+    {
+      text: "How to structure tests",
+      link: "#how-to-structure-tests",
+      nested: true,
+    },
+    {
+      text: "Avoid hardcoding values",
+      link: "#avoid-hardcoding-values",
+      nested: true,
+    },
+    {
+      text: "Keep tests simple",
+      link: "#keep-tests-simple",
+      nested: true,
+    },
+    {
+      text: "Test multiple scenarios",
+      link: "#test-multiple-scenarios",
+      nested: true,
+    },
+    {
+      text: "Testing is an iterative process",
+      link: "#testing-is-an-iterative-process",
+      nested: true,
+    },
+    {
+      text: "More Examples",
+      link: "#more-examples",
+      nested: false,
+    },
+    {
+      text: "Test if an empty array is passed",
+      link: "#test-if-an-empty-array-is-passed",
+      nested: true,
+    },
+    {
+      text: "Test if it throws an error when no argument is passed",
+      link: "#test-if-it-throws-an-error-when-no-argument-is-passed",
+      nested: true,
+    },
+    {
+      text: "Test for falsy values with .not",
+      link: "#test-for-falsy-values-with-.not",
+      nested: true,
+    },
+    {
+      text: "Test if a specific error message is thrown",
+      link: "#test-if-a-specific-error-message-is-thrown",
+      nested: true,
+    },
+    {
+      text: "Test if the result is a specific type",
+      link: "#test-if-the-result-is-a-specific-type",
+      nested: true,
+    },
+  ]}
+/>
+
+<Fab />
+
+# Testing with Vitest
+
+_Published: 13/05/25_
+
+## What is testing
+
+Testing is all about writing code ("tests") which automates the process of checking whether your application is working as intended.
+
+You can run the tests:
+- After you make changes (to ensure your changes didn't break anything else)
+- During your CI/CD pipeline to ensure you're not pushing bugs to production
+
+---
+
+## Benifits of testing
+
+Testing helps with:
+- Confidence when refactoring (you'll be sure that your changes haven't broken anything)
+- Less bugs in production
+- Less manual testing
+- Forces you to write better code (code that's easy to test)
+
+---
+
+## Types of tests
+
+There are a few different categories of tests which test different things, and you should aim to add each of these to your app:
+
+### Unit tests
+
+Test the smallest building blocks ("units") of your app (e.g. a function, a class, or a component in React).
+
+### Integration tests
+
+Test multiple units to ensure they work well together.
+
+### End-to-End tests
+
+Test an entire flow/feature of your app (e.g. a user uploading an image).
+
+Generally, you want:
+- A lot of unit tests
+- Less integration tests
+- A small amount of end-to-end tests
+
+As shown in this testing pyramid
+![Testing Pyramid](https://www.leapwork.com/hubfs/Blog%20Images/Testing-pyramid.png)
+
+---
+
+## Getting Started
+
+### Local development setup
+
+We need a tool to achieve the following:
+- Test Runner - Runs the tests and shows the results
+- Assertion Library - The test themselves, what to check etc
+
+A popular tool for both of these features is [Jest](https://jestjs.io), however, Jest can be slow when executing tests, and requires extra setup to use ECMAScript modules (i.e. `import x from "y"` syntax)
+
+A modern alternative is [Vitest](https://vitest.dev/) (prounounced "vee-test") which works in the same way as Jest, is fast and supports ECMAScript modules out of the box.
+
+Let's start by making a directory
+
+```shell
+mkdir testing
+cd testing
+```
+
+Create a `package.json` file
+
+```shell
+npm init -y
+```
+
+Install vitest as a dev dependency
+
+```shell
+npm i vitest --save-dev
+```
+
+Create a `index.js` file with the following contents
+
+```js
+export function add(numbers) {
+  let sum = 0;
+
+  for (const number of numbers) {
+    sum += number;
+  }
+
+  return sum;
+}
+```
+
+_**Note**: The functions that we'll be testing in this article are intentionally simple, in order to keep the tests simple_
+
+This is the first function we'll test
+
+Create a `index.test.js` file with the following code
+
+```js
+import { expect, test } from "vitest";
+import { add } from "./index";
+
+test("should sum all numbers in an array", () => {
+  const result = add([1, 2, 3]);
+
+  expect(result).toBe(6);
+});
+```
+
+> The `test` in the file name is important, Vitest looks for files with `test` in and executes the tests within them.
+
+In your `package.json` file add a script to run vitest
+
+```json
+{
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0"
+  }
+}
+```
+
+Now run the test script
+
+```shell
+npm test
+```
+
+You should see the following output
+
+![Vitest output](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ogk798vdfon5qc6fh9qe.png)
+
+### Writing our first test
+
+Now we have our test runner & assertion library setup, let's revisit our test
+
+```js
+test("should sum all numbers in an array", () => {
+  const result = add([1, 2, 3]);
+
+  expect(result).toBe(6);
+});
+```
+
+The `test()` method sets up a new test and takes two arguments
+- A string describing what we're testing
+- A callback function to execute when the test executes
+
+Inside the callback function, we simply execute the function we want to test and store the result in a variable: `const result = add([1, 2, 3])`
+
+The `expect()` method takes one argument:
+- The value that the assertion library will check
+
+The `toBe()` method takes one argument:
+- Checks if the value that was given to `expect()` is a particular value
+
+In this case, the sum of `[1, 2, 3]` should result in `6`, hence `expect(result).toBe(6)`
+
+### Using it() instead of test()
+
+We can make the name of our test easier to read by using the `it()` method, which does the same thing as `test()`
+
+```js
+import { expect, it } from "vitest";
+import { add } from "./index";
+
+it("should sum all numbers in an array", () => {
+  const result = add([1, 2, 3]);
+
+  expect(result).toBe(6);
+});
+```
+
+As you can see, our code reads better "It should..." rather than "Test should..."
+
+### Detecting bugs
+
+If another developer on your team makes a change to the original function e.g. changing `let sum = 0` to `let sum`
+
+```js
+export function add(numbers) {
+  let sum;
+
+  for (const number of numbers) {
+    sum += number;
+  }
+
+  return sum;
+}
+```
+
+When the tests run, an issue is detected and the test fails
+
+![Failed Test](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2sku1h4mkpmrjfcfdzwg.png)
+
+The output tells you the following:
+- Which test(s) failed
+- What value the test was expecting
+- What value the test actaully recieved
+
+```
+index.test.js
+   × should sum all numbers in an array
+
+AssertionError: expected NaN to be 6
+
+- Expected
++ Received
+
+- 6
++ NaN
+```
+
+This is happening since the variable `sum` is now `undefined` , and adding a number to `undefined` results in `NaN`
+
+This will prompt the developer to review their change, and therefore the presence of this unit test has prevented a bug from being committed 🎉
+
+---
+
+## Best Practices
+
+### How to structure tests
+
+A common pattern for structuring a unit test is the **Triple A Pattern**
+- **Arrange** - Define the values that we're going to use
+- **Act** - Execute the function we want to test
+- **Assert** - Check if the expected outcome happened
+
+Currently out test is only "Acting" and "Asserting"
+
+```js
+it("should sum all numbers in an array", () => {
+  // Act
+  const result = add([1, 2, 3]);
+
+  // Assert
+  expect(result).toBe(6);
+});
+```
+
+Let's add the "Arrange" step to make our test clearer
+
+```js
+it("should sum all numbers in an array", () => {
+  // Arrange
+  const numbers = [1, 2, 3];  
+  
+  // Act
+  const result = add(numbers);
+
+  // Assert
+  expect(result).toBe(6);
+});
+```
+
+### Avoid hardcoding values
+
+Our test is currently hardcoding the expected value
+
+```js
+expect(result).toBe(6);
+```
+
+But what if a developer changes the numbers in the arrange step without updating the expected value
+
+```js
+it("should sum all numbers in an array", () => {
+  const numbers = [1, 2];  
+  
+  const result = add(numbers);
+
+  expect(result).toBe(6);
+});
+```
+
+Now our test will fail, and we might start debugging the function rather than the test by mistake.
+
+We can dynamically calulate the expected value to make our test more reliable:
+
+```js
+it("should sum all numbers in an array", () => {
+  const numbers = [1, 2];
+  
+  const result = add(numbers);
+
+  const expectedResult = numbers.reduce((acc, curr) => acc + curr, 0);
+  expect(result).toBe(expectedResult);
+});
+```
+
+Here we're using the [`reduce()` array method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) to loop over the values in the numbers array and add them up.
+
+This isn't necessary, however, it does arguably make your test clearer, in terms of how the final value is calculated.
+
+### Keep tests simple
+
+When arranging your tests, keep the input values as simple as possible
+
+```js
+it("should sum all numbers in an array", () => { 
+  // Good
+  const numbers = [1, 2];
+
+  // Bad
+  const numbers = [1, 2, 3, 4, 5, 6];
+
+  // ...
+});
+```
+
+Regardless if we provide 2 or 6 input values, the test will establish whether `"should sum all numbers in an array"` is working or not.
+
+To keep our test simple, we should go for the simplist set of inputs. This will help your colleagues understand the test quickly.
+
+If, for example, you want to test if the functions works with a lot of input values (or negative numbers) you could write a sepatate test for that scenario.
+
+### Test multiple scenarios
+
+Currently we're only testing one scenario, the "ideal scenario" so to speak (i.e. the function recieved an array of numbers).
+
+What about the following scenarios:
+
+1. A value that can't be converted to a number (e.g. `invalid`) is passed to the function
+2. Strings which contain numbers (e.g. `"1"`) are passed
+
+We can write tests for these scenarios!
+
+#### Test for failed conversions
+
+Let's start off by writing a test for scenario 1 above:
+
+```js
+it("should return NaN if a least one invalid number is passed", () => {
+  const inputs = ["invalid", 1];
+
+  const result = add(inputs);
+
+  expect(result).toBeNaN();
+});
+```
+
+Here we're using the `toBeNaN()` provided by Vitest - there are lots of other methods available for other scenarios we might expect (see the [right hand sidebar here](https://vitest.dev/api/expect.html))
+
+If we run this test, it fails with the message
+
+```bash
+AssertionError: expected '0invalid1' to be NaN
+```
+
+This is because JavaScript encounters a string in the numbers array and converts everything to a string and concatinates them.
+
+We can update our function force each value in the array to be a number like so:
+
+```js
+export function add(numbers) {
+  let sum = 0;
+
+  for (const number of numbers) {
+    sum += Number(number);
+  }
+
+  return sum;
+}
+```
+
+Now our test passes since `Number("invalid")` results in `NaN`
+
+In fact, both our tests are passing
+
+
+![Multiple Passing tests](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3pe7ot8qvoe4ing0pnyp.png)
+
+Which confirms the last change didn't break the function.
+
+#### Test for string to number conversions
+
+Let's also add a test for the scenario 2 (when strings that can be converted to numbers are passed)
+
+```js
+it("should return a correct sum even if an array of numeric string values is passed", () => {
+  const numbers = ["1", "2"];
+
+  const result = add(numbers);
+
+  const expectedResult = numbers.reduce(
+    (acc, curr) => Number(acc) + Number(curr),
+    0
+  );
+  expect(result).toBe(expectedResult);
+});
+```
+
+Take note of a couple of statements here:
+- We're providing strings with numbers in `["1", "2"]`
+- In the `.reduce()`, we're converting the `acc` variable _(the accumulator in the reduce loop)_ and `curr` variable _(the current value in the reduce loop)_ to numbers
+
+**Important**: Make sure not to introduce bugs in your tests, you can `console.log(expectedResult)` and `console.log(typeof expectedResult)` in your test to ensure the dynamically calculated expected value is correct
+
+**Note**: console logs will be shown by Vitest in the terminal output
+
+When we run our tests, we see that the new test, as well as all previous tests, are passing!
+
+![Three tests](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qxir91ccmxwf4nkfog6x.png)
+
+This is due to the refactor we made earlier in our `add()` function `sum += Number(number)`.
+
+Now, going forward, your and your colleagues can run these tests any time and be 100% certain that this function works in those scenarios, even after making changes to it.
+
+### Testing is an iterative process
+
+At a certain point you'll ask yourself _"Should I write any more tests for this unit?"_
+
+The answer is _"it depends!"_
+
+- Have you written tests for the main scenarios?
+- Do you tests cover good and bad scenarios?
+
+As time goes on, you may continue working on the unit that you're testing, and therefore you should revisit the tests.
+
+---
+
+### More Examples
+
+You may not feel the need to add these tests, it's up to you, but these are some examples of scenarios you could test for it it's important to you and your team.
+
+#### Test if an empty array is passed
+
+Let's add a test for a scenario where a developer calls this function and passes an empty array, in which case, it shouldn't crash but instead simply return 0
+
+```js
+it("should return 0 if an empty array is passed", () => {
+  const numbers = [];
+
+  const results = add(numbers);
+
+  expect(results).toBe(0);
+});
+```
+
+When we run our tests, we find that our function already behaves that way - great!
+
+At least now it's clear to everyone how the function behaves in this scenario.
+
+You can consider your tests as a form of documentation for your code - a developer can look at the tests and see how it behaves without even trying it out.
+
+#### Test if it throws an error when no argument is passed
+
+There are a couple of approaches to check if an error is thrown in a test:
+1. Wrap it in a `try...catch` statement
+2. Wrap the function call in a function, and use `.toThrow()`
+
+##### The try...catch approach
+
+```js
+it("should throw an error if no value is passed", () => {
+  try {
+    add();
+  } catch (error) {
+    expect(error).toBeDefined();
+  }
+});
+```
+
+Here we're using `.toBeDefined()` to check if the error object is defined
+
+#### The .toThrow() approach
+
+```js
+it("should throw an error if no value is passed", () => {
+  const resultFn = () => {
+    add();
+  };
+
+  expect(resultFn).toThrow();
+});
+```
+
+Here we're wrapping the function call `add()` in an anonymous function, then passing a reference to the function to `expect()` and chaining on `.toThrow()`
+
+With this approach, the `expect()` method will execute the wrapping function `resultFn()` and check whether it throws
+
+### Test for falsy values with .not
+
+For any of the example above, we can chain the `.not` property to check if a statement evaluates to a falsy value e.g.
+
+```js
+expect(resultFn).not.toThrow();
+```
+
+```js
+expect(results).not.toBe(0);
+```
+
+### Test if a specific error message is thrown
+
+Let's write a test to see if, when passing individual numbers as arguments instead of an array, a specific error message is thrown
+
+```js
+it("should throw an error if multiple arguments are passed instead of an array", () => {
+  const num1 = 1;
+  const num2 = 2;
+
+  const resultFn = () => {
+    add(num1, num2);
+  };
+
+  expect(resultFn).toThrow(/is not iterable/);
+});
+```
+
+Here we're passing a regular expression to `.toThrow()`
+
+If you hover your mouse over the the method, you'll see what you can pass in
+
+![toThrow parameters](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dlgxn1ft0izlyrhl6qhl.png)
+
+It could be
+- A string that we expect the `error.message` to be
+- A regular expression (i.e. a pattern to check for part of a message)
+- A class which the error might be an instance of
+
+In our example above, we provided the following regular expression `/is not iterable/` (i.e. the `error.message` must include those three words somewhere in the string)
+
+Since we're using a `for...of` loop in our function which expects a value that can be looped over (i.e. an "iterable"), passing in a couple of numbers `add(num1, num2)` will throw that error message.
+
+### Test if the result is a specific type
+
+Consider this function
+
+```js
+export function convertToNumber(value) {
+  return Number(value);
+}
+```
+
+_**Note**: The functions that we'll be testing in this article are intentionally simple, in order to keep the tests simple_
+
+We can write a test which checks if the function returns a value of a specfic via `.toBeTypeOf()`
+
+```js
+it("converts a string with a number inside to a number", () => {
+  const input = "1";
+
+  const result = convertToNumber(input);
+
+  expect(result).toBeTypeOf("number");
+});
+```
+
+*More coming soon...*
