@@ -31,3 +31,7 @@ Tech Stack:
   - Add integration tests
   - Add E2E testing
   - Add endpoint testing
+- Tanstack Query
+- Zod
+- Go
+- tRPC
