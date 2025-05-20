@@ -35,3 +35,5 @@ Tech Stack:
 - Zod
 - Go
 - tRPC
+- Python
+- ML

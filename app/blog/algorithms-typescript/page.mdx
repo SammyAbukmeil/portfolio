@@ -131,6 +131,16 @@ export const metadata = {
       link: "#fibonacci-sequence-using-recursion",
       nested: true,
     },
+    {
+      text: "Dynamic Programming",
+      link: "#dynamic-programming",
+      nested: false,
+    },
+    {
+      text: "Fibonacci Sequence using Recursion and Memoisation",
+      link: "#fibonacci-sequence-using-recursion-and-memoisation",
+      nested: true,
+    },
   ]}
 />
 
@@ -603,6 +613,9 @@ function fib(n: number): number {
   return numbers[n];
 }
 ```
+
+This is refereed to as a **"bottom-up" approach**, meaning westart from an array containing the initial values, and iteratively 
+build up the Fibonacci sequence from those base cases until we reach the desired value at index `n`.
 
 Now let's follow the [steps to use Asymptotic Analysis to derive Big O](#option-3:-derive-big-o-via-asymptotic-analysis) for this function:
 
@@ -1085,5 +1098,127 @@ Comparing the same inputs as if we had Qubic `O(n³)` time complexity:
 
 The increase in loops is also slower then what we observed with our recursive algorithm.
 
-This validates that our recursive algorithm is exponential `O(2ⁿ)`.
+This confirms that our recursive algorithm is exponential `O(2ⁿ)`.
 
+## Dynamic Programming
+
+Dynamic programming combines Recursion with Memoisation to create more efficient recursive solutions.
+
+Memoization is the technique of storing the results of function calls with specific 
+inputs (e.g. `fib(2)` from the Fibonacci sequence). This stored result can then be 
+reused later without needing to re-compute it, saving computational power and improving performance.
+
+### Fibonacci Sequence using Recursion and Memoisation
+
+Let's look at an example, revisiting the [Fibonacci Sequence using Recursion](#fibonacci-sequence-using-recursion) problem we previously covered:
+
+<iframe
+  style={{ height: "34rem" }}
+  src="https://codesandbox.io/embed/mlxmzv?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+// The shape of our memo object, which looks like: 
+// { 0: 1, 1: 1, 2: 2, 3: 3, 4: 5, 5: 8 }
+// Where the key is input and the value is the result
+interface Memo {
+  [key: number]: number;
+}
+
+// A global object to store the results from our function calls. This allows us to avoid recomputing values
+const memo: Memo = {};
+
+function fib(n: number): number {
+  // A variable to store the result, which we can store in the memo and return
+  let result;
+
+  // If the memo already contains a value for this input 'n', return it directly (memoisation)
+  if (memo[n]) {
+    return memo[n];
+  }
+
+  // Otherwise, calculate the Fibonacci number recursively
+  if (n === 0 || n === 1) {
+    result = 1;
+  } else {
+    result = fib(n - 1) + fib(n - 2);
+  }
+
+  // Store the calculated result in the memo for future use
+  memo[n] = result;
+
+  return result;
+}
+```
+
+This improves the performance of our algorithm by avoiding recalculating previously caclulated function calls. Let's
+check the performance using the same test cases we used for the[Fibonacci Sequence using Recursion](#fibonacci-sequence-using-recursion) 
+example:
+
+<iframe
+  style={{ height: "55rem" }}
+  src="https://codesandbox.io/embed/4pmq3s?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+As you can see, much less function calls due to the results in the memo object. The time complexity here is `O(n)`
+
+However, we can improve this solution by avoiding the use of a global object to store results across all our initial function calls.
+This is the problem in question:
+
+```ts
+const memo = {};
+
+function fib(n) { 
+  // ... 
+}
+
+// these two function calls share the same memo
+fib(5);
+fib(6);
+```
+
+Using a global object introduces potential issues if the input values lead to completely different values. This isn't the case
+for the fibonacci sequence, but it could be for another problem/algorithm.
+
+Here's a version which creates a new memo for each of the initial function calls:
+
+<iframe
+  style={{ height: "32rem" }}
+  src="https://codesandbox.io/embed/g4mscs?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+interface Memo {
+  [key: number]: number;
+}
+
+// The function accepts a memo parameter, which will be an empty object
+// that gets populated for each of the initial function calls.
+// This ensures that each call has its own independent memoisation space.
+function fib(n: number, memo: Memo): number {
+  let result;
+
+  if (memo[n]) {
+    return memo[n];
+  }
+
+  if (n === 0 || n === 1) {
+    result = 1;
+  } else {
+    // Pass the memo that's being populated to the inner function calls
+    result = fib(n - 1, memo) + fib(n - 2, memo);
+  }
+
+  memo[n] = result;
+
+  return result;
+}
+
+// Pass an empty memo object to the initial function calls
+console.log(fib(5, {}));
+console.log(fib(6, {}));
+```
