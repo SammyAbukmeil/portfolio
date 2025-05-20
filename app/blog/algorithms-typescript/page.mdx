@@ -141,6 +141,21 @@ export const metadata = {
       link: "#fibonacci-sequence-using-recursion-and-memoisation",
       nested: true,
     },
+    {
+      text: "Search Algorithms",
+      link: "#search-algorithms",
+      nested: false,
+    },
+    {
+      text: "Linear Search",
+      link: "#linear-search",
+      nested: true,
+    },
+    {
+      text: "Binary Search",
+      link: "#binary-search",
+      nested: true,
+    },
   ]}
 />
 
@@ -1222,3 +1237,160 @@ function fib(n: number, memo: Memo): number {
 console.log(fib(5, {}));
 console.log(fib(6, {}));
 ```
+
+## Search Algorithms
+
+## Linear Search
+
+Consider the following array:
+
+```ts
+[4, 8, 3, 2, 10, -5]
+```
+
+If we want to find an element in this array, let's say `10`, we could use a linear search algorithm.
+
+The linear search algorithm works as follows:
+- Loops through each item in an array
+- When it finds the element, it stops and returns the index
+
+It works on ordered and unordered lists.
+
+For example:
+
+<iframe
+  style={{ height: "15rem" }}
+  src="https://codesandbox.io/embed/ktvkx8?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+However, this wouldn't work for reference data types such as objects:
+
+<iframe
+  style={{ height: "30rem" }}
+  src="https://codesandbox.io/embed/vfmqdw?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+The reason for this is explained nicely by
+[Primitive vs Reference Values in JavaScript | ui.dev](https://ui.dev/primitive-vs-reference-values-in-javascript). In summary, 
+reference data types, such as objects and arrays, are stored in separate places in memory, so `{ name: "sammy" } === { name: "sammy" }`
+results in `false`. However, when we store it in a variable `const person = { name: "sammy" }`, then `person === person` results in
+`true` since both references point to the same place in memory
+
+If we wanted it to work for primative and reference data types, we would could do the following: 
+
+<iframe
+  style={{ height: "38rem" }}
+  src="https://codesandbox.io/embed/lnxhzg?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+function linearSearch(arr: Person[], element: Person) {
+  for (let i = 0; i < arr.length; i++) {
+    // Check if the provided input is an object which isn't null (since `typeof null` returns "object"),
+    // and if the `name` property of the input matches the `name` property of the object in the loop
+    if (
+      typeof element === "object" &&
+      element !== null &&
+      element.name === arr[i].name
+    ) {
+      return i;
+    }
+
+    // Otherwise we're not working with objects, so strict equality works
+    if (arr[i] === element) {
+      return i;
+    }
+  }
+}
+```
+
+However, the drawback here is the object must have a `name` property for this to work, the algorithm is very specific.
+We could make it more flexible via a callback function:
+
+<iframe
+  style={{ height: "45rem" }}
+  src="https://codesandbox.io/embed/d9g3zq?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+function linearSearch(
+  arr: Person[],
+  element: Person,
+  comparitorFn: (element: Person, item: Person) => boolean
+) {
+  for (let i = 0; i < arr.length; i++) {
+    // Check if the provided input is an object which isn't null, and execute the
+    // comparitorFn which implements the matching criteria
+    if (
+      typeof element === "object" &&
+      element !== null &&
+      comparitorFn(element, arr[i])
+    ) {
+      return i;
+    }
+
+    if (arr[i] === element) {
+      return i;
+    }
+  }
+}
+
+console.log(
+  linearSearch(
+    [
+      { name: "Jane", age: 21 },
+      { name: "John", age: 23 },
+    ],
+    { name: "John", age: 23 },
+    // Pass the comparitorFn, which recieves the element we're looking for
+    // and the item in the loop, and returns a boolean value indicating whether
+    // the element matches.
+    (element, item) => element.name === item.name
+  )
+);
+```
+
+Let's analyise the different cases of inputs/time complexities:
+
+- Best case
+  - The item we're looking for is the first item in the list e.g. `1` in `[1, 2, 3]`
+  - `O(1)` since only one loop happens
+- Average case
+  - The list is in a random order
+  - Likely `O(n)`
+- Worst case
+  - The item we're looking for is the last item in the list e.g. `3` in `[1, 2, 3]`
+  - `O(n)` since it loops `n` amount of times
+
+## Binary Search
+
+Binary search is similar to linear search algorithm, however, it:
+- Performs better than `O(n)` linear time complexity
+- The list must be ordered, therefore, you need to sort your list first
+
+Consider the following array:
+
+```ts
+[-5, 8, 10, 13, 18, 21, 25]
+```
+
+The binary search algorithm works as follows:
+- Find the median/middle number i.e. `13`
+- Check if that's the item we're looking for
+- If not
+  - Continue looking in the half of the list that the item must be in (since it's sorted)
+  - Repeat...

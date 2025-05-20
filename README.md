@@ -10,30 +10,47 @@ Tech Stack:
 
 ## Potential future blog posts
 
-- Spell check
+Admin
+- Spell check all posts
+
+CS
 - Data Structures
+
+Patterns
 - Design Patterns
 - Architectural patterns
-- Monorepos via pnpm
+
+TypeScript
 - Update TS post
   - Using an interface with a class
   - More advanced TS features
   - Common errors
   - Pretty errors extension
-- Leetcode problems
-- Queues
-- Redis
-- Docker
-- AWS
+- Tanstack Query
+- Zod
+- tRPC
+- Prisma
+
+Testing
 - Update testing post
   - Add mocking
   - Add React testing
   - Add integration tests
   - Add E2E testing
   - Add endpoint testing
-- Tanstack Query
-- Zod
+
+Languages
 - Go
-- tRPC
+- Rust
 - Python
-- ML
+  - ML
+
+Devops
+- AWS
+- Docker
+
+Other
+- Monorepos via pnpm
+- Leetcode problems
+- Queues
+- Redis
