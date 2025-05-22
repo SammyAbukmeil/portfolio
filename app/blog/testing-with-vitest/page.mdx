@@ -14,6 +14,10 @@ export const metadata = {
   <ArrowLeft className="mr-2" /> <span>Back</span>
 </Link>
 
+# Testing with Vitest
+
+_Published: 13/05/25_
+
 <TableOfContents
   items={[
     {
@@ -136,10 +140,6 @@ export const metadata = {
 
 <Fab />
 
-# Testing with Vitest
-
-_Published: 13/05/25_
-
 ## What is testing
 
 Testing is all about writing code ("tests") which automates the process of checking whether your application is working as intended.
@@ -148,8 +148,6 @@ You can run the tests:
 - After you make changes (to ensure your changes didn't break anything else)
 - During your CI/CD pipeline to ensure you're not pushing bugs to production
 
----
-
 ## Benifits of testing
 
 Testing helps with:
@@ -157,8 +155,6 @@ Testing helps with:
 - Less bugs in production
 - Less manual testing
 - Forces you to write better code (code that's easy to test)
-
----
 
 ## Types of tests
 
@@ -183,8 +179,6 @@ Generally, you want:
 
 As shown in this testing pyramid
 ![Testing Pyramid](https://www.leapwork.com/hubfs/Blog%20Images/Testing-pyramid.png)
-
----
 
 ## Getting Started
 
@@ -357,8 +351,6 @@ AssertionError: expected NaN to be 6
 This is happening since the variable `sum` is now `undefined` , and adding a number to `undefined` results in `NaN`
 
 This will prompt the developer to review their change, and therefore the presence of this unit test has prevented a bug from being committed 🎉
-
----
 
 ## Best Practices
 
@@ -560,8 +552,6 @@ The answer is _"it depends!"_
 
 As time goes on, you may continue working on the unit that you're testing, and therefore you should revisit the tests.
 
----
-
 ### More Examples
 
 You may not feel the need to add these tests, it's up to you, but these are some examples of scenarios you could test for it it's important to you and your team.
@@ -689,5 +679,3 @@ it("converts a string with a number inside to a number", () => {
   expect(result).toBeTypeOf("number");
 });
 ```
-
-*More coming soon...*
