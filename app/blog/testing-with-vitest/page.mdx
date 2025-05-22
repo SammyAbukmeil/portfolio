@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import Navbar from "../../components/blog/Navbar.tsx";
+import TableOfContents from "../../components/blog/TableOfContents.tsx";
 import Fab from "../../components/blog/Fab.tsx";
 
 export const metadata = {
@@ -14,7 +14,7 @@ export const metadata = {
   <ArrowLeft className="mr-2" /> <span>Back</span>
 </Link>
 
-<Navbar
+<TableOfContents
   items={[
     {
       text: "What is Testing",

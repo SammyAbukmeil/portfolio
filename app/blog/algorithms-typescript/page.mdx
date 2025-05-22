@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import Navbar from "../../components/blog/Navbar.tsx";
+import TableOfContents from "../../components/blog/TableOfContents.tsx";
 import Fab from "../../components/blog/Fab.tsx";
 
 export const metadata = {
@@ -14,7 +14,7 @@ export const metadata = {
   <ArrowLeft className="mr-2" /> <span>Back</span>
 </Link>
 
-<Navbar
+<TableOfContents
   items={[
     {
       text: "Algorithms in TypeScript",
@@ -47,8 +47,8 @@ export const metadata = {
       nested: true,
     },
     {
-      text: "Other common algorithms",
-      link: "#other-common-algorithms",
+      text: "Common algorithms",
+      link: "#common-algorithms",
       nested: false,
     },
     {
@@ -77,13 +77,13 @@ export const metadata = {
       nested: true,
     },
     {
-      text: "Common Misconception: Calling functions their own time complexity",
-      link: "#common-misconception:-calling-functions-their-own-time-complexity",
+      text: "Common Misconception: Calling functions with their own time complexity",
+      link: "#common-misconception:-calling-functions-with-their-own-time-complexity",
       nested: false,
     },
     {
-      text: "Math Problems",
-      link: "#math-problems",
+      text: "Math Algorithms",
+      link: "#math-algorithms",
       nested: false,
     },
     {
@@ -160,6 +160,16 @@ export const metadata = {
       text: "Binary Search using Recursion",
       link: "#binary-search-using-recursion",
       nested: true,
+    },
+    {
+      text: "The Master Theorem",
+      link: "#the-master-theorem",
+      nested: true,
+    },
+    {
+      text: "Sorting Algorithms",
+      link: "#sorting-algorithms",
+      nested: false,
     },
   ]}
 />
@@ -502,7 +512,7 @@ case, the time the function takes to execute doesn't depend on `n`.
 Constant time is the best possible outcome for an algorithm in terms of performance, although it
 isn't always possible.
 
-## Other common algorithms
+## Common algorithms
 
 Here's a list of the most common algorithms, ordered from **fastest to slowest**:
 
@@ -555,7 +565,7 @@ Here's a list of the most common algorithms, ordered from **fastest to slowest**
 
 There are even more algorithms (technically any mathematical function is possible), butthese are the most common.
 
-## Common Misconception: Calling functions their own time complexity
+## Common Misconception: Calling functions with their own time complexity
 
 Consider this algorithm:
 
@@ -592,7 +602,7 @@ const sumNumbers = (numbers: number[]): number => {
 
 But this still has a time complexity of `O(n)` since `.reduce()` executes a loop behind the scenes.
 
-## Math Problems
+## Math Algorithms
 
 ## Fibonacci Sequence
 
@@ -1510,3 +1520,127 @@ function binarySearch(
 
 console.log(binarySearch([3, 7, 12, 33, 58, 79], 58, 0)); // Start without an offset
 ```
+
+A couple of notes on the time complexity of this algorithm:
+- It's faster than `O(n)` since we're shrinking the array with each recursive call when 
+calling `binarySearch(sortedArr.slice(...))`, we're likely dealing with `O(log n)`
+- Calling `slice()` costs some performance, however, the genereal trend of the time complexity
+is not impacted by it
+
+Since we're shrinking the array with each recursive call, this algorithm has the same time complexity as
+the [Loop binary search](#binary-search):
+- Best case - `O(1)` 
+- Average case - `O(log n)`
+- Worst case - `O(log n)`
+
+However, if you want to mathematically derive time complexity via a formula, we can use **The Master Theorem**
+
+## The Master Theorem
+
+> **Note**: Be warned that **there's a lot of maths in this section**, don't worry if it goes over your head, just be aware that
+> this sort of thing exists.
+>
+> You can always follow the [steps to use quickly estimate time complexity](#option-4:-quickly-estimating-time-complexity) instead.
+
+The Master Theorem is a forumla to determine the time complexity of complex **recursive functions** where you **split your
+`n` into smaller chuncks (halfs, thirds etc)**, as we're doing in the [Binary Search using Recursion](#binary-search-using-recursion) example
+above. It doesn't work for recursive functions where you recursively call the function with `n - 1`.
+
+The formula to calculate the **runtime of recursion** is as follows: <img className='w-30' src="/algorithms/master-theorem.png" />
+
+To calculate the **overall algorithm runtime**, there are three cases an algorithm could be categorised by:
+1. The recursive step does most of the work (has the biggest runtime) <img className='w-30' src="/algorithms/master-theorem.png" />
+2. Same amount of work inside and outside of the recursion <img className='w-30' src="/algorithms/master-theorem-2.png" />
+3. Non-recursive part does more work <img className='w-30' src="/algorithms/master-theorem-3.png" />
+
+Where:
+- `a` = number of sub-problems (i.e. the number of times the recursive function calls itself with a split array)
+- `b` = relative sub-problem size (i.e. are you halfing it, diving by three etc)
+- `f(n)` = runtime of the code other than the recursive step
+
+Let's apply it to the [Binary Search using Recursion](#binary-search-using-recursion) solution:
+
+```ts
+function binarySearch(sortedArr: number[], element: number, offset: number ): number | undefined {
+  let startIndex = 0;
+  let endIndex = sortedArr.length - 1;
+
+  const middleIndex = Math.floor((endIndex - startIndex) / 2);
+
+  if (element === sortedArr[middleIndex]) {
+    return middleIndex + offset;
+  }
+
+  if (sortedArr[middleIndex] < element) {
+    startIndex = middleIndex + 1;
+    offset += middleIndex + 1;
+  } else {
+    endIndex = middleIndex;
+  }
+
+  return binarySearch(sortedArr.slice(startIndex, endIndex + 1), element, offset);
+}
+```
+
+First, let's calculate the **runtime of recursion** by plugging the values into <img className='w-30' src="/algorithms/master-theorem.png" />
+
+This is referring to this line
+
+```ts
+binarySearch(sortedArr.slice(startIndex, endIndex + 1), element, offset)
+```
+
+- `a` (number of sub-problems / how often does the function call itself) = `1`
+- `b` (sub-problem size, are we splitting the array in halves, thirds etc) = `2` since we devide by 2
+
+So we have `O(n^logb a)` = `O(n^log2 1)`
+
+We can put this through a [Logarithm calculator](https://www.calculator.net/log-calculator.html) 
+with `1` in the top box and `2` in the bottom box which gives us `0`
+
+This results in `O(n^0)` => `O(1)`
+
+So this line:
+
+```ts
+binarySearch(sortedArr.slice(startIndex, endIndex + 1), element, offset)
+```
+
+Has a constant runtime `O(1)`, not the overall algorithm, just the recursive step.
+
+Next, let's calculate the **overall algorithm runtime**. We need to check whether the recursive step, which
+has a time complexity of `O(1)`, does more work / less work / equal work to the rest of the function. The rest
+of the function looks like so:
+
+```ts
+let startIndex = 0;
+let endIndex = sortedArr.length - 1;
+
+const middleIndex = Math.floor((endIndex - startIndex) / 2);
+
+if (element === sortedArr[middleIndex]) {
+  return middleIndex + offset;
+}
+
+if (sortedArr[middleIndex] < element) {
+  startIndex = middleIndex + 1;
+  offset += middleIndex + 1;
+} else {
+  endIndex = middleIndex;
+}
+```
+
+Since there isn't a loop or nested function calls (other than `Math.floor()` which has a time complexity of `O(1)`),
+the rest of the function is `O(1)`.
+
+Therefore, since the time complexity of the recursive step `O(1)` is the same as the time complexity of the rest 
+of the function `O(1)`, we have this case:
+
+2. Same amount of work inside and outside of the recursion <img className='w-30' src="/algorithms/master-theorem-2.png" />
+
+So the overall algorithm time complexity = `O(n^logb a * log n)`
+
+We calculated the first part `n^logb a` earlier via the logarithm calculator which was `1`, so we have `O(1 * log n)` which
+results in `O(log n)`
+
+## Sorting Algorithms

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Fab from "../../components/blog/Fab.tsx";
-import Navbar from "../../components/blog/Navbar.tsx";
+import TableOfContents from "../../components/blog/TableOfContents.tsx";
 
 export const metadata = {
   title: "TypeScript Basics",
@@ -14,7 +14,7 @@ export const metadata = {
   <ArrowLeft className="mr-2" /> <span>Back</span>
 </Link>
 
-<Navbar
+<TableOfContents
   items={[
     { text: "What is TypeScript", link: "#what-is-typescript", nested: false },
     {
