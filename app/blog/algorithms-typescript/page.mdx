@@ -156,6 +156,11 @@ export const metadata = {
       link: "#binary-search",
       nested: true,
     },
+    {
+      text: "Binary Search using Recursion",
+      link: "#binary-search-using-recursion",
+      nested: true,
+    },
   ]}
 />
 
@@ -1254,7 +1259,7 @@ The linear search algorithm works as follows:
 - Loops through each item in an array
 - When it finds the element, it stops and returns the index
 
-It works on ordered and unordered lists.
+It **works on ordered and unordered lists**.
 
 For example:
 
@@ -1263,7 +1268,7 @@ For example:
   src="https://codesandbox.io/embed/ktvkx8?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
 ></iframe>
 
-However, this wouldn't work for reference data types such as objects:
+However, this wouldn't work for reference data types such as objects as you can see by the `undefined` in the console:
 
 <iframe
   style={{ height: "30rem" }}
@@ -1291,7 +1296,7 @@ interface Person {
   age: number;
 }
 
-function linearSearch(arr: Person[], element: Person) {
+function linearSearch(arr: Person[], element: Person): number | undefined {
   for (let i = 0; i < arr.length; i++) {
     // Check if the provided input is an object which isn't null (since `typeof null` returns "object"),
     // and if the `name` property of the input matches the `name` property of the object in the loop
@@ -1331,7 +1336,7 @@ function linearSearch(
   arr: Person[],
   element: Person,
   comparitorFn: (element: Person, item: Person) => boolean
-) {
+): number | undefined {
   for (let i = 0; i < arr.length; i++) {
     // Check if the provided input is an object which isn't null, and execute the
     // comparitorFn which implements the matching criteria
@@ -1380,7 +1385,7 @@ Let's analyise the different cases of inputs/time complexities:
 
 Binary search is similar to linear search algorithm, however, it:
 - Performs better than `O(n)` linear time complexity
-- The list must be ordered, therefore, you need to sort your list first
+- The **list must be ordered**, therefore, you need to sort your list first
 
 Consider the following array:
 
@@ -1392,5 +1397,116 @@ The binary search algorithm works as follows:
 - Find the median/middle number i.e. `13`
 - Check if that's the item we're looking for
 - If not
-  - Continue looking in the half of the list that the item must be in (since it's sorted)
-  - Repeat...
+  - **Figure out which half of the list the item must be in** (since it's sorted)
+  - **Search that half** by finding the medium/middle number
+  - Check if that's the item we're looking for
+  - **Repeat**...
+
+In a nutshell, it repeatedly divides the list in half.
+
+Here it is in action:
+
+<iframe
+  style={{ height: "31rem" }}
+  src="https://codesandbox.io/embed/hdmktw?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down:
+
+```ts
+function binarySearch(sortedArr: number[], element: number): number | undefined {
+  // Variables to keep track of the search range (the items to look at in a given loop iteration)
+  let startIndex = 0;
+  let endIndex = sortedArr.length - 1;
+
+  // Keep looping as long as there is search range, since the following code will half the search range each loop
+  while (startIndex <= endIndex) {
+    // Calculate the middle index, round down to handle even-length arrays, and add it to the startIndex
+    // to ensure we're finding the middle element within the current search range, not just the middle of the original array
+    const middleIndex = startIndex + Math.floor((endIndex - startIndex) / 2);
+
+    // If the element we're looking for is the item at the middle index, we found it
+    if (element === sortedArr[middleIndex]) {
+      return middleIndex;
+    }
+
+    // Otherwise, if the middle element is smaller than the target element, the target must be in the right half
+    if (sortedArr[middleIndex] < element) {
+      startIndex = middleIndex + 1; // Move the start index to search the right half
+    } else {
+      endIndex = middleIndex - 1;  // Move the end index to search the left half
+    }
+  }
+}
+```
+
+Let's see how many times the loop runs:
+
+<iframe
+  style={{ height: "33rem" }}
+  src="https://codesandbox.io/embed/rrdpz2?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Two loop iterations to find an element at index `4`.
+
+Let's analyise the different cases of inputs/time complexities:
+
+- Best case
+  - The item we're looking for is in the middle e.g. `2` in `[1, 2, 3]`
+  - `O(1)` since only one loop happens
+- Average case
+  - We don't know where the 
+  - Likely `O(log n)`
+- Worst case
+  - The item we're looking for is the first or last item in the list e.g. `1` or `5` in `[1, 2, 3, 4, 5]`
+  - `O(log n)` (quicker than `O(n)`) since we split the list in half each iteration
+
+## Binary Search using Recursion
+
+We can also impliment the binary search algorithm via recursion:
+
+<iframe
+  style={{ height: "38rem" }}
+  src="https://codesandbox.io/embed/8jgrhx?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
+></iframe>
+
+Let's break it down
+
+```ts
+function binarySearch(
+  sortedArr: number[],
+  element: number,
+  offset: number
+): number | undefined {
+  let startIndex = 0;
+  let endIndex = sortedArr.length - 1;
+
+  // No while loop needed...
+
+  // No need to add the start index this time since we use slice 
+  // down below which creates a new array to work with
+  const middleIndex = Math.floor((endIndex - startIndex) / 2);
+
+  if (element === sortedArr[middleIndex]) {
+    // Add the offset to get the correct index in the 
+    // original array, not the index in the sliced array
+    return middleIndex + offset;
+  }
+
+  if (sortedArr[middleIndex] < element) {
+    startIndex = middleIndex + 1;
+    offset += middleIndex + 1; // Increment offset by the elements we're skipping
+  } else {
+    endIndex = middleIndex;
+  }
+
+  // Recursively call the function
+  return binarySearch(
+    sortedArr.slice(startIndex, endIndex + 1), // send part of the array
+    element,
+    offset // send how many elements we've skipped
+  );
+}
+
+console.log(binarySearch([3, 7, 12, 33, 58, 79], 58, 0)); // Start without an offset
+```
