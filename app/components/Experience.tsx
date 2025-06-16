@@ -1,11 +1,12 @@
 import { StaticImageData } from "next/image";
 import { ReactNode } from "react";
+import DynamicTime from "./DynamicTime";
 
 interface Props {
   children: ReactNode;
   title: string;
   role: string;
-  time: string;
+  time?: string;
   link: string;
   date: string;
   logo: StaticImageData;
@@ -38,7 +39,14 @@ export default function Experience({
       </div>
       <h4 className="font-bold text-l">{role}</h4>
       <p className="italic">{date}</p>
-      <p><small>{time}</small></p>
+      {!time ? (
+        <DynamicTime />
+      ) : (
+        <p>
+          <small>{time}</small>
+        </p>
+      )}
+
       <div className="mt-4">{children}</div>
     </article>
   );
