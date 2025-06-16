@@ -7,19 +7,28 @@ import grazeLogo from "@/app/images/graze-logo.jpeg";
 import promoveritasLogo from "@/app/images/promoveritas-logo.jpeg";
 import brainstationLogo from "@/app/images/brainstation-logo.jpeg";
 import konradLogo from "@/app/images/konrad-logo.jpeg";
-import { formatDistance, formatDistanceStrict } from "date-fns";
+import { formatDistanceStrict } from "date-fns";
+import { revalidatePath } from "next/cache";
 
 export default function ExperienceSection() {
+  const calculateCurrentJob = () => {
+    const time = formatDistanceStrict(new Date(), new Date(2025, 4, 14), {
+      unit: "month",
+      roundingMethod: "ceil",
+    });
+
+    revalidatePath("/");
+
+    return time;
+  };
+
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
       <h3 className="font-bold text-2xl">Professional Experience</h3>
       <Experience
         title="Konrad Group"
         role="Senior Software Developer"
-        time={`${formatDistanceStrict(new Date(), new Date(2025, 4, 14), {
-          unit: "month",
-          roundingMethod: "ceil",
-        })} and counting...`}
+        time={`${calculateCurrentJob} and counting...`}
         link="https://www.konrad.com"
         date="Apr '25 - Present"
         logo={konradLogo}
