@@ -1,15 +1,20 @@
 {
   "Navigation": {
     "home": "ホーム",
-    "blog": "ブログ",
-    "about": "について"
+    "blog": "ブログ"
   },
   "HomePage": {
     "title": "ポートフォリオ | サミー・アブクメイル",
     "description": "サミーのソフトウェア開発ポートフォリオ",
     "hero": {
-      "greeting": "こんにちは、サミーです",
-      "subtitle": "フルスタック開発者"
+      "title": "サミー・アブクメイル",
+      "subtitle": "フルスタック開発者",
+      "intro": "学習に情熱を持っており、現在",
+      "intro2": "アルゴリズム",
+      "intro3": "、",
+      "intro4": "データ構造",
+      "intro5": "と",
+      "intro6": "デザインパターン"
     }
   },
   "Footer": {

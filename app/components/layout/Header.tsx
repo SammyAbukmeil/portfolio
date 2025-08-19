@@ -12,6 +12,7 @@ interface Props {
 
 export default function Header({ isBlog }: Props) {
   const { theme, setTheme } = useTheme();
+  const tNav = useTranslations("Navigation");
   const t = useTranslations("HomePage");
 
   const activeClasses =
@@ -26,7 +27,7 @@ export default function Header({ isBlog }: Props) {
           <ul className="flex gap-4 list-none">
             <li>
               <Link href="/" className={isBlog ? hoverClasses : activeClasses}>
-                Home
+                {tNav('home')}
               </Link>
             </li>
             <li>
@@ -34,7 +35,7 @@ export default function Header({ isBlog }: Props) {
                 href="/blog"
                 className={isBlog ? activeClasses : hoverClasses}
               >
-                Blog
+                {tNav('blog')}
               </Link>
             </li>
           </ul>
@@ -54,7 +55,7 @@ export default function Header({ isBlog }: Props) {
       </nav>
       {!isBlog && (
         <>
-          <h1 className="font-bold text-2xl">Sammy Abukmeil</h1>
+          <h1 className="font-bold text-2xl">{t('hero.title')}</h1>
           <h2 className="pt-2 text-xl">{t('hero.subtitle')}</h2>
         </>
       )}

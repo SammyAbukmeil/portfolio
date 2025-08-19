@@ -1,15 +1,20 @@
 {
   "Navigation": {
     "home": "Home",
-    "blog": "Blog",
-    "about": "About"
+    "blog": "Blog"
   },
   "HomePage": {
     "title": "Portfolio | Sammy Abukmeil",
     "description": "Sammy's Software Development Portfolio",
     "hero": {
-      "greeting": "Hi, I'm Sammy",
-      "subtitle": "Full-Stack Developer"
+      "title": "Sammy Abukmeil",
+      "subtitle": "Full-Stack Developer",
+      "intro": "I'm passionate about learning and am currently diving into the world of",
+      "intro2": "algorithms",
+      "intro3": ",",
+      "intro4": "data structures",
+      "intro5": "and",
+      "intro6": "design patterns"
     }
   },
   "Footer": {

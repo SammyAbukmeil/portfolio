@@ -1,8 +1,11 @@
 import Image from "next/image";
 import headshot from "@/app/images/headshot.jpg";
 import { Github, Linkedin } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Hero() {
+  const t = useTranslations("HomePage");
+
   return (
     <section className="m-auto max-w-3xs md:max-w-md">
       <Image
@@ -13,17 +16,17 @@ export default function Hero() {
         alt="A photo of Sammy"
       />
       <p className="text-center">
-        I'm passionate about learning and am currently diving into the world of{" "}
+        {t('hero.intro')}{" "}
         <span className="underline decoration-wavy underline-offset-4 decoration-primary">
-          algorithms
+          {t('hero.intro2')}
         </span>
-        ,{" "}
+        {t('hero.intro3')}{" "}
         <span className="underline decoration-wavy underline-offset-4 decoration-primary">
-          data structures
+          {t('hero.intro4')}
         </span>{" "}
-        and{" "}
+        {t('hero.intro5')}{" "}
         <span className="underline decoration-wavy underline-offset-4 decoration-primary">
-          design patterns
+          {t('hero.intro6')}
         </span>
       </p>
       <div className="flex justify-center mt-6 gap-3">
