@@ -1,8 +1,8 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { Locale } from "next-intl";
-import { ChangeEvent, ReactNode, useTransition } from "react";
+import { Locale, useTranslations } from "next-intl";
+import { ReactNode, useTransition, useState, useRef, useEffect } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ChevronDown, Languages } from "lucide-react";
 
@@ -17,41 +17,92 @@ export default function LocaleSwitcherSelect({
   defaultValue,
   label,
 }: Props) {
+  const t = useTranslations('LocaleSwitcher');
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const params = useParams();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  function onSelectChange(event: ChangeEvent<HTMLSelectElement>) {
-    const nextLocale = event.target.value as Locale;
+  function onLocaleSelect(locale: Locale) {
+    setIsOpen(false);
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
         // are used in combination with a given `pathname`. Since the two will
         // always match for the current route, we can skip runtime checks.
         { pathname, params },
-        { locale: nextLocale }
+        { locale }
       );
     });
   }
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isOpen]);
+
   return (
-    <label
-      className={`flex mr-2 relative ${
+    <div 
+      ref={dropdownRef}
+      className={`relative mr-2 ${
         isPending ? "transition-opacity opacity-30" : ""
       }`}
     >
-      <p className="sr-only">{label}</p>
-      <Languages />
-      <select
-        className="inline-flex appearance-none bg-transparent pl-2 pr-1 focus:outline-none"
-        defaultValue={defaultValue}
+      <span className="sr-only">{label}</span>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
         disabled={isPending}
-        onChange={onSelectChange}
+        className="flex items-center gap-1 hover:text-[#6EAA8B] transition-colors duration-200 focus:outline-none focus:text-[#6EAA8B]"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-label={label}
       >
-        {children}
-      </select>
-      <ChevronDown />
-    </label>
+        <Languages />
+        <span className="font-medium">{t('locale', { locale: defaultValue })}</span>
+        <ChevronDown 
+          className={`transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`} 
+        />
+      </button>
+
+      {isOpen && (
+        <div 
+          className="absolute top-full mt-1 right-0 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg min-w-[120px] z-50 transform transition-all duration-200 ease-out"
+          role="listbox"
+        >
+          <div className="py-1">
+            {Array.isArray(children) 
+              ? children.map((child: any) => {
+                  if (child?.props?.value) {
+                    return (
+                      <button
+                        key={child.props.value}
+                        onClick={() => onLocaleSelect(child.props.value)}
+                        className="w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-[#6EAA8B] hover:text-white transition-colors duration-150 focus:outline-none"
+                        role="option"
+                        aria-selected={child.props.value === defaultValue}
+                      >
+                        {child.props.children}
+                      </button>
+                    );
+                  }
+                  return null;
+                })
+              : children}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
