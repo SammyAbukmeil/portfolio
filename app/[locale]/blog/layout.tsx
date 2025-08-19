@@ -1,4 +1,4 @@
-import Header from "../components/layout/Header";
+import Header from "@/app/components/layout/Header";
 
 export default function MdxLayout({ children }: { children: React.ReactNode }) {
   return (
