@@ -54,9 +54,7 @@ export default function LocaleSwitcherSelect({
   return (
     <div 
       ref={dropdownRef}
-      className={`relative mr-2 hover:cursor-pointer ${
-        isPending ? "transition-opacity opacity-30" : ""
-      }`}
+      className="relative mr-2 hover:cursor-pointer"
     >
       <span className="sr-only">{label}</span>
       <button
