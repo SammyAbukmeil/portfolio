@@ -27,6 +27,11 @@ export default function LocaleSwitcherSelect({
 
   function onLocaleSelect(locale: Locale) {
     setIsOpen(false);
+    
+    // Preserve theme during navigation to prevent flash
+    const currentTheme = localStorage.getItem('theme');
+    const isDark = document.documentElement.classList.contains('dark');
+    
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
@@ -35,6 +40,18 @@ export default function LocaleSwitcherSelect({
         { pathname, params },
         { locale }
       );
+      
+      // Reapply theme immediately after navigation starts
+      setTimeout(() => {
+        if (currentTheme) {
+          localStorage.setItem('theme', currentTheme);
+        }
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }, 0);
     });
   }
 
