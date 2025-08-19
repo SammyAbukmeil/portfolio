@@ -14,5 +14,9 @@
   },
   "Footer": {
     "copyright": "© 2024 Sammy Abukmeil. All rights reserved."
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, en {English} jp {日本語} other {Unknown}}"
   }
 }

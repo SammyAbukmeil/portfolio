@@ -14,5 +14,9 @@
   },
   "Footer": {
     "copyright": "© 2024 サミー・アブクメイル. 無断転載を禁じます。"
+  },
+  "LocaleSwitcher": {
+    "label": "言語を変更",
+    "locale": "{locale, select, en {English} jp {日本語} other {Unknown}}"
   }
 }

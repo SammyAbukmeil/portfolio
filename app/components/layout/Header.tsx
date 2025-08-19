@@ -4,6 +4,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import LocaleSwitcher from "./LocaleSwitcher";
 
 interface Props {
   isBlog: boolean;
@@ -34,6 +35,9 @@ export default function Header({ isBlog }: Props) {
             >
               Blog
             </Link>
+          </li>
+          <li>
+            <LocaleSwitcher />
           </li>
           <li
             className="hover:cursor-pointer"
