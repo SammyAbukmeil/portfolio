@@ -22,31 +22,35 @@ export default function Header({ isBlog }: Props) {
   return (
     <header className="text-center py-6">
       <nav className={`${!isBlog ? "mb-10" : ""}`}>
-        <ul className="flex justify-end gap-4 mx-6 mb-4 md:mx-20 list-none">
-          <li>
-            <Link href="/" className={isBlog ? hoverClasses : activeClasses}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/blog"
-              className={isBlog ? activeClasses : hoverClasses}
+        <div className="flex justify-between items-center mx-6 mb-4 md:mx-20">
+          <ul className="flex gap-4 list-none">
+            <li>
+              <Link href="/" className={isBlog ? hoverClasses : activeClasses}>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/blog"
+                className={isBlog ? activeClasses : hoverClasses}
+              >
+                Blog
+              </Link>
+            </li>
+          </ul>
+          <ul className="flex gap-4 list-none">
+            <li>
+              <LocaleSwitcher />
+            </li>
+            <li
+              className="hover:cursor-pointer"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
-              Blog
-            </Link>
-          </li>
-          <li>
-            <LocaleSwitcher />
-          </li>
-          <li
-            className="hover:cursor-pointer"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            <Moon className="dark:hidden" />
-            <Sun className="hidden dark:block" />
-          </li>
-        </ul>
+              <Moon className="dark:hidden" />
+              <Sun className="hidden dark:block" />
+            </li>
+          </ul>
+        </div>
       </nav>
       {!isBlog && (
         <>
