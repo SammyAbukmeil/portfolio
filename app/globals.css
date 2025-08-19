@@ -38,6 +38,25 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Prevent flash of wrong theme - CSS fallback */
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    color-scheme: dark;
+  }
+  html:not(.light) body {
+    background-color: #1E1E1E;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html:not(.dark) {
+    color-scheme: light;
+  }
+  html:not(.dark) body {
+    background-color: #ffffff;
+  }
+}
+
 pre {
   background-color: #2a2a31;
   border-radius: 0.5rem;

@@ -54,7 +54,7 @@ export default function LocaleSwitcherSelect({
   return (
     <div 
       ref={dropdownRef}
-      className={`relative mr-2 ${
+      className={`relative mr-2 hover:cursor-pointer ${
         isPending ? "transition-opacity opacity-30" : ""
       }`}
     >
@@ -62,7 +62,7 @@ export default function LocaleSwitcherSelect({
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={isPending}
-        className="flex items-center gap-1 hover:text-[#6EAA8B] transition-colors duration-200 focus:outline-none focus:text-[#6EAA8B]"
+        className="flex hover:cursor-pointer items-center gap-1 hover:text-[#6EAA8B] transition-colors duration-200 focus:outline-none focus:text-[#6EAA8B]"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-label={label}

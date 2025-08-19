@@ -17,15 +17,15 @@ export default function Hero() {
       />
       <p className="text-center">
         {t('hero.intro')}{" "}
-        <span className="underline decoration-wavy underline-offset-4 decoration-primary">
+        <span className="underline underline-offset-2 decoration-primary">
           {t('hero.intro2')}
         </span>
         {t('hero.intro3')}{" "}
-        <span className="underline decoration-wavy underline-offset-4 decoration-primary">
+        <span className="underline underline-offset-2 decoration-primary">
           {t('hero.intro4')}
         </span>{" "}
         {t('hero.intro5')}{" "}
-        <span className="underline decoration-wavy underline-offset-4 decoration-primary">
+        <span className="underline underline-offset-2 decoration-primary">
           {t('hero.intro6')}
         </span>
       </p>

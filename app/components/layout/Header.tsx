@@ -44,7 +44,7 @@ export default function Header({ isBlog }: Props) {
               <LocaleSwitcher />
             </li>
             <li
-              className="hover:cursor-pointer"
+              className="hover:cursor-pointer hover:text-[#6EAA8B] transition-all duration-200 ease-out"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
               <Moon className="dark:hidden" />
