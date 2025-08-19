@@ -1,5 +1,5 @@
 import Header from "@/app/components/layout/Header";
-import Hero from "./components/layout/Hero";
+import Hero from "@/app/components/layout/Hero";
 import Footer from "@/app/components/layout/Footer";
 import SideProjectSection from "@/app/components/sections/SideProjectSection";
 import ExperienceSection from "@/app/components/sections/ExperienceSection";

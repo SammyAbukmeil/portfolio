@@ -1,0 +1,18 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About"
+  },
+  "HomePage": {
+    "title": "Portfolio | Sammy Abukmeil",
+    "description": "Sammy's Software Development Portfolio",
+    "hero": {
+      "greeting": "Hi, I'm Sammy",
+      "subtitle": "Full-Stack Developer"
+    }
+  },
+  "Footer": {
+    "copyright": "© 2024 Sammy Abukmeil. All rights reserved."
+  }
+}

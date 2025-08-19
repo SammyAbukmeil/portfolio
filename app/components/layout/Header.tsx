@@ -2,6 +2,7 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 
 export default function Header({ isBlog }: Props) {
   const { theme, setTheme } = useTheme();
+  const t = useTranslations("HomePage");
 
   const activeClasses =
     "decoration-solid underline decoration-primary underline-offset-6 hover:underline-offset-6 transition-all decoration-2";
@@ -18,7 +20,7 @@ export default function Header({ isBlog }: Props) {
 
   return (
     <header className="text-center py-6">
-      <nav className={`${!isBlog? "mb-10" : ""}`}>
+      <nav className={`${!isBlog ? "mb-10" : ""}`}>
         <ul className="flex justify-end gap-4 mx-6 mb-4 md:mx-20 list-none">
           <li>
             <Link href="/" className={isBlog ? hoverClasses : activeClasses}>
@@ -45,7 +47,7 @@ export default function Header({ isBlog }: Props) {
       {!isBlog && (
         <>
           <h1 className="font-bold text-2xl">Sammy Abukmeil</h1>
-          <h2 className="pt-2 text-xl">Fullstack Software Engineer</h2>
+          <h2 className="pt-2 text-xl">{t('hero.subtitle')}</h2>
         </>
       )}
     </header>
