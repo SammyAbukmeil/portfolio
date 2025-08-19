@@ -63,21 +63,21 @@ const components = {
     </h4>
   ),
   p: (props: ParagraphProps) => (
-    <p className="dark:text-white leading-6 mb-4" {...props} />
+    <p className="text-white leading-6 mb-4" {...props} />
   ),
   ol: (props: ListProps) => (
     <ol
-      className="dark:text-white list-decimal pl-5 space-y-2 mb-4"
+      className="text-white list-decimal pl-5 space-y-2 mb-4"
       {...props}
     />
   ),
   ul: (props: ListProps) => (
-    <ul className="dark:text-white list-disc pl-5 space-y-1 my-4" {...props} />
+    <ul className="text-white list-disc pl-5 space-y-1 my-4" {...props} />
   ),
   li: (props: ListItemProps) => <li className="pl-1" {...props} />,
   em: (props: ComponentPropsWithoutRef<"em">) => <em {...props} />,
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
-    <strong className="font-medium text-blue dark:text-accent" {...props} />
+    <strong className="font-medium text-accent" {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className =
@@ -114,11 +114,11 @@ const components = {
   },
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="ml-4 border-l-3 border-gray-300 pl-4 text-gray-700 dark:border-zinc-600 dark:text-white my-8"
+      className="ml-4 border-l-3 border-zinc-600 pl-4 text-white my-8"
       {...props}
     />
   ),
-  hr: () => <hr className="my-16 mx-8 dark:border-zinc-600" />,
+  hr: () => <hr className="my-16 mx-8 border-zinc-600" />,
 };
 
 declare global {

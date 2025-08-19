@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Next.js portfolio website showcasing projects and blog posts. The site uses MDX for blog content, Tailwind CSS for styling, and includes dark/light theme support.
+This is a Next.js portfolio website showcasing projects and blog posts. The site uses MDX for blog content, Tailwind CSS for styling, and features a permanent dark theme design.
 
 ## Tech Stack
 
@@ -12,7 +12,6 @@ This is a Next.js portfolio website showcasing projects and blog posts. The site
 - TypeScript
 - Tailwind CSS v4
 - MDX for blog posts with custom components
-- next-themes for theme management
 - sugar-high for code syntax highlighting
 - Lucide React for icons
 - Vercel Analytics
@@ -40,7 +39,6 @@ npm run lint
     - `layout/` - Header, Footer, Hero components
     - `sections/` - Page section components  
     - `blog/` - Blog-specific components (Fab, TableOfContents)
-  - `contexts/` - React contexts (ThemeContext)
   - `blog/` - MDX blog posts organized by topic
 - `mdx-components.tsx` - Custom MDX component definitions
 - `public/` - Static assets including algorithm diagrams
@@ -53,10 +51,10 @@ npm run lint
 - Code blocks use sugar-high for syntax highlighting
 - Headings automatically generate IDs for anchor links
 
-### Theme System
-- Uses next-themes with system preference detection
-- Theme context wraps the entire app in `app/layout.tsx`
-- Tailwind configured with dark: prefix for dark mode styles
+### Dark Theme Design
+- Permanent dark theme with consistent styling throughout
+- Dark color scheme applied at the HTML level
+- Optimized for readability and visual appeal in dark mode
 
 ### Component Organization
 - Layout components (Header, Footer, Hero) handle page structure

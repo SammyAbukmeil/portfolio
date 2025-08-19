@@ -6,7 +6,7 @@ interface Props {
 
 export default function TableOfContents({ items }: Props) {
   return (
-    <section className="my-8 bg-zinc-100 dark:bg-primary-dark p-4">
+    <section className="my-8 bg-primary-dark p-4">
       <ul className="list-none">
         {items.map((item, i) => (
           <li

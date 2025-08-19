@@ -38,49 +38,15 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Prevent flash of wrong theme - CSS fallback */
+/* Dark theme styles */
 html {
-  background-color: #ffffff;
-  color-scheme: light;
-}
-
-html.dark {
   background-color: #1E1E1E;
   color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  html:not(.light) {
-    background-color: #1E1E1E;
-    color-scheme: dark;
-  }
-  html:not(.light) body {
-    background-color: #1E1E1E;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  html:not(.dark) {
-    background-color: #ffffff;
-    color-scheme: light;
-  }
-  html:not(.dark) body {
-    background-color: #ffffff;
-  }
-}
-
-/* Mobile-specific anti-flash */
-@media screen and (max-width: 768px) {
-  @media (prefers-color-scheme: dark) {
-    html:not(.light) {
-      background-color: #1E1E1E !important;
-    }
-  }
-  @media (prefers-color-scheme: light) {
-    html:not(.dark) {
-      background-color: #ffffff !important;
-    }
-  }
+body {
+  background-color: #1E1E1E;
+  color: white;
 }
 
 pre {
@@ -126,28 +92,8 @@ code:not(pre code) span {
   color: black !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  code {
-    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-    font-size: 14px;
-    padding: 0.2em 0.4em;
-    border-radius: 0.3em;
-    background-color: #464646;
-  }
-
-  code:not(pre code) span {
-    color: var(--color-zinc-100) !important;
-  }
-}
-
-html.dark code:not(pre code) span {
+code:not(pre code) span {
   color: var(--color-zinc-100) !important;
-}
-
-@media (prefers-color-scheme: light) {
-  code:not(pre code) span {
-    color: var(--color-zinc-100) !important;
-  }
 }
 
 pre code span {

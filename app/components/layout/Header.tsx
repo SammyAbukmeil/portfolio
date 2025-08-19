@@ -1,7 +1,5 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import LocaleSwitcher from "./LocaleSwitcher";
@@ -11,7 +9,6 @@ interface Props {
 }
 
 export default function Header({ isBlog }: Props) {
-  const { theme, setTheme } = useTheme();
   const tNav = useTranslations("Navigation");
   const t = useTranslations("HomePage");
 
@@ -42,13 +39,6 @@ export default function Header({ isBlog }: Props) {
           <ul className="flex gap-4 list-none">
             <li>
               <LocaleSwitcher />
-            </li>
-            <li
-              className="hover:cursor-pointer hover:text-[#6EAA8B] transition-all duration-200 ease-out"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <Moon className="dark:hidden" />
-              <Sun className="hidden dark:block" />
             </li>
           </ul>
         </div>

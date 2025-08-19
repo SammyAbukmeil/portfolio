@@ -27,11 +27,6 @@ export default function LocaleSwitcherSelect({
 
   function onLocaleSelect(locale: Locale) {
     setIsOpen(false);
-    
-    // Preserve theme during navigation to prevent flash
-    const currentTheme = localStorage.getItem('theme');
-    const isDark = document.documentElement.classList.contains('dark');
-    
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
@@ -40,18 +35,6 @@ export default function LocaleSwitcherSelect({
         { pathname, params },
         { locale }
       );
-      
-      // Reapply theme immediately after navigation starts
-      setTimeout(() => {
-        if (currentTheme) {
-          localStorage.setItem('theme', currentTheme);
-        }
-        if (isDark) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      }, 0);
     });
   }
 
@@ -93,7 +76,7 @@ export default function LocaleSwitcherSelect({
 
       {isOpen && (
         <div 
-          className="absolute top-full mt-1 right-0 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg min-w-[120px] z-50 transform transition-all duration-200 ease-out"
+          className="absolute top-full mt-1 right-0 bg-gray-900 border border-gray-700 rounded-md shadow-lg min-w-[120px] z-50 transform transition-all duration-200 ease-out"
           role="listbox"
         >
           <div className="py-1">
@@ -104,7 +87,7 @@ export default function LocaleSwitcherSelect({
                       <button
                         key={child.props.value}
                         onClick={() => onLocaleSelect(child.props.value)}
-                        className="w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-[#6EAA8B] hover:text-white transition-colors duration-150 focus:outline-none"
+                        className="w-full text-left px-3 py-2 text-sm text-gray-200 hover:bg-[#6EAA8B] hover:text-white transition-colors duration-150 focus:outline-none"
                         role="option"
                         aria-selected={child.props.value === defaultValue}
                       >
