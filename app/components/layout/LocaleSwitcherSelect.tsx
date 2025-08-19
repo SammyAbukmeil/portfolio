@@ -68,7 +68,7 @@ export default function LocaleSwitcherSelect({
         aria-label={label}
       >
         <Languages />
-        <span className="font-medium">{t('locale', { locale: defaultValue })}</span>
+        <span className="font-medium min-w-[53px]">{t('locale', { locale: defaultValue })}</span>
         <ChevronDown 
           className={`transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
