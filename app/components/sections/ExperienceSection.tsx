@@ -29,6 +29,7 @@ export default function ExperienceSection() {
             <li>TypeScript</li>
             <li>React</li>
             <li>Express</li>
+            <li>AWS</li>
           </ul>
         </TechStack>
       </Experience>
