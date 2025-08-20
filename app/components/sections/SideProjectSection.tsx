@@ -1,23 +1,24 @@
+"use client";
+
 import Project from "@/app/components/Project";
 import Links from "@/app/components/Links";
 import TechStack from "@/app/components/TechStack";
 import minoImg from "@/app/images/mino.png";
 import holmesImg from "@/app/images/holmes.png";
 import biaBakesImg from "@/app/images/bia-bakes.png";
+import { useTranslations } from "next-intl";
 
 export default function SideProjectSection() {
+  const t = useTranslations("SideProjects");
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
-      <h3 className="font-bold text-2xl">Side Projects</h3>
+      <h3 className="font-bold text-2xl">{t('title')}</h3>
       <Project title="Mino" isLive={true} img={minoImg}>
         <p className="mt-2">
-          A native app to help non-verbal people communicate via text-to-speech.
-          Users can create blocks with images and text, and when clicked, the
-          app speaks the text.
+          {t('mino.description1')}
         </p>
         <p className="mt-4">
-          I built this app for my nephew who uses it daily! I have some other
-          users who found the app organically.
+          {t('mino.description2')}
         </p>
         <TechStack>
           <ul className="pl-4">
@@ -41,7 +42,7 @@ export default function SideProjectSection() {
                 target="_blank"
                 href="https://play.google.com/store/apps/details?id=com.minoSpeak&pli=1"
               >
-                Google Play Store
+                {t('links.googlePlay')}
               </a>
             </li>
             <li>
@@ -50,7 +51,7 @@ export default function SideProjectSection() {
                 target="_blank"
                 href="https://apps.apple.com/gb/app/mino-speak/id6449201524"
               >
-                Apple App Store
+                {t('links.appleStore')}
               </a>
             </li>
           </ul>
@@ -58,13 +59,10 @@ export default function SideProjectSection() {
       </Project>
       <Project title="Holmes" isLive={true} img={holmesImg}>
         <p className="mt-2">
-          Collaborated with a colleague to create the web interface for Holmes
-          as a freelance project. The app helps users find reviews on rental
-          properties.
+          {t('holmes.description1')}
         </p>
         <p className="mt-4">
-          The client already had a React Native app hooked up to a Firebase
-          backend, our job was to build a web interface which was designed by{" "}
+          {t('holmes.description2')}{" "}
           <a
             className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
             target="_blank"
@@ -95,7 +93,7 @@ export default function SideProjectSection() {
                 target="_blank"
                 href="https://holmes-app.com"
               >
-                Website
+                {t('links.website')}
               </a>
             </li>
           </ul>
@@ -103,16 +101,13 @@ export default function SideProjectSection() {
       </Project>
       <Project title="Bia Bakes" isLive={false} img={biaBakesImg}>
         <p className="mt-2">
-          Developed a website for a bakery in Jordan to help advertise their
-          products. The website has a CMS integrated which allowed her to change
-          the menu whenever she wanted.
+          {t('biaBakes.description1')}
         </p>
         <p className="mt-4">
-          The website was running for 3 years before the client decided to take
-          the website down to cut costs.
+          {t('biaBakes.description2')}
         </p>
         <p className="mt-4">
-          The designs were created by{" "}
+          {t('biaBakes.description3')}{" "}
           <a
             className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
             target="_blank"

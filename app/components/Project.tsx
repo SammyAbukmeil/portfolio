@@ -1,5 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 
 interface Props {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export default function Project({ children, title, isLive, img }: Props) {
+  const t = useTranslations("Project");
   const pillClasses = "p-1.5 rounded-2xl text-xs text-white";
 
   return (
@@ -24,9 +26,9 @@ export default function Project({ children, title, isLive, img }: Props) {
         />
         <div className="mt-4 md:mt-0 md:ml-4">
           {isLive ? (
-            <span className={`bg-primary ${pillClasses}`}>Live</span>
+            <span className={`bg-primary ${pillClasses}`}>{t("live")}</span>
           ) : (
-            <span className={`bg-red-400  ${pillClasses}`}>Not Live</span>
+            <span className={`bg-red-400  ${pillClasses}`}>{t("notLive")}</span>
           )}
           {children}
         </div>

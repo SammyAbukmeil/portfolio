@@ -1,3 +1,5 @@
+"use client";
+
 import Experience from "@/app/components/Experience";
 import TechStack from "@/app/components/TechStack";
 import totallyLogo from "@/app/images/totally-tech.jpeg";
@@ -7,19 +9,21 @@ import grazeLogo from "@/app/images/graze-logo.jpeg";
 import promoveritasLogo from "@/app/images/promoveritas-logo.jpeg";
 import brainstationLogo from "@/app/images/brainstation-logo.jpeg";
 import konradLogo from "@/app/images/konrad-logo.jpeg";
+import { useTranslations } from "next-intl";
 
 export default function ExperienceSection() {
+  const t = useTranslations("Experience");
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
-      <h3 className="font-bold text-2xl">Professional Experience</h3>
+      <h3 className="font-bold text-2xl">{t('title')}</h3>
       <Experience
         title="Konrad Group"
         role="Senior Software Developer"
         link="https://www.konrad.com"
-        date="Apr '25 - Present"
+        date={`Apr '25 - ${t('present')}`}
         logo={konradLogo}
       >
-        <p>Fullstack development for a digital agency</p>
+        <p>{t('konrad')}</p>
         <TechStack>
           <ul className="pl-4">
             <li>TypeScript</li>
@@ -31,13 +35,13 @@ export default function ExperienceSection() {
       <Experience
         title="BrainStation"
         role="Senior Educator"
-        time="3 years"
+        time={t("threeYears")}
         link="https://brainstation.io"
         date="Mar '22 - Apr '25"
         logo={brainstationLogo}
       >
         <p>
-          Teaching groups of students on a 3 month software engineering bootcamp
+          {t('brainstation')}
         </p>
         <TechStack>
           <ul className="pl-4">
@@ -54,12 +58,12 @@ export default function ExperienceSection() {
       <Experience
         title="PromoVeritas"
         role="Senior Backend Developer"
-        time="1 year"
+        time={t("oneYear")}
         link="https://www.promoveritas.com"
         date="Feb '21 - Mar '22"
         logo={promoveritasLogo}
       >
-        <p>Worked on a rebuild of a prize draw competition API</p>
+        <p>{t('promoveritas')}</p>
         <TechStack>
           <ul className="pl-4">
             <li>PHP</li>
@@ -71,12 +75,12 @@ export default function ExperienceSection() {
       <Experience
         title="Graze"
         role="Backend Engineer"
-        time="9 months"
+        time={t("nineMonths")}
         link="https://www.graze.com"
         date="Mar '20 - Dec '20"
         logo={grazeLogo}
       >
-        <p>Worked on an internal PHP application to manage stock and orders</p>
+        <p>{t('graze')}</p>
         <TechStack>
           <ul className="pl-4">
             <li>PHP</li>
@@ -88,12 +92,12 @@ export default function ExperienceSection() {
       <Experience
         title="AKA UK"
         role="Full Stack Developer"
-        time="2.5 years"
+        time={t("twoPointFiveYears")}
         link="https://www.akauk.com"
         date="Feb '17 - Mar '20"
         logo={akaLogo}
       >
-        <p>Worked on various WordPress websites for theatre shows</p>
+        <p>{t('akauk')}</p>
         <TechStack>
           <ul className="pl-4">
             <li>PHP</li>
@@ -105,12 +109,12 @@ export default function ExperienceSection() {
       <Experience
         title="Passion Digital"
         role="Full Stack Developer"
-        time="6 months"
+        time={t("sixMonths")}
         link="https://passion.digital"
         date="May '17 - Sept '17"
         logo={passionDigitalLogo}
       >
-        <p>Worked on various WordPress websites for clients</p>
+        <p>{t('passion')}</p>
         <TechStack>
           <ul className="pl-4">
             <li>PHP</li>
@@ -122,12 +126,12 @@ export default function ExperienceSection() {
       <Experience
         title="Totally Communications Ltd"
         role="Full Stack Developer"
-        time="2 years"
+        time={t("twoYears")}
         link="https://totally.tech"
         date="Jun '15 - May '17"
         logo={totallyLogo}
       >
-        <p>Worked on various PHP applications for clients</p>
+        <p>{t('totally')}</p>
         <TechStack>
           <ul className="pl-4">
             <li>PHP</li>

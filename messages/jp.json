@@ -23,5 +23,49 @@
   "LocaleSwitcher": {
     "label": "言語を変更",
     "locale": "{locale, select, en {English} jp {日本語} other {Unknown}}"
+  },
+  "SideProjects": {
+    "title": "サイドプロジェクト",
+    "mino": {
+      "description1": "音声合成でコミュニケーションを支援するネイティブアプリです。ユーザーは画像とテキストでブロックを作成し、クリックするとアプリがテキストを読み上げます。",
+      "description2": "甥っ子のために作ったアプリで、毎日使ってくれています！他にも自然に見つけてくれたユーザーがいます。"
+    },
+    "holmes": {
+      "description1": "同僚と協力してフリーランスプロジェクトとしてHolmesのWebインターフェースを作成しました。このアプリは賃貸物件のレビューを見つけるのに役立ちます。",
+      "description2": "クライアントは既にFirebaseバックエンドに接続されたReact Nativeアプリを持っており、私たちの仕事は"
+    },
+    "biaBakes": {
+      "description1": "ヨルダンのベーカリーの製品を宣伝するためのウェブサイトを開発しました。CMSが統合されており、クライアントがいつでもメニューを変更できるようになっていました。",
+      "description2": "ウェブサイトは3年間稼働していましたが、クライアントがコスト削減のためにサイトを閉鎖することに決めました。",
+      "description3": "デザインは"
+    },
+    "links": {
+      "googlePlay": "Google Play ストア",
+      "appleStore": "Apple App ストア",
+      "website": "ウェブサイト"
+    }
+  },
+  "Experience": {
+    "title": "職歴",
+    "konrad": "デジタルエージェンシーでのフルスタック開発",
+    "brainstation": "3ヶ月のソフトウェアエンジニアリングブートキャンプで学生グループを指導",
+    "promoveritas": "抽選コンペティションAPIの再構築に携わる",
+    "graze": "在庫と注文を管理する社内PHPアプリケーションに従事",
+    "akauk": "劇場ショー向けの様々なWordPressウェブサイトに従事",
+    "passion": "クライアント向けの様々なWordPressウェブサイトに従事",
+    "totally": "クライアント向けの様々なPHPアプリケーションに従事",
+    "present": "現在",
+    "threeYears": "3年",
+    "oneYear": "1年",
+    "nineMonths": "9ヶ月",
+    "twoPointFiveYears": "2.5年",
+    "sixMonths": "6ヶ月",
+    "twoYears": "2年"
+  },
+  "Project": {
+    "live": "稼働中",
+    "notLive": "停止中",
+    "techStack": "技術スタック",
+    "links": "リンク"
   }
 }
