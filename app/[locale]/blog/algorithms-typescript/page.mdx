@@ -206,10 +206,10 @@ Consider the following problem:
 
 A solution might look like the following:
 
-<iframe
+<LoadingIframe
   style={{ height: "17rem" }}
   src="https://codesandbox.io/embed/r4mzpz?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 You might be tempted to measure the performance via the [Performance API](https://developer.mozilla.org/en-US/docs/Web/API/Performance)
 
@@ -220,10 +220,10 @@ You might be tempted to measure the performance via the [Performance API](https:
 >
 > - Small numbers show `0` since the function call finishes in less than a millisecond.
 
-<iframe
+<LoadingIframe
   style={{ height: "22rem" }}
   src="https://codesandbox.io/embed/h5zl76?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 As you make the number bigger, you'll notice that the time it takes increases. However, try the same number twice, it's
 always slightly different. This is due to various factors:
@@ -253,10 +253,10 @@ In other words, as the input increases, so does the time in a linear fashion. Th
 
 We could also solve the same problem with a fancy maths formula like so:
 
-<iframe
+<LoadingIframe
   style={{ height: "22rem" }}
   src="https://codesandbox.io/embed/5625sr?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 As you add `0`'s to the example above, you'll notice that the time it takes (looking for a trend, not the exact numbers)
 doesn't increase. This trend is called **constant time complexity**:
@@ -627,10 +627,10 @@ Our task here is:
 
 Here's the solution:
 
-<iframe
+<LoadingIframe
   style={{ height: "17rem" }}
   src="https://codesandbox.io/embed/q9phzx?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -670,10 +670,10 @@ function fib(n: number): number {
 
 To see how many times the loop runs, let's add a console log and let dev tools output the count:
 
-<iframe
+<LoadingIframe
   style={{ height: "17rem" }}
   src="https://codesandbox.io/embed/p7cjqg?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 When `n` is `4`, the loop runs three times i.e. `n - 1` times.
 
@@ -725,10 +725,10 @@ if it's only divisible by itself and 1.
 
 Here's the solution:
 
-<iframe
+<LoadingIframe
   style={{ height: "17rem" }}
   src="https://codesandbox.io/embed/dzvq7r?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -775,10 +775,10 @@ The square root of a number is a number that when multiplied by itself equals th
 With this, we can modify our `for` loop to only loop as many times as `Math.sqrt(num)` to reduce the amount of loops, and
 use `<=` to check the square root itself:
 
-<iframe
+<LoadingIframe
   style={{ height: "17rem" }}
   src="https://codesandbox.io/embed/qmzfwr?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 This changes the Big O of our cases:
 
@@ -802,10 +802,11 @@ Our task here is:
 
 Here's the solution:
 
-<iframe
+
+<LoadingIframe
   style={{ height: "20rem" }}
   src="https://codesandbox.io/embed/5983rd?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Pretty self-explanatory.
 
@@ -848,10 +849,10 @@ This one is super simple:
 
 Here's the solution:
 
-<iframe
+<LoadingIframe
   style={{ height: "11rem" }}
   src="https://codesandbox.io/embed/c6stlt?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Rather than using Asymptotic Analysis, we can clearly see that there is no loop and there's only one expression execution.
 Therefore, this algorithm has a Big O of `O(1)` i.e. constant time
@@ -870,10 +871,10 @@ long as there is no remainder for any division, the number is a power of two.
 
 Here's the solution:
 
-<iframe
+<LoadingIframe
   style={{ height: "28rem" }}
   src="https://codesandbox.io/embed/knzvn3?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -919,10 +920,10 @@ A reminder of how `O(log n)` looks on a graph:
 
 i.e. It doesn't take a large amount of time for big numbers. To prove this, we can count the number of loops via a counter variable:
 
-<iframe
+<LoadingIframe
   style={{ height: "33rem" }}
   src="https://codesandbox.io/embed/4w4crf?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 ## Calculate Factorial
 
@@ -935,10 +936,10 @@ The approach to this problem is to iterate through all smaller numbers and multi
 
 Here's the solution:
 
-<iframe
+<LoadingIframe
   style={{ height: "16rem" }}
   src="https://codesandbox.io/embed/vqx8d9?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -969,10 +970,10 @@ Recursion is a technique where a function calls itself to solve a problem.
 
 Let's look at an example, revisiting the [Calculate Factorial](#calculate-factorial) problem we just covered: 
 
-<iframe
+<LoadingIframe
   style={{ height: "16rem" }}
   src="https://codesandbox.io/embed/dgkj23?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -1065,10 +1066,10 @@ Let's look at an example, revisiting the [Fibonacci Sequence](#fibonacci-sequenc
 >
 > e.g. `fib(4)` should return `5`
 
-<iframe
+<LoadingIframe
   style={{ height: "16rem" }}
   src="https://codesandbox.io/embed/ytlvq4?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -1115,10 +1116,10 @@ But how can we distinguish between:
 
 Let's add a counter:
 
-<iframe
+<LoadingIframe
   style={{ height: "35rem" }}
   src="https://codesandbox.io/embed/6gq6y8?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Comparing the same inputs as if we had Quadratic `O(n²)` time complexity:
 - For an input of 5: `5²` = `5 * 5` = `25` function calls
@@ -1149,10 +1150,10 @@ reused later without needing to re-compute it, saving computational power and im
 
 Let's look at an example, revisiting the [Fibonacci Sequence using Recursion](#fibonacci-sequence-using-recursion) problem we previously covered:
 
-<iframe
+<LoadingIframe
   style={{ height: "34rem" }}
   src="https://codesandbox.io/embed/mlxmzv?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -1194,10 +1195,10 @@ This improves the performance of our algorithm by avoiding recalculating previou
 check the performance using the same test cases we used for the[Fibonacci Sequence using Recursion](#fibonacci-sequence-using-recursion) 
 example:
 
-<iframe
+<LoadingIframe
   style={{ height: "55rem" }}
   src="https://codesandbox.io/embed/4pmq3s?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 As you can see, much less function calls due to the results in the memo object. The time complexity here is `O(n)`
 
@@ -1221,10 +1222,10 @@ for the fibonacci sequence, but it could be for another problem/algorithm.
 
 Here's a version which creates a new memo for each of the initial function calls:
 
-<iframe
+<LoadingIframe
   style={{ height: "32rem" }}
   src="https://codesandbox.io/embed/g4mscs?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -1280,17 +1281,17 @@ It **works on ordered and unordered lists**.
 
 For example:
 
-<iframe
+<LoadingIframe
   style={{ height: "15rem" }}
   src="https://codesandbox.io/embed/ktvkx8?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 However, this wouldn't work for reference data types such as objects as you can see by the `undefined` in the console:
 
-<iframe
+<LoadingIframe
   style={{ height: "30rem" }}
   src="https://codesandbox.io/embed/vfmqdw?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 The reason for this is explained nicely by
 [Primitive vs Reference Values in JavaScript | ui.dev](https://ui.dev/primitive-vs-reference-values-in-javascript). In summary, 
@@ -1300,10 +1301,10 @@ results in `false`. However, when we store it in a variable `const person = { na
 
 If we wanted it to work for primative and reference data types, we would could do the following: 
 
-<iframe
+<LoadingIframe
   style={{ height: "38rem" }}
   src="https://codesandbox.io/embed/lnxhzg?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -1336,10 +1337,10 @@ function linearSearch(arr: Person[], element: Person): number | undefined {
 However, the drawback here is the object must have a `name` property for this to work, the algorithm is very specific.
 We could make it more flexible via a callback function:
 
-<iframe
+<LoadingIframe
   style={{ height: "45rem" }}
   src="https://codesandbox.io/embed/d9g3zq?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -1423,10 +1424,10 @@ In a nutshell, it repeatedly divides the list in half.
 
 Here it is in action:
 
-<iframe
+<LoadingIframe
   style={{ height: "31rem" }}
   src="https://codesandbox.io/embed/hdmktw?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down:
 
@@ -1459,10 +1460,10 @@ function binarySearch(sortedArr: number[], element: number): number | undefined 
 
 Let's see how many times the loop runs:
 
-<iframe
+<LoadingIframe
   style={{ height: "33rem" }}
   src="https://codesandbox.io/embed/rrdpz2?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Two loop iterations to find an element at index `4`.
 
@@ -1482,10 +1483,10 @@ Let's analyise the different cases of inputs/time complexities:
 
 We can also impliment the binary search algorithm via recursion:
 
-<iframe
+<LoadingIframe
   style={{ height: "38rem" }}
   src="https://codesandbox.io/embed/8jgrhx?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 Let's break it down
 
@@ -1683,10 +1684,10 @@ If we were using bubble sort to sort this array in ascending order, the algorith
 
 Here's how it looks in code for ascending order:
 
-<iframe
+<LoadingIframe
   style={{ height: "31rem" }}
   src="https://codesandbox.io/embed/89jp9x?view=editor+%2B+preview&view=split&previewwindow=console&fontsize=12"
-></iframe>
+/>
 
 For decending order, simply swap `>` with `<` in the code editor above.
 
