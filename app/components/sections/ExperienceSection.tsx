@@ -49,13 +49,9 @@ export default function ExperienceSection() {
         </p>
         <TechStack>
           <ul className="pl-4">
-            <li>HTML</li>
-            <li>CSS &amp; Sass</li>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node &amp; Express</li>
+            <li>JavaScript/React</li>
+            <li>Node/Express</li>
             <li>MySQL</li>
-            <li>Deployment via Heroku &amp; Netlify</li>
           </ul>
         </TechStack>
       </Experience>
