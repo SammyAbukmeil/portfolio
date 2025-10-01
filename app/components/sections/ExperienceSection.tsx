@@ -64,9 +64,9 @@ export default function ExperienceSection() {
         <p>{t('promoveritas')}</p>
         <TechStack>
           <ul className="pl-4">
-            <li>PHP</li>
             <li>Laravel</li>
-            <li>AWS</li>
+            <li>AWS (ECS, SQS, EventBridge, S3)</li>
+            <li>PHPUnit</li>
           </ul>
         </TechStack>
       </Experience>
