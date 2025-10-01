@@ -82,7 +82,8 @@ export default function ExperienceSection() {
         <TechStack>
           <ul className="pl-4">
             <li>PHP</li>
-            <li>PHPUnit</li>
+            <li>Electron / JavaScript</li>
+            <li>Vue.js</li>
             <li>MySQL</li>
           </ul>
         </TechStack>
