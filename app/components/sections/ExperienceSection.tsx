@@ -92,7 +92,7 @@ export default function ExperienceSection() {
         role="Full Stack Developer"
         time={t("twoPointFiveYears")}
         link="https://www.akauk.com"
-        date="Feb '17 - Mar '20"
+        date="Sept '17 - Mar '20"
         logo={akaLogo}
       >
         <p>{t('akauk')}</p>
