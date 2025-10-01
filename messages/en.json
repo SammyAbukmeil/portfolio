@@ -31,13 +31,13 @@
       "description2": "I built this app for my nephew who uses it daily! I have some other users who found the app organically."
     },
     "holmes": {
-      "description1": "Collaborated with a colleague to create the web interface for Holmes as a freelance project. The app helps users find reviews on rental properties.",
-      "description2": "The client already had a React Native app hooked up to a Firebase backend, our job was to build a web interface which was designed by"
+      "description1": "Freelance project collaborating with another developer to build the web interface for Holmes, a rental property review platform",
+      "description2": "Built a web interface for an existing React Native app with Firebase backend, implementing designs from"
     },
     "biaBakes": {
-      "description1": "Developed a website for a bakery in Jordan to help advertise their products. The website has a CMS integrated which allowed her to change the menu whenever she wanted.",
-      "description2": "The website was running for 3 years before the client decided to take the website down to cut costs.",
-      "description3": "The designs were created by"
+      "description1": "Built a WordPress site with integrated CMS for a Jordanian bakery, enabling the client to independently manage their menu.",
+      "description2": "The site ran successfully for 3 years.",
+      "description3": "Designs by"
     },
     "links": {
       "googlePlay": "Google Play Store",
@@ -63,7 +63,7 @@
   },
   "Project": {
     "live": "Live",
-    "notLive": "Not Live",
+    "notLive": "Archived",
     "techStack": "Tech Stack",
     "links": "Links"
   }
