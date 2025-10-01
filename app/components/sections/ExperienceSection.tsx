@@ -3,7 +3,6 @@
 import Experience from "@/app/components/Experience";
 import TechStack from "@/app/components/TechStack";
 import totallyLogo from "@/app/images/totally-tech.jpeg";
-import passionDigitalLogo from "@/app/images/passion-digital.jpeg";
 import akaLogo from "@/app/images/aka-logo.jpeg";
 import grazeLogo from "@/app/images/graze-logo.jpeg";
 import promoveritasLogo from "@/app/images/promoveritas-logo.jpeg";
@@ -106,23 +105,6 @@ export default function ExperienceSection() {
         </TechStack>
       </Experience>
       <Experience
-        title="Passion Digital"
-        role="Full Stack Developer"
-        time={t("sixMonths")}
-        link="https://passion.digital"
-        date="May '17 - Sept '17"
-        logo={passionDigitalLogo}
-      >
-        <p>{t('passion')}</p>
-        <TechStack>
-          <ul className="pl-4">
-            <li>PHP</li>
-            <li>WordPress</li>
-            <li>MySQL</li>
-          </ul>
-        </TechStack>
-      </Experience>
-      <Experience
         title="Totally Communications Ltd"
         role="Full Stack Developer"
         time={t("twoYears")}
@@ -133,8 +115,9 @@ export default function ExperienceSection() {
         <p>{t('totally')}</p>
         <TechStack>
           <ul className="pl-4">
-            <li>PHP</li>
-            <li>Zend</li>
+            <li>PHP / Zend Framework</li>
+            <li>WordPress</li>
+            <li>MySQL</li>
             <li>jQuery</li>
           </ul>
         </TechStack>
