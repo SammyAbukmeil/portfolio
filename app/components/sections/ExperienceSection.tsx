@@ -26,9 +26,12 @@ export default function ExperienceSection() {
         <p>{t('konrad')}</p>
         <TechStack>
           <ul className="pl-4">
-            <li>TypeScript</li>
             <li>React</li>
+            <li>TypeScript</li>
+            <li>Next.js</li>
+            <li>Node.js</li>
             <li>Express</li>
+            <li>PostgreSQL</li>
             <li>AWS</li>
           </ul>
         </TechStack>
