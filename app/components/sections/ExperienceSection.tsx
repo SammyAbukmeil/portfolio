@@ -18,8 +18,9 @@ export default function ExperienceSection() {
       <Experience
         title="Konrad Group"
         role="Senior Software Developer"
+        time={t("eightMonths")}
         link="https://www.konrad.com"
-        date={`Apr '25 - ${t('present')}`}
+        date={`Apr '25 - Nov '25`}
         logo={konradLogo}
       >
         <p>{t('konrad')}</p>
