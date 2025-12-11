@@ -22,7 +22,7 @@ export default function Footer() {
           <Linkedin />
         </a>
       </div>
-      <p className="text-sm text-gray-400">{t('copyright')}</p>
+      <p className="text-sm text-gray-400">© {new Date().getFullYear()} {t('copyright')}</p>
     </footer>
   );
 }
