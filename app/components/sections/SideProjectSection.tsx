@@ -57,7 +57,7 @@ export default function SideProjectSection() {
           </ul>
         </Links>
       </Project>
-      <Project title="Holmes" isLive={true} img={holmesImg}>
+      <Project title="Holmes" isLive={false} img={holmesImg}>
         <p className="mt-2">
           {t('holmes.description1')}
         </p>
