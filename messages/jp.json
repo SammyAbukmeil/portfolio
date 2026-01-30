@@ -20,6 +20,13 @@
   "Footer": {
     "copyright": "サミー・アブクメイル. 無断転載を禁じます。"
   },
+  "Badges": {
+    "JLPTN5": {
+      "title": "JLPT N5",
+      "short": "日本語能力試験 N5",
+      "tooltip": "日本語能力試験（JLPT）N5 合格。\n初級レベルの資格です。引き続き日本語を勉強しています。"
+    }
+  },
   "LocaleSwitcher": {
     "label": "言語を変更",
     "locale": "{locale, select, en {English} jp {日本語} other {Unknown}}"

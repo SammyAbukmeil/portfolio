@@ -20,6 +20,13 @@
   "Footer": {
     "copyright": "Sammy Abukmeil. All rights reserved."
   },
+  "Badges": {
+    "JLPTN5": {
+      "title": "JLPT N5",
+      "short": "JLPT N5",
+      "tooltip": "Japanese Language Proficiency Test (JLPT) N5 — Passed\nEntry-level certification. Continuing to study Japanese."
+    }
+  },
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, en {English} jp {日本語} other {Unknown}}"

@@ -2,6 +2,7 @@ import Image from "next/image";
 import headshot from "@/app/images/headshot.jpg";
 import { Github, Linkedin } from "lucide-react";
 import { useTranslations } from "next-intl";
+import JLPTBadge from "@/app/components/JLPTBadge";
 
 export default function Hero() {
   const t = useTranslations("HomePage");
@@ -29,6 +30,9 @@ export default function Hero() {
           {t('hero.intro6')}
         </span>
       </p>
+      <div className="flex justify-center mt-4">
+        <JLPTBadge />
+      </div>
       <div className="flex justify-center mt-6 gap-3">
         <a href="https://github.com/SammyAbukmeil" target="_blank">
           <Github />
