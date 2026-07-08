@@ -21,10 +21,10 @@
     "copyright": "Sammy Abukmeil. All rights reserved."
   },
   "Badges": {
-    "JLPTN5": {
-      "title": "JLPT N5",
-      "short": "JLPT N5",
-      "tooltip": "Japanese Language Proficiency Test (JLPT) N5 — Passed"
+    "JLPTN4": {
+      "title": "JLPT N4",
+      "short": "JLPT N4",
+      "tooltip": "Japanese Language Proficiency Test (JLPT) N4 — Passed"
     }
   },
   "LocaleSwitcher": {

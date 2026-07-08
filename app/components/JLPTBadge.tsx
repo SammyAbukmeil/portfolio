@@ -9,8 +9,8 @@ type Props = {
   showTooltip?: boolean;
 };
 
-export default function JLPTBadge({ level = "N5", className = "", showTooltip = true }: Props) {
-  const t = useTranslations("Badges.JLPTN5");
+export default function JLPTBadge({ level = "N4", className = "", showTooltip = true }: Props) {
+  const t = useTranslations("Badges.JLPTN4");
   const tooltipId = "jlpt-tooltip";
 
   const tooltipText = t("tooltip");

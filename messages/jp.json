@@ -21,10 +21,10 @@
     "copyright": "サミー・アブクメイル. 無断転載を禁じます。"
   },
   "Badges": {
-    "JLPTN5": {
-      "title": "JLPT N5",
-      "short": "日本語能力試験 N5",
-      "tooltip": "日本語能力試験（JLPT）N5 合格。"
+    "JLPTN4": {
+      "title": "JLPT N4",
+      "short": "日本語能力試験 N4",
+      "tooltip": "日本語能力試験（JLPT）N4 合格。"
     }
   },
   "LocaleSwitcher": {
