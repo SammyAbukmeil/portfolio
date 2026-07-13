@@ -8,6 +8,7 @@ import grazeLogo from "@/app/images/graze-logo.jpeg";
 import promoveritasLogo from "@/app/images/promoveritas-logo.jpeg";
 import brainstationLogo from "@/app/images/brainstation-logo.jpeg";
 import konradLogo from "@/app/images/konrad-logo.jpeg";
+import saLogo from "@/app/images/sa-logo.png";
 import { useTranslations } from "next-intl";
 
 export default function ExperienceSection() {
@@ -15,6 +16,27 @@ export default function ExperienceSection() {
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
       <h3 className="font-bold text-2xl">{t('title')}</h3>
+      <Experience
+        title={t("freelanceTitle")}
+        role="Full Stack Software Engineer"
+        startDate={new Date(2026, 2, 1)}
+        link="https://www.linkedin.com/in/sammyabukmeil/"
+        date={`Mar '26 - ${t("present")}`}
+        logo={saLogo}
+      >
+        <p>{t('freelance')}</p>
+        <TechStack>
+          <ul className="pl-4">
+            <li>Rails / React</li>
+            <li>Node.js</li>
+            <li>WordPress</li>
+            <li>Cloudflare</li>
+            <li>GCP</li>
+            <li>GitHub Actions</li>
+            <li>Claude Code</li>
+          </ul>
+        </TechStack>
+      </Experience>
       <Experience
         title="Konrad Group"
         role="Senior Software Developer"

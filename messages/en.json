@@ -33,6 +33,10 @@
   },
   "SideProjects": {
     "title": "Side Projects",
+    "aerialink": {
+      "description1": "Audited and optimised a live Japanese e-commerce platform using agentic AI tooling (Claude Code), eliminating database query bottlenecks, cutting multi-megabyte image payloads with Cloudflare edge caching, and building a commit-to-production CI/CD pipeline with GitHub Actions.",
+      "description2": "The initial audit converted into follow-on contracts, including a security and infrastructure audit of the client's Node/React/GCP file storage platform."
+    },
     "mino": {
       "description1": "A native app to help non-verbal people communicate via text-to-speech. Users can create blocks with images and text, and when clicked, the app speaks the text.",
       "description2": "I built this app for my nephew who uses it daily! I have some other users who found the app organically."
@@ -54,6 +58,9 @@
   },
   "Experience": {
     "title": "Professional Experience",
+    "freelanceTitle": "Freelance",
+    "freelance": "Performance optimisation, security audits, and technical consulting for local and international e-commerce and web platforms since relocating to Japan. Clients include a live Japanese e-commerce platform and The Kobe Yacht Club",
+    "andCounting": "{duration} and counting...",
     "konrad": "Seconded from BrainStation to build web applications for enterprise clients at a global consultancy",
     "brainstation": "Taught fullstack development to 500+ students across 20+ bootcamp cohorts internationally",
     "promoveritas": "Rebuilt a Laravel API for enterprise prize draw platform serving clients like Cadbury, Kellogg's, and Pepsi, handling tens of thousands of competition entries",

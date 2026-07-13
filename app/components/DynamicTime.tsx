@@ -1,15 +1,27 @@
 "use client";
 
 import { formatDistanceStrict } from "date-fns";
+import { ja } from "date-fns/locale";
+import { useLocale, useTranslations } from "next-intl";
 
-export default function DynamicTime() {
+interface Props {
+  from: Date;
+}
+
+export default function DynamicTime({ from }: Props) {
+  const locale = useLocale();
+  const t = useTranslations("Experience");
+
   return (
     <p>
       <small>
-        {formatDistanceStrict(new Date(), new Date(2025, 4, 14), {
-          unit: "month",
-          roundingMethod: "ceil",
-        })} and counting...
+        {t("andCounting", {
+          duration: formatDistanceStrict(new Date(), from, {
+            unit: "month",
+            roundingMethod: "ceil",
+            locale: locale === "jp" ? ja : undefined,
+          }),
+        })}
       </small>
     </p>
   );

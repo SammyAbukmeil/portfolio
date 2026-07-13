@@ -7,6 +7,7 @@ interface Props {
   title: string;
   role: string;
   time?: string;
+  startDate?: Date;
   link: string;
   date: string;
   logo: StaticImageData;
@@ -17,6 +18,7 @@ export default function Experience({
   title,
   role,
   time,
+  startDate,
   link,
   date,
   logo,
@@ -39,12 +41,12 @@ export default function Experience({
       </div>
       <h4 className="font-bold text-l">{role}</h4>
       <p className="italic">{date}</p>
-      {!time ? (
-        <DynamicTime />
-      ) : (
+      {time ? (
         <p>
           <small>{time}</small>
         </p>
+      ) : (
+        startDate && <DynamicTime from={startDate} />
       )}
 
       <div className="mt-4">{children}</div>

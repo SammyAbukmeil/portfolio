@@ -4,6 +4,7 @@ import Project from "@/app/components/Project";
 import Links from "@/app/components/Links";
 import TechStack from "@/app/components/TechStack";
 import minoImg from "@/app/images/mino.png";
+import aerialinkImg from "@/app/images/aerialink.png";
 import holmesImg from "@/app/images/holmes.png";
 import biaBakesImg from "@/app/images/bia-bakes.png";
 import { useTranslations } from "next-intl";
@@ -13,6 +14,35 @@ export default function SideProjectSection() {
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
       <h3 className="font-bold text-2xl">{t('title')}</h3>
+      <Project title="Aerialink" isLive={true} img={aerialinkImg}>
+        <p className="mt-2">
+          {t('aerialink.description1')}
+        </p>
+        <p className="mt-4">
+          {t('aerialink.description2')}
+        </p>
+        <TechStack>
+          <ul className="pl-4">
+            <li>Ruby on Rails</li>
+            <li>React</li>
+            <li>Cloudflare</li>
+            <li>GitHub Actions</li>
+          </ul>
+        </TechStack>
+        <Links>
+          <ul className="pl-4">
+            <li>
+              <a
+                className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
+                target="_blank"
+                href="https://aerialinkshop.jp"
+              >
+                {t('links.website')}
+              </a>
+            </li>
+          </ul>
+        </Links>
+      </Project>
       <Project title="Mino" isLive={true} img={minoImg}>
         <p className="mt-2">
           {t('mino.description1')}
