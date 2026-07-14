@@ -4,6 +4,7 @@ import Project from "@/app/components/Project";
 import Links from "@/app/components/Links";
 import TechStack from "@/app/components/TechStack";
 import minoImg from "@/app/images/mino.png";
+import kobeYachtClubImg from "@/app/images/the-kobe-yacht-club.png";
 import aerialinkImg from "@/app/images/aerialink.png";
 import holmesImg from "@/app/images/holmes.png";
 import biaBakesImg from "@/app/images/bia-bakes.png";
@@ -14,6 +15,36 @@ export default function SideProjectSection() {
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
       <h3 className="font-bold text-2xl">{t('title')}</h3>
+      <Project title="The Kobe Yacht Club" isLive={true} img={kobeYachtClubImg}>
+        <p className="mt-2">
+          {t('kobeYachtClub.description1')}
+        </p>
+        <p className="mt-4">
+          {t('kobeYachtClub.description2')}
+        </p>
+        <TechStack>
+          <ul className="pl-4">
+            <li>WordPress</li>
+            <li>PHP (custom child theme)</li>
+            <li>Ultimate Member</li>
+            <li>Bold Page Builder</li>
+            <li>ConoHa WING (hosting)</li>
+          </ul>
+        </TechStack>
+        <Links>
+          <ul className="pl-4">
+            <li>
+              <a
+                className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
+                target="_blank"
+                href="https://kobeyachtclub.jp"
+              >
+                {t('links.website')}
+              </a>
+            </li>
+          </ul>
+        </Links>
+      </Project>
       <Project title="Aerialink" isLive={true} img={aerialinkImg}>
         <p className="mt-2">
           {t('aerialink.description1')}
