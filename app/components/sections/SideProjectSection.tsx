@@ -15,11 +15,13 @@ export default function SideProjectSection() {
   return (
     <section className="mt-12 px-4 md:px-0 m-auto container">
       <h3 className="font-bold text-2xl">{t('title')}</h3>
-      <Project title="The Kobe Yacht Club" isLive={true} img={kobeYachtClubImg}>
-        <p className="mt-2">
-          {t('kobeYachtClub.description1')}
-        </p>
-        <p className="mt-4">
+      <Project
+        title="The Kobe Yacht Club"
+        isLive={true}
+        img={kobeYachtClubImg}
+        summary={<p>{t('kobeYachtClub.description1')}</p>}
+      >
+        <p>
           {t('kobeYachtClub.description2')}
         </p>
         <TechStack>
@@ -45,11 +47,13 @@ export default function SideProjectSection() {
           </ul>
         </Links>
       </Project>
-      <Project title="Aerialink" isLive={true} img={aerialinkImg}>
-        <p className="mt-2">
-          {t('aerialink.description1')}
-        </p>
-        <p className="mt-4">
+      <Project
+        title="Aerialink"
+        isLive={true}
+        img={aerialinkImg}
+        summary={<p>{t('aerialink.description1')}</p>}
+      >
+        <p>
           {t('aerialink.description2')}
         </p>
         <TechStack>
@@ -74,11 +78,13 @@ export default function SideProjectSection() {
           </ul>
         </Links>
       </Project>
-      <Project title="Mino" isLive={true} img={minoImg}>
-        <p className="mt-2">
-          {t('mino.description1')}
-        </p>
-        <p className="mt-4">
+      <Project
+        title="Mino"
+        isLive={true}
+        img={minoImg}
+        summary={<p>{t('mino.description1')}</p>}
+      >
+        <p>
           {t('mino.description2')}
         </p>
         <TechStack>
@@ -118,11 +124,13 @@ export default function SideProjectSection() {
           </ul>
         </Links>
       </Project>
-      <Project title="Holmes" isLive={false} img={holmesImg}>
-        <p className="mt-2">
-          {t('holmes.description1')}
-        </p>
-        <p className="mt-4">
+      <Project
+        title="Holmes"
+        isLive={false}
+        img={holmesImg}
+        summary={<p>{t('holmes.description1')}</p>}
+      >
+        <p>
           {t('holmes.description2')}{" "}
           <a
             className="underline underline-offset-4 decoration-primary hover:underline-offset-6 transition-all"
@@ -160,11 +168,13 @@ export default function SideProjectSection() {
           </ul>
         </Links>
       </Project>
-      <Project title="Bia Bakes" isLive={false} img={biaBakesImg}>
-        <p className="mt-2">
-          {t('biaBakes.description1')}
-        </p>
-        <p className="mt-4">
+      <Project
+        title="Bia Bakes"
+        isLive={false}
+        img={biaBakesImg}
+        summary={<p>{t('biaBakes.description1')}</p>}
+      >
+        <p>
           {t('biaBakes.description2')}
         </p>
         <p className="mt-4">
