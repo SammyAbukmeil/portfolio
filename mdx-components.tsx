@@ -2,6 +2,7 @@ import React, { ComponentPropsWithoutRef } from "react";
 import { Link } from "@/i18n/navigation";
 import { highlight } from "sugar-high";
 import LoadingIframe from "@/app/components/blog/LoadingIframe";
+import Mermaid from "@/app/components/blog/Mermaid";
 
 type HeadingProps = ComponentPropsWithoutRef<"h1">;
 type ParagraphProps = ComponentPropsWithoutRef<"p">;
@@ -121,6 +122,7 @@ const components = {
   ),
   hr: () => <hr className="my-16 mx-8 border-zinc-600" />,
   LoadingIframe,
+  Mermaid,
 };
 
 declare global {

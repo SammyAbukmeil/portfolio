@@ -1,0 +1,321 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import TableOfContents from "@/app/components/blog/TableOfContents.tsx";
+import Fab from "@/app/components/blog/Fab.tsx";
+
+export const metadata = {
+  title: "System Design",
+  alternates: {
+    canonical: "/blog/system-design",
+  },
+};
+
+<Link href="/blog" className="flex">
+  <ArrowLeft className="mr-2" /> <span>Back</span>
+</Link>
+
+# System Design
+
+_Published: 22/07/26_
+
+<TableOfContents
+  items={[
+    { text: "Overview", link: "#overview", nested: false },
+    { text: "Scaling", link: "#scaling", nested: false },
+    { text: "Load balancing", link: "#load-balancing", nested: false },
+    { text: "Caching", link: "#caching", nested: false },
+    { text: "Cache aside", link: "#cache-aside", nested: true },
+    { text: "Eviction", link: "#eviction", nested: true },
+    { text: "Invalidation", link: "#invalidation", nested: true },
+    { text: "SQL vs NoSQL", link: "#sql-vs-nosql", nested: false },
+    { text: "Replication", link: "#replication", nested: false },
+    { text: "Sharding", link: "#sharding", nested: false },
+    { text: "CAP theorem", link: "#cap-theorem", nested: false },
+    { text: "Queues", link: "#queues", nested: false },
+    { text: "Rate limiting", link: "#rate-limiting", nested: false },
+    { text: "Observability", link: "#observability", nested: false },
+    { text: "Putting it together", link: "#putting-it-together", nested: false },
+  ]}
+/>
+
+<Fab />
+
+## Overview
+
+System design is deciding **how the parts of an app fit together** as it grows. Where data lives, how requests flow, what happens when something breaks.
+
+There are no perfect designs, only trade-offs:
+
+- Caching buys speed, costs freshness
+- Replication buys availability, costs consistency
+- Sharding buys capacity, costs joins
+
+> Most apps need none of this. One server and one database goes a long way. Add a piece when you've measured that you need it.
+
+## Scaling
+
+Two directions when one machine isn't enough:
+
+- **Vertical** - bigger machine. Nothing to change in your app, but hardware has a ceiling and it's still one machine
+- **Horizontal** - more machines. No ceiling, survives a failure, but your app has to be built for it
+
+Horizontal scaling needs **stateless** servers. Any server must handle any request:
+
+```ts
+// Bad: state in memory ties the user to one machine
+const sessions = new Map<string, Session>();
+const session = sessions.get(req.cookies.sid);
+
+// Good: shared store, any machine can serve
+const session = await redis.get(`session:${req.cookies.sid}`);
+```
+
+## Load balancing
+
+Sits in front of your servers and picks one per request.
+
+Algorithms:
+
+- **Round robin** - next server in turn. Fine when requests cost the same
+- **Least connections** - fewest in flight. Better when they don't
+- **Hash** - same user hits the same server every time
+
+It also runs **health checks** and pulls dead servers out of rotation. Without this a crashed server keeps getting traffic.
+
+> A good health check verifies the server can reach its database, not just that the process is alive.
+
+## Caching
+
+Store the result so you skip the work next time. The fastest query is the one you never send.
+
+Caches live at every layer:
+
+- **Browser** - never hits the network
+- **CDN** - served near the user
+- **App** - Redis, Memcached
+- **Database** - free, just give it RAM
+
+### Cache aside
+
+Check the cache, fall back to the source, write it back:
+
+```ts
+async function getUser(id: string): Promise<User> {
+  const cached = await redis.get(`user:${id}`);
+  if (cached) return JSON.parse(cached);
+
+  const user = await db.users.findById(id);
+  await redis.set(`user:${id}`, JSON.stringify(user), { EX: 300 });
+
+  return user;
+}
+```
+
+Only requested data gets cached. First request pays full cost.
+
+### Eviction
+
+Caches fill up, so something has to go:
+
+- **LRU** - drop least recently used. The usual choice
+- **LFU** - drop least frequently used
+- **TTL** - entries expire on a timer
+
+### Invalidation
+
+The moment data changes, every cached copy is wrong. Options:
+
+- Delete the key on write - correct, but you need to know every affected key
+- Short TTLs - accept a stale window
+- Version the key - old entries fall out naturally
+
+> There are only two hard things in computer science: cache invalidation and naming things.
+
+Two failure modes:
+
+- **Stampede** - popular key expires, every request misses at once. Lock the first one, let the rest wait
+- **Penetration** - repeated requests for data that doesn't exist. Cache the miss
+
+## SQL vs NoSQL
+
+**SQL** gives you ACID transactions, joins and constraints. Correctness by default.
+
+- Use for money, orders, permissions, anything where wrong is expensive
+
+**NoSQL** gives you horizontal scale and a flexible schema, and gives up transactions and joins.
+
+- Use for event data, sessions, content that varies in shape
+
+> Default to SQL. Move when you have a specific problem it can't solve.
+
+## Replication
+
+Copies of the same data on multiple machines. Writes go to the leader, reads can go to any follower.
+
+<Mermaid
+  chart={`
+flowchart LR
+  W[Write] --> L[Leader]
+  L -.->|lag| F1[Follower 1]
+  L -.->|lag| F2[Follower 2]
+  F1 --> R1[Read]
+  F2 --> R2[Read]
+`}
+/>
+
+Buys you read capacity, availability and durability. Costs you **replication lag**.
+
+That lag causes a specific bug: a user writes, then reads from a follower that hasn't caught up, and their own change is missing.
+
+> Fix: route reads to the leader straight after a write. Known as read your own writes.
+
+## Sharding
+
+Replication copies everything to every machine. Sharding gives each machine a **slice**.
+
+<Mermaid
+  chart={`
+flowchart LR
+  K1[user:alice] --> H{{hash mod 3}}
+  K2[user:bob] --> H
+  K3[user:carol] --> H
+  H --> S0[(Shard 0)]
+  H --> S1[(Shard 1)]
+  H --> S2[(Shard 2)]
+`}
+/>
+
+The shard key decides which machine holds what:
+
+- **Range** - A to F here, G to M there. Range queries stay fast, distribution gets uneven
+- **Hash** - even spread, no adjacency
+
+```ts
+function shardFor(key: string, shardCount: number): number {
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash = (hash * 31 + key.charCodeAt(i)) | 0;
+  }
+  return Math.abs(hash) % shardCount;
+}
+```
+
+Change `shardCount` and nearly every key moves. **Consistent hashing** fixes this by putting keys and shards on a ring, so adding a shard only moves its neighbours.
+
+> Sharding kills joins and cross-shard transactions. Last resort, after caching and replication.
+
+## CAP theorem
+
+During a network partition you pick two of three: **consistency**, **availability**, **partition tolerance**.
+
+Partitions aren't optional, so the real choice is what to do when one happens:
+
+- **Consistency** - refuse requests you can't answer correctly. Banking
+- **Availability** - answer with possibly stale data. Social feeds
+
+**PACELC** is the useful version: during a **P**artition choose **A** or **C**, **E**lse choose **L**atency or **C**onsistency. That second half applies to every request, not just the rare failure.
+
+Consistency is a spectrum, not a switch:
+
+- **Strong** - every read sees every write. Needs coordination, costs latency
+- **Eventual** - replicas converge later. Fast, temporarily wrong
+- **Read your own writes** - you see your changes, maybe not everyone else's. Usually the right answer
+
+## Queues
+
+Not everything needs to happen while the user waits.
+
+<Mermaid
+  chart={`
+flowchart LR
+  U[Upload] --> API[Web server]
+  API -->|202| U
+  API --> Q[[Queue]]
+  Q --> W1[Worker 1]
+  Q --> W2[Worker 2]
+  W1 --> DB[(Database)]
+  W2 -.->|failed| DLQ[[Dead letter queue]]
+`}
+/>
+
+```ts
+app.post("/videos", async (req, res) => {
+  const video = await db.videos.create({ status: "processing" });
+  await queue.publish("video.transcode", { videoId: video.id });
+  res.status(202).json({ id: video.id });
+});
+```
+
+What you get:
+
+- **Decoupling** - deploy and scale each side separately
+- **Spike smoothing** - the queue gets longer instead of the servers falling over
+- **Failure isolation** - jobs wait instead of vanishing
+
+Most queues deliver **at least once**, so a message can arrive twice. Make handlers **idempotent** - running twice does the same as running once.
+
+> Send repeatedly failing jobs to a dead letter queue, or they block everything behind them.
+
+## Rate limiting
+
+Caps how many requests a client can make. Protects against abuse and buggy clients.
+
+**Token bucket** is the usual choice. Tokens refill at a fixed rate, each request spends one, empty bucket means rejected:
+
+```ts
+tryConsume(): boolean {
+  const now = Date.now();
+  const elapsed = (now - this.lastRefill) / 1000;
+
+  this.tokens = Math.min(this.capacity, this.tokens + elapsed * this.refillRate);
+  this.lastRefill = now;
+
+  if (this.tokens < 1) return false;
+
+  this.tokens -= 1;
+  return true;
+}
+```
+
+It allows bursts, which matches how clients actually behave. A fixed window counter lets a client send double its limit across a window boundary.
+
+> Counters go in Redis so limits work across servers. Reject with `429` and a `Retry-After` header.
+
+## Observability
+
+Three signals:
+
+- **Logs** - discrete events. Structured JSON, not free text
+- **Metrics** - numbers over time. Cheap, good for alerts
+- **Traces** - one request across every service. The only way to find where time went
+
+Watch **percentiles**, not averages. A 200ms average hides the 1% taking eight seconds, and those are usually your heaviest users.
+
+> Alert on symptoms, not causes. High CPU might be fine. Users getting errors never is.
+
+## Putting it together
+
+A read-heavy request, end to end:
+
+<Mermaid
+  chart={`
+flowchart LR
+  B[Browser] --> CDN
+  CDN --> LB{{Load balancer}}
+  LB --> S[Server]
+  S --> C[(Cache)]
+  C -.->|miss| DB[(Replica)]
+  S --> Q[[Queue]]
+`}
+/>
+
+1. Browser cache answers, or
+2. CDN serves it near the user, or
+3. Load balancer picks a healthy server
+4. Server checks the cache
+5. On a miss, read from a replica and write back to cache
+6. Writes go to the leader, slow work goes on the queue
+
+Every piece above exists because of a specific pressure. No pressure, no piece.
+
+> The best system isn't the cleverest one. It's the one you can still reason about at 3am.
