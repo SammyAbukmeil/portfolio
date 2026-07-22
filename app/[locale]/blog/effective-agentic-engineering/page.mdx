@@ -1,0 +1,211 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import TableOfContents from "@/app/components/blog/TableOfContents.tsx";
+import Fab from "@/app/components/blog/Fab.tsx";
+
+export const metadata = {
+  title: "Effective Agentic Engineering",
+  alternates: {
+    canonical: "/blog/effective-agentic-engineering",
+  },
+};
+
+<Link href="/blog" className="flex">
+  <ArrowLeft className="mr-2" /> <span>Back</span>
+</Link>
+
+# Effective Agentic Engineering
+
+_Published: 22/07/26_
+
+<TableOfContents
+  items={[
+    { text: "Pick a tool", link: "#pick-a-tool", nested: false },
+    { text: "Plan mode", link: "#plan-mode", nested: false },
+    { text: "Question the plan", link: "#question-the-plan", nested: false },
+    { text: "Keep context clear", link: "#keep-context-clear", nested: false },
+    { text: "Watch effort", link: "#watch-effort", nested: false },
+    { text: "The desktop app", link: "#the-desktop-app", nested: false },
+    { text: "Skills", link: "#skills", nested: false },
+    { text: "A skill in practice", link: "#a-skill-in-practice", nested: false },
+  ]}
+/>
+
+<Fab />
+
+## Pick a tool
+
+I've been using Claude Code recently, since it's the most performant right now. That could change.
+
+Don't be afraid to try different models, but don't bounce around either. Depth in one tool beats a shallow pass over five. Most of what follows applies wherever you land.
+
+## Plan mode
+
+For anything bigger than a one-liner, plan first. The agent explores the codebase and proposes an approach before touching a file.
+
+Why it pays:
+
+- **Cheap to redirect** - rewriting a plan costs a sentence. Unpicking a bad diff costs an afternoon
+- **Surfaces wrong assumptions early** - the plan names the files it will touch, so you spot a wrong file before it's edited
+- **Forces exploration** - the agent reads before it writes
+
+The failure mode isn't a bad diff, it's a confident diff built on a wrong assumption. Plans make the assumption visible before it costs anything.
+
+## Question the plan
+
+A plan is a draft, not an answer. It's written by something with full knowledge of the codebase and none of the history.
+
+Push on it:
+
+- **Ask for tests** - agents skip them unless asked
+- **Challenge the approach** - you know which parts are load bearing and which broke last time
+- **Make it justify** - if it can't say why, that's the weak section
+- **Check what's missing** - the gap is usually migrations, error paths, or the caller nobody updated
+
+You supply the taste and the history. It supplies the reading speed.
+
+## Keep context clear
+
+One task, clear, repeat.
+
+A long session accumulates dead ends and abandoned approaches. All of it stays in context and none of it helps:
+
+- Old failures get treated as current constraints
+- Every request re-reads the noise, so cost climbs
+- Instructions from twenty turns ago compete with the one you just gave
+
+Finish the task, clear, start the next one clean. If something needs to survive the wipe, write it down.
+
+## Watch effort
+
+Match the effort level to the problem, not to the anxiety:
+
+- **High** - architecture, debugging, anything with subtle failure modes
+- **Medium** - the default. Most feature work
+- **Low** - mechanical edits, renames, formatting. Cheap and fast
+
+Low effort on a hard problem is a false economy. You pay it back debugging.
+
+## The desktop app
+
+Claude Code runs in a terminal, but the desktop app is a nicer all in one setup:
+
+- **Multiple chats** across different projects at once
+- **Terminal built in**
+- **Browser built in** to watch the agent test things
+- **Background task viewer**
+- **Plan viewer**
+- **Context is easy to see**, so you know when to clear
+
+The visible context is the underrated one. Guessing how full the window is means clearing too early or far too late.
+
+## Skills
+
+Anything you repeat is a skill. A phrase you retype, a checklist you re-explain, a workflow you describe every session.
+
+Write it once, invoke it by name.
+
+## A skill in practice
+
+My `/notes` skill keeps per repo notes so work survives a context wipe. It's the one I use most, so here it is in full.
+
+Two things to point out before the code. The **index** matters more than it looks: loading every note would put the whole history back into context and defeat the point, so only the index loads by default. And **key-info.md** holds anything always true, including client preferences and agreed rates. I've been doing freelance work recently, and re-explaining a client's standing instructions every session got old fast.
+
+```markdown
+---
+name: notes
+description: Personal per-repo note-taking - track in-progress thinking, plans, and questions, plus a key-info.md for stable context like architectural decisions and client preferences.
+disable-model-invocation: true
+---
+
+# /notes
+
+Notes live in `.notes/` at the repo root. The index (`index.md`) is the only file loaded by default - individual note files are only read when explicitly needed.
+
+## Behaviour
+
+When invoked, always start by reading `.notes/index.md` (create it with the header below if it doesn't exist). Also read `.notes/key-info.md` if it exists.
+
+**If invoked with the argument `sync`**, skip the menu and run **Option D - Session sync** directly.
+
+**Otherwise (bare `/notes`)**, give a brief orientation first: summarize the active notes, highlight relevant key info, and say where things stand. This is the default because bare `/notes` is often the first command after a context wipe - treat it as "catch me up before the next task." Then offer the menu options below in case the user wants to do more:
+
+**Option A - Create a new note**
+
+- Ask for a title if not already provided
+- Generate a filename: `YYYY-MM-DD-slugified-title.md` using today's date
+- Write the file with frontmatter: date, title, status: active
+- Append a one-liner to `index.md`:
+  `- YYYY-MM-DD | <title> | active -> <filename>`
+
+**Option B - Review existing notes**
+
+- Display the active notes from `index.md`
+- Ask which note(s) to update and what status to set: `active`, `stale`, or `done`
+- Update the status in both `index.md` and the note file's frontmatter
+
+**Option C - Update key info**
+
+- Read `.notes/key-info.md` (create it if it doesn't exist)
+- Show the current contents and ask what to add, update, or remove
+- Write the changes back to the file
+
+**Option D - Session sync** (run directly when invoked as `/notes sync`)
+
+End-of-session check before the user clears context. Make sure everything from this session is captured:
+
+1. Review the conversation for decisions made, progress on in-flight work, open questions, and next steps not yet reflected in the notes
+2. Propose updates: amend active notes that this session progressed, mark finished threads `done`, and create a new dated note if a distinct new thread emerged
+3. Check whether anything belongs in `key-info.md` (newly stable decisions, client context)
+4. Run the CLAUDE.md check below
+5. Finish by confirming explicitly: "Notes are up to date - safe to clear context."
+
+## CLAUDE.md check (always runs)
+
+After handling the chosen option, review the current conversation for anything that belongs in the repo's `CLAUDE.md` rather than (or in addition to) notes. Candidates:
+
+- Commands that took effort to discover (build, test, lint, deploy, dev server)
+- Conventions or coding standards Claude was corrected on during the session
+- Architecture facts or gotchas that aren't obvious from the code
+- Standing instructions ("never do X", "always use Y")
+
+Not candidates: in-progress thinking (dated notes), client/comms context (`key-info.md`), one-off facts, or anything the codebase already makes obvious.
+
+**Keep the root `CLAUDE.md` lean.** It should read like a table of contents plus the few things needed in every session. Target well under ~100 lines. Push detail into `context/` files imported with `@` links.
+
+## key-info.md format
+
+    # Key Info
+    <!-- Stable context that doesn't belong in a dated note -->
+
+    ## Project / Technical
+    - <architectural decision, invariant, convention>
+
+    ## Client / Comms
+    - <client preference, agreed rate, standing instruction>
+
+## index.md format
+
+    # Notes Index
+    <!-- date | title | status: active / stale / done -->
+    - 2026-06-19 | Event slug redirect plan | active -> 2026-06-19-event-slug-redirect-plan.md
+
+## Setup for a new repo
+
+When creating `.notes/` in a repo for the first time, ask whether notes should be excluded locally or committed:
+
+**Exclude locally** (public repos, or when notes are purely personal):
+
+    echo '.notes/' >> .git/info/exclude
+
+**Commit normally** (private/shared repos where notes are useful to track): just `git add .notes/` as needed.
+
+## Notes
+
+- Never load all note files at once - context cost grows with history
+- Always include the date in filenames (`YYYY-MM-DD-slugified-title.md`)
+```
+
+The payoff is the same as any skill: the instruction is written once instead of re-explained every session.
+
+Notice what you keep retyping. That's the skill.

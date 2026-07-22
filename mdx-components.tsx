@@ -110,9 +110,25 @@ const components = {
       </a>
     );
   },
-  code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
+  code: ({ children, className, ...props }: ComponentPropsWithoutRef<"code">) => {
+    // sugar-high only understands JS/TS. Highlighting anything else (markdown,
+    // shell, plain text) tints ordinary words as keywords, so leave it alone.
+    const highlightable = /language-(js|jsx|ts|tsx)$/.test(className ?? "");
+    if (className && !highlightable) {
+      return (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      );
+    }
     const codeHTML = highlight(children as string);
-    return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
+    return (
+      <code
+        className={className}
+        dangerouslySetInnerHTML={{ __html: codeHTML }}
+        {...props}
+      />
+    );
   },
   blockquote: (props: BlockquoteProps) => (
     <blockquote

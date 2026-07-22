@@ -22,9 +22,9 @@ export default function Project({
   const pillClasses = "p-1.5 rounded-2xl text-xs text-white";
 
   return (
-    <article className="my-6">
-      <details className="group">
-        <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+    <article className="my-6 max-w-[750px]">
+      <details className="group details-animated">
+        <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden rounded-lg border border-zinc-700 p-3 transition-colors hover:border-primary hover:bg-primary/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           <div className="flex items-center">
             <img
               src={img.src}
@@ -39,12 +39,12 @@ export default function Project({
             )}
             <ChevronDown
               aria-hidden="true"
-              className="w-4 h-4 ml-auto shrink-0 transition-transform group-open:rotate-180"
+              className="w-4 h-4 ml-2 shrink-0 text-zinc-500 transition-transform duration-300 group-open:rotate-180"
             />
           </div>
           <div className="mt-2">{summary}</div>
         </summary>
-        <div className="mt-4">
+        <div className="mt-4 min-h-0">
           <Image
             className="w-full md:w-1/2"
             width={750}

@@ -238,3 +238,30 @@ iframe {
 .important-border h3 {
   margin-top: 0;
 }
+
+/* Animate <details> open/close. Browsers swap display outright, so the panel
+   snaps in. Keeping it rendered and transitioning a grid row to its natural
+   height avoids a hardcoded max-height that would clip longer content. */
+details.details-animated::details-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    grid-template-rows 300ms ease,
+    opacity 200ms ease,
+    content-visibility 300ms allow-discrete;
+  transition-behavior: allow-discrete;
+}
+
+details.details-animated[open]::details-content {
+  content-visibility: visible;
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details.details-animated::details-content {
+    transition: none;
+  }
+}
