@@ -46,10 +46,10 @@ npm run lint
 ## Key Architecture Notes
 
 ### MDX Integration
-- Blog posts are written in MDX and located in `app/blog/[slug]/page.mdx`
+- Blog posts are written in MDX and located in `app/[locale]/blog/[slug]/page.mdx` (the site is i18n-enabled via next-intl; posts are a single English file rendered for all locales)
 - Custom MDX components are defined in `mdx-components.tsx` with Tailwind styling
-- Code blocks use sugar-high for syntax highlighting
-- Headings automatically generate IDs for anchor links
+- Code blocks use sugar-high for syntax highlighting. sugar-high only understands JS/TS, so highlighting is gated to js/jsx/ts/tsx fences; other languages render unhighlighted
+- Headings automatically generate IDs for anchor links by lowercasing and replacing spaces. Punctuation is NOT stripped, so keep headings punctuation-free or TOC anchors will break
 
 ### Dark Theme Design
 - Permanent dark theme with consistent styling throughout
